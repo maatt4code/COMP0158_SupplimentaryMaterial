@@ -1,0 +1,5 @@
+# Generated outputs are not committed. The samples/ directory is the exception.
+*
+!.gitignore
+!samples/
+!samples/**

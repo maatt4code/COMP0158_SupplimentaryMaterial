@@ -1,0 +1,39 @@
+name: env_thesis
+# Linux + NVIDIA GPU (CUDA 11.8) -- UCL cluster, RTX 4070 Ti SUPER
+#
+# Environment lives under the prefix below (NOT a named env):
+# Create:
+#   micromamba create -f env_linux_nvidia.yml -p $ENV_PREFIX/env_linux_nvidia
+# Activate:
+#   micromamba activate $ENV_PREFIX/env_linux_nvidia
+# Delete:
+#   micromamba env remove -p $ENV_PREFIX/env_linux_nvidia
+#
+channels:
+  - pytorch
+  - nvidia
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.12
+  - pandas
+  - numpy
+  - sympy=1.13.1
+  - matplotlib
+  - seaborn
+  - scipy
+  - scikit-learn
+  - transformers
+  - huggingface_hub
+  - ffmpeg
+  - pysoundfile
+  - tqdm
+  - pip
+  - pip:
+      - soundfile
+      - librosa==0.11.0          # MIR analysis (album arrangement dynamics); pulls numba/llvmlite/soxr/audioread
+      - essentia-tensorflow      # off-the-shelf VA judge baseline (MTG emomusic/deam MusiCNN); bundles its own CPU TF, does not touch torch+cu118
+      - --extra-index-url https://download.pytorch.org/whl/cu118
+      - torch==2.6.0+cu118
+      - torchaudio==2.6.0+cu118
+      - music21

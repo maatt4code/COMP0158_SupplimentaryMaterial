@@ -1,0 +1,46 @@
+name: env_thesis_arc
+# Windows + Intel Arc T140
+#
+# Intel XPU support is natively built into PyTorch 2.5+ (IPEX is deprecated/EOL Mar 2026).
+# No extra packages needed — torch.xpu is available out of the box.
+#
+# Prerequisites:
+#   Latest Intel Arc GPU driver: intel.com/arc
+#
+# Create:
+#   micromamba create -f env_windows_arc.yml -n env_thesis_arc
+# Activate:
+#   micromamba activate env_thesis_arc
+#
+# Device usage in code (handled automatically by get_device() in soundscape_synth.py):
+#   device = torch.device("xpu")
+#   model  = model.to(device)
+#
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.12
+  - pandas
+  - numpy
+  - sympy=1.13.1
+  - matplotlib
+  - seaborn
+  - scipy
+  - scikit-learn
+  - transformers
+  - huggingface_hub
+  - ffmpeg
+  - tqdm
+  - pip
+  - pip:
+      - soundfile
+      - librosa==0.11.0          # MIR analysis (album arrangement dynamics); pulls numba/llvmlite/soxr/audioread
+      # NOTE: essentia-tensorflow (off-the-shelf VA judge baseline) is Linux/macOS-only —
+      # no Windows wheel. Run the essentia-vs-judge comparison on the Linux cluster.
+      # PyTorch with native XPU support (Intel Arc built-in, no IPEX needed)
+      - --index-url https://download.pytorch.org/whl/xpu
+      - torch
+      - torchaudio
+      - gradio
+      - music21

@@ -1,0 +1,4 @@
+.DS_Store
+*.pyc
+__pycache__/
+_raw_ratings_DO_NOT_COMMIT/
