@@ -107,15 +107,22 @@ def human_coords(rows, X, pool_meta_path, bank_index):
     meta = json.loads(Path(pool_meta_path).read_text())
     by_clip = {clip_name(m["clip_path"]): m for m in meta}
 
-    bank = Path(bank_index)
-    if not bank.exists():
+    # anchor_idx indexes the CONCATENATION of the banks, in the order the pool
+    # recorded, so every bank must be supplied and concatenated in that order.
+    # Passing one of two silently puts every anchor past the first bank out of
+    # range -- which is how this was caught.
+    banks = [Path(b) for b in ([bank_index] if isinstance(bank_index, (str, Path))
+                               else bank_index)]
+    missing = [b for b in banks if not b.exists()]
+    if missing:
         raise SystemExit(
-            f"\nbank index not found at:\n    {bank}\n\n"
-            "The human label space needs a bank carrying valence_human.\n"
-            "Run propagate_labels_krr.py --propagate first.\n")
-    df = pd.read_csv(bank)
+            "\nbank index not found:\n"
+            + "\n".join(f"    {b}" for b in missing)
+            + "\n\nThe human label space needs bank(s) carrying valence_human.\n"
+              "Run propagate_labels_krr.py --propagate first.\n")
+    df = pd.concat([pd.read_csv(b) for b in banks], ignore_index=True)
     if "valence_human" not in df.columns:
-        raise SystemExit(f"\n{bank} has no valence_human column.\n")
+        raise SystemExit(f"\n{banks} has no valence_human column.\n")
     vj = df["valence"].to_numpy(np.float64)
     aj = df["arousal"].to_numpy(np.float64)
     vh = df["valence_human"].to_numpy(np.float64)
@@ -192,8 +199,12 @@ def main():
     ap.add_argument("--rater", default=PRIMARY_RATER)
     ap.add_argument("--label-space", dest="label_space",
                     choices=["judge", "human"], default="judge")
-    ap.add_argument("--bank-index", dest="bank_index", default=None,
-                    help="bank index carrying valence_human, for --label-space human")
+    ap.add_argument("--bank-index", dest="bank_index", nargs="+", default=None,
+                    metavar="CSV",
+                    help="bank index/indexes carrying valence_human, for "
+                         "--label-space human. Supply ALL of them, in the order "
+                         "the pool recorded, because anchor_idx indexes their "
+                         "concatenation")
     ap.add_argument("--tau-quantile", dest="tau_quantile", type=float, default=0.90)
     ap.add_argument("--safe-quantile", dest="safe_quantile", type=float, default=0.50)
     ap.add_argument("--seed", type=int, default=0)

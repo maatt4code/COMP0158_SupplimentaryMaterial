@@ -57,6 +57,7 @@ from __future__ import annotations
 import argparse
 import csv
 import json
+import sys
 from pathlib import Path
 
 import numpy as np
@@ -64,6 +65,13 @@ import torch
 
 _HERE = Path(__file__).resolve()
 _SECTION = _HERE.parents[1]
+sys.path.insert(0, str(_SECTION / "inference"))
+# ONE canonical texture ladder, defined on the INFERENCE side because the
+# conductor renders with it. Importing it back here is what guarantees the
+# level this GP learns a preference for is voiced identically live.
+from arc_policy import (TEXTURE_GAINS, texture_overrides,      # noqa: E402
+                        texture_signed, load_pool)
+
 RATINGS = _SECTION / "human_ratings"
 POOL_META = RATINGS / "arc_pool_meta.json"
 PAIR_CSV = RATINGS / "arc_ratings.csv"
@@ -76,48 +84,6 @@ JITTER = 1e-4
 FEATURE_NAMES = ["context_v", "context_a", "audible_dist", "ramp_s",
                  "start_is_maj", "end_is_maj", "is_glide", "glide_semitones",
                  "texture_probe", "param_wander_std", "pitch_drift_cents"]
-
-# The canonical voice-richness ladder. ONE source of truth, so the level the GP
-# learns a preference for is voiced identically when the conductor renders it.
-# Signed level in [-1, +1], a monotonic voice-count ladder on the END pad.
-TEXTURE_GAINS = {
-    1.0:  {"fifth_gain": 0.5, "octave_gain": 0.5},   # strong thick
-    0.5:  {"octave_gain": 0.5},                       # mild thick
-    0.0:  {},                                         # anchor baseline
-    -0.5: {"fifth_gain": 0.0, "octave_gain": 0.0},    # mild thin
-    -1.0: {"third_gain": 0.0, "fifth_gain": 0.0, "octave_gain": 0.0},
-}
-
-
-def texture_overrides(level):
-    """Signed texture level -> the end-theta overrides that render it."""
-    return dict(TEXTURE_GAINS[float(level)])
-
-
-def texture_signed(m):
-    """Signed texture level of an arc. Prefers the explicit field; otherwise
-    reverse-detects it from the overrides, for the earlier binary probes."""
-    if m.get("texture_signed") is not None:
-        return float(m["texture_signed"])
-    ov = m.get("theta_end_overrides") or {}
-    if ov.get("fifth_gain") == 0.5 or ov.get("octave_gain") == 0.5:
-        return 1.0
-    if "third_gain" in ov and ov.get("third_gain") == 0.0:
-        return -1.0
-    return 0.0
-
-
-def load_pool(meta_path=POOL_META):
-    """Arc parameter metadata. No audio is needed or shipped."""
-    p = Path(meta_path)
-    if not p.exists():
-        raise SystemExit(f"\narc pool metadata not found at:\n    {p}\n")
-    pool = {}
-    for m in json.loads(p.read_text()):
-        m["chord"] = f"{m['chord_start']}->{m['chord_end']}"
-        pool[m["arc_id"]] = m
-    print(f"arc pool: {len(pool)} arcs (metadata only)")
-    return pool
 
 
 def arc_features(m):

@@ -59,6 +59,54 @@ TEXTURE_CHOICES = (-1.0, -0.5, 0.0, 0.5, 1.0)
 TEXTURE_NAMES = {-1.0: "thin-strong", -0.5: "thin-mild", 0.0: "none",
                  0.5: "thick-mild", 1.0: "thick-strong"}
 
+# The canonical voice-richness ladder. ONE source of truth, so the level the GP
+# learns a preference for is voiced identically when the conductor renders it.
+# Signed level in [-1, +1], a monotonic voice-count ladder on the END pad.
+TEXTURE_GAINS = {
+    1.0:  {"fifth_gain": 0.5, "octave_gain": 0.5},   # strong thick
+    0.5:  {"octave_gain": 0.5},                       # mild thick
+    0.0:  {},                                         # anchor baseline
+    -0.5: {"fifth_gain": 0.0, "octave_gain": 0.0},    # mild thin
+    -1.0: {"third_gain": 0.0, "fifth_gain": 0.0, "octave_gain": 0.0},
+}
+
+
+def texture_overrides(level):
+    """Signed texture level -> the end-theta overrides that render it."""
+    return dict(TEXTURE_GAINS[float(level)])
+
+
+def texture_signed(m):
+    """Signed texture level of an arc. Prefers the explicit field; otherwise
+    reverse-detects it from the overrides, for the earlier binary probes."""
+    if m.get("texture_signed") is not None:
+        return float(m["texture_signed"])
+    ov = m.get("theta_end_overrides") or {}
+    if ov.get("fifth_gain") == 0.5 or ov.get("octave_gain") == 0.5:
+        return 1.0
+    if "third_gain" in ov and ov.get("third_gain") == 0.0:
+        return -1.0
+    return 0.0
+
+
+def load_pool(meta_path=None):
+    """Arc parameter metadata, keyed by arc id.
+
+    Lives here rather than in the rating app because the RUNTIME needs arc
+    metadata to answer a policy query, and it must not import a data-collection
+    script to get it. No audio is needed or shipped.
+    """
+    import json
+    p = Path(meta_path) if meta_path else (
+        Path(__file__).resolve().parents[1] / "human_ratings" / "arc_pool_meta.json")
+    if not p.exists():
+        raise SystemExit(f"\narc pool metadata not found at:\n    {p}\n")
+    pool = {}
+    for m in json.loads(p.read_text()):
+        m["chord"] = f"{m['chord_start']}->{m['chord_end']}"
+        pool[m["arc_id"]] = m
+    return pool
+
 
 class PreferenceGP:
     """The frozen Laplace posterior, queryable at new parameter vectors."""

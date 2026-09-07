@@ -61,8 +61,8 @@ def main():
         check(f"train/{s} exists", (TRAIN / s).exists())
     for m in INFER_MODULES:
         check(f"inference/{m} exists", (INFER / m).exists())
-    for w in ["boundary_guard.json", "attn_retrieval.pt",
-              "control_ridge_valence.npz"]:
+    for w in ["boundary_guard.json", "boundary_guard_human.json",
+              "attn_retrieval.pt", "control_ridge_valence.npz"]:
         check(f"weights/{w} ships", (HERE / "weights" / w).exists())
 
     # 2. the inference boundary ------------------------------------------
@@ -135,6 +135,19 @@ def main():
           info["hard_norm"] <= g.hard_step_cap + 1e-9, f"{info['hard_norm']:.4f}")
     drift_in, info_in = g.guard_drift(np.array([-0.6, 0.0]))
     check("the hard term is off inside", not info_in["hard_triggered"])
+    # A guard is only valid for a walk on the axis it was fitted on, so BOTH
+    # label spaces must ship. A judge-space guard fences a human-space walk out
+    # of exactly the territory the human axis opens up.
+    gh = BoundaryGuard.load(HERE / "weights" / "boundary_guard_human.json")
+    check("the human-space guard ships and loads", gh.label_space == "human",
+          gh.label_space)
+    check("the two guards are genuinely different fences",
+          abs(gh.tau - g.tau) > 1e-3,
+          f"tau judge {g.tau:.4f} vs human {gh.tau:.4f}")
+    check("neither guard carries rating values",
+          all("y" not in json.loads((HERE / "weights" / n).read_text())
+              for n in ("boundary_guard.json", "boundary_guard_human.json")))
+
     guarded, sg = ou_walk(g, (-0.6, 0.0), (0.9, 0.9), steps=120, use_guard=True)
     free, sf = ou_walk(g, (-0.6, 0.0), (0.9, 0.9), steps=120, use_guard=False)
     check("the guard contains the walk", sg.max() < sf.max(),

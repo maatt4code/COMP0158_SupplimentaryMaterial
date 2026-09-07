@@ -22,7 +22,25 @@ versions load frozen weights instead of refitting, carry no rating data,
 resolve no dataset roots and are de-identified, and re-migrating would undo
 all of that silently.
 
-Next: §3.9's code, then §3.8 following that plan. The report side is separately
+**Conductor prep done 09-07** -- four items off the plan, each verified:
+1. The texture ladder (`TEXTURE_GAINS`/`texture_overrides`/`texture_signed`)
+   moved to `3.5/inference/arc_policy.py`; the trainer imports it back. ONE
+   canonical map. The GP refit reproduces its numbers exactly (230 arcs, 120
+   comparisons, nu 0.245, 219 ratings, same fitted link).
+2. `load_pool` exposed from `3.5/inference/arc_policy.py`, so the runtime no
+   longer reaches into the rating app for arc metadata.
+3. `common/loudness.py` now holds the canonical A-weighted `aw_rms`/`AW_TARGET`;
+   3.7's melody runtime imports it instead of a local copy. The two curves were
+   verified equivalent to 3.6e-08 dB before the copy was deleted, and the curve
+   matches published reference values (0.00 dB at 1 kHz, -39.5 at 31.5 Hz,
+   +1.2 at 3 kHz, -2.5 at 10 kHz).
+4. The human-space guard is frozen: `3.4.2/weights/boundary_guard_human.json`,
+   tau 0.5505 against the judge guard's 0.5898. **Bug found doing it:**
+   `fit_guard.py` accepted a single `--bank-index`, but `anchor_idx` indexes
+   the CONCATENATION of both banks, so every anchor past the first was out of
+   range and the human path had never been exercised. Fixed to take all banks.
+
+Next: §3.9's code, then §3.8 following the §2.8 plan. The report side is separately
 finished and committed, and its log is
 `THESIS_MYDIR/COMP0158_Report/notes/CLAUDE.md`, session 2026-09-06 (evening).
 

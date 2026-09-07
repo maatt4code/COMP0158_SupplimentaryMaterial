@@ -114,13 +114,13 @@ automated loop reached the running system, which is the finding of §4.1.
 |---|---|---|---|---|
 | [`common/`](code/common) | — | Shared imports only: the DDSP synth, device selection, dataset paths. | — | `import ddsp_synth` |
 | [`models/3.3_drone_synthesis_and_nsynth_prior/`](code/models/3.3_drone_synthesis_and_nsynth_prior) | §3.3 | Measures an empirical timbre prior from NSynth bowed strings, then samples and renders the 20,000-preset bank. | `python train/build_nsynth_prior.py --metadata-only`<br>`python train/analyse_nsynth_timbre.py --audio-dir $DRONE_NSYNTH/audio`<br>`python train/generate_preset_bank.py --n 10000 --duration 10` | `python inference/theta_render.py --out demo.wav --f0 55 --duration 6` |
-| [`models/3.4.1_surrogate_guided_optimisation/`](code/models/3.4.1_surrogate_guided_optimisation) | §3.4.1 | Labels the bank with frozen MERT and audEERING heads, distils a 250k-parameter CNN proxy, and optimises a mapper against it. This is the loop that reward-hacked. | `python train/label_dataset.py --arousal-ridge emo --arousal-scale pm1`<br>`python train/train_judge_proxy.py`<br>`python train/train_closed_loop.py` | none by design, see §4.1 |
-| [`models/3.4.2_human_grounding_and_retrieval/`](code/models/3.4.2_human_grounding_and_retrieval) | §3.4.2 | Propagates 150 human seed ratings across the bank with θ-KRR, then serves 1-NN retrieval. This is what the conductor actually navigates. | `python train/rating_agreement.py`<br>`python train/propagate_labels_krr.py`<br>`python train/fit_guard.py` | `python inference/retrieval_engines.py --v -0.3 --a 0.4` |
-| [`models/3.5_transition_dynamics_and_scheduling/`](code/models/3.5_transition_dynamics_and_scheduling) | §3.5 | Semi-Markov dwell scheduler over five transition archetypes, re-ranked by a Bradley–Terry preference GP. | `python train/fit_preference_gp.py` | `python inference/scheduler.py --demo` |
-| [`models/3.6_differentiable_reverberation/`](code/models/3.6_differentiable_reverberation) | §3.6 | Fits three scalars (decay, damping, wet gain) per impulse response by gradient descent under a multi-scale STFT loss. | `python train/fit_from_irs.py --echothief-root $DRONE_ECHOTHIEF` | `python inference/reverb.py --in dry.wav --out wet.wav --space dark_long` |
-| [`models/3.7_melody_generation/`](code/models/3.7_melody_generation) | §3.7 | Causal micro-transformer over Essen folk phrases, plus an order-2 Markov baseline. Three trained sizes ship. | `python train/build_essen_dataset.py`<br>`python train/train_transformer.py --layers 6 --d-model 128` | `python inference/melody_transformer.py --ckpt ../weights/melodic_transformer_L6_d128.pt --v 0.2 --a -0.4` |
-| [`models/3.9_human_evaluation_and_protocols/`](code/models/3.9_human_evaluation_and_protocols) | §3.9 | The listening studies: long-track recency and component preference. Merge and hygiene scripts, plus the rating data. | `python train/analyse_space_ratings.py`<br>`python train/build_results.py` | — |
-| [`conductor/`](code/conductor) | §3.8 | The deployed runtime. Inference only: it starts with every dataset root missing. | — | `python conductor/app.py` |
+| [`models/3.4.1_surrogate_guided_optimisation/`](code/models/3.4.1_surrogate_guided_optimisation) | §3.4.1 | Labels the bank with frozen MERT and audEERING heads, distils a 250k-parameter CNN proxy, and optimises a mapper against it. This is the loop that reward-hacked. | `python train/label_dataset.py --data-dir <bank>`<br>`python train/train_judge_proxy.py --data-dir <bank>`<br>`python train/train_closed_loop.py --bank-dirs <bank>` | none by design, see §4.1 |
+| [`models/3.4.2_human_grounding_and_retrieval/`](code/models/3.4.2_human_grounding_and_retrieval) | §3.4.2 | Propagates 150 human seed ratings across the bank with θ-KRR, then serves 1-NN retrieval. This is what the conductor actually navigates. | `python train/rating_agreement.py`<br>`python train/propagate_labels_krr.py --bank-index <bank>/labeled_index.csv`<br>`python train/fit_guard.py` | `python -c "import sys;sys.path.insert(0,'inference');import retrieval_engines as r;b=r.build_bank(['<bank>/labeled_index.csv']);print(r.make_engine('soft',b).blend(-0.3,0.4))"` |
+| [`models/3.5_transition_dynamics_and_scheduling/`](code/models/3.5_transition_dynamics_and_scheduling) | §3.5 | Semi-Markov dwell scheduler over five transition archetypes, re-ranked by a Bradley–Terry preference GP. | `python train/fit_preference_gp.py` | `python inference/scheduler.py --preset overlay --trans-source corpus_dwell` |
+| [`models/3.6_differentiable_reverberation/`](code/models/3.6_differentiable_reverberation) | §3.6 | Fits three scalars (decay, damping, wet gain) per impulse response by gradient descent under a multi-scale STFT loss. | `python train/fit_from_irs.py --echothief-root $DRONE_ECHOTHIEF` | `python inference/reverb_bank.py --list`<br>`python inference/reverb_bank.py --selftest` |
+| [`models/3.7_melody_generation/`](code/models/3.7_melody_generation) | §3.7 | Causal micro-transformer over Essen folk phrases, plus an order-2 Markov baseline. Three trained sizes ship. | `python train/build_essen_dataset.py`<br>`python train/train_transformer.py --n-layers 6 --d-model 128` | `python inference/melody_transformer.py --demo out.wav --valence 0.2 --arousal -0.4` |
+| [`models/3.9_human_evaluation_and_protocols/`](code/models/3.9_human_evaluation_and_protocols) | §3.9 | The listening studies: long-track recency and component preference. Merge and hygiene scripts, plus the rating data. | *not yet migrated; the rating data ships* | — |
+| [`conductor/`](code/conductor) | §3.8 | The deployed runtime. Inference only: it starts with every dataset root missing. | — | *not yet migrated* |
 
 Sections 3.1 and 3.2 ship no code. §3.1 is the architecture overview and §3.2
 is the developmental explorations.
@@ -142,19 +142,23 @@ python 3.3_drone_synthesis_and_nsynth_prior/train/generate_preset_bank.py \
        --n 10000 --duration 10 --out-dir $DRONE_DATA/ddsp_chord10k
 
 # 3.4.1  label it, distil the proxy, run the closed loop
+# the frozen judge configuration is the default; no flags needed for it
 python 3.4.1_surrogate_guided_optimisation/train/label_dataset.py \
-       --data-dir $DRONE_DATA/ddsp_chord10k --arousal-ridge emo --arousal-scale pm1
-python 3.4.1_surrogate_guided_optimisation/train/train_judge_proxy.py
-python 3.4.1_surrogate_guided_optimisation/train/train_closed_loop.py
+       --data-dir $DRONE_DATA/ddsp_chord10k
+python 3.4.1_surrogate_guided_optimisation/train/train_judge_proxy.py \
+       --data-dir $DRONE_DATA/ddsp_chord10k
+python 3.4.1_surrogate_guided_optimisation/train/train_closed_loop.py \
+       --bank-dirs $DRONE_DATA/ddsp_chord10k
 
 # 3.4.2  human grounding, which is what actually ships
-python 3.4.2_human_grounding_and_retrieval/train/propagate_labels_krr.py
+python 3.4.2_human_grounding_and_retrieval/train/propagate_labels_krr.py \
+       --bank-index $DRONE_DATA/ddsp_chord10k/labeled_index.csv --propagate
 python 3.4.2_human_grounding_and_retrieval/train/fit_guard.py
 
 # 3.5 to 3.7  scheduler, reverb, melody
 python 3.5_transition_dynamics_and_scheduling/train/fit_preference_gp.py
 python 3.6_differentiable_reverberation/train/fit_from_irs.py --echothief-root $DRONE_ECHOTHIEF
-python 3.7_melody_generation/train/train_transformer.py --layers 6 --d-model 128
+python 3.7_melody_generation/train/train_transformer.py --n-layers 6 --d-model 128
 ```
 
 Nothing above is needed to run the conductor. Every fitted artefact it uses

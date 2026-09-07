@@ -698,7 +698,7 @@ Measured from `s02_conductor_app.py`, not guessed.
 | `s20/s21/s22/s19/s18` | UI | UI/, verbatim but for import paths |
 | `crackle`, `distance` | optional overlays | runtime/ |
 
-#### 2.8c Four extractions still to do, all small
+#### 2.8c Four extractions -- THREE ARE NOW DONE (09-07)
 
 These are the only places the app still reaches into training code.
 
@@ -706,13 +706,13 @@ These are the only places the app still reaches into training code.
    frozen posterior already ships (`3.5/weights/preference_gp.npz`) and
    `arc_policy.PreferenceGP.load()` replaces it. This is decision 2's whole
    point, and it is already built and verified.
-2. **The texture ladder moves to inference.** `TEXTURE_GAINS`,
+2. ~~**The texture ladder moves to inference.**~~ **DONE.** `TEXTURE_GAINS`,
    `texture_overrides` and `texture_signed` currently live in
    `3.5/train/fit_preference_gp.py`, but the conductor RENDERS with them, so
    they belong beside `TEXTURE_CHOICES`. Move to
    `3.5/inference/arc_policy.py`; the trainer imports them back. ONE canonical
    map, so the level the GP learned a preference for is voiced identically.
-3. **`load_pool` moves to inference.** The app needs arc metadata, not the
+3. ~~**`load_pool` moves to inference.**~~ **DONE.** The app needs arc metadata, not the
    rating app. Expose `load_pool()` from `3.5/inference/arc_policy.py`
    (it already reads the manifest inline in `main`).
 4. **`render_params`**: `apply_chord`, `HOLD_S`, `RENDER_KW`, `aw_rms`,
@@ -723,12 +723,12 @@ These are the only places the app still reaches into training code.
 
 #### 2.8d Known gaps to close before the app will run
 
-* **The human-space guard is not frozen.** The app constructs the guard with
-  `label_space="judge"` but the UI lets a session retrieve on `valence_human`,
-  and a judge-space guard fences a human-space walk out of exactly the
-  territory the human axis opens up. `3.4.2/train/fit_guard.py` already
-  supports `--label-space human`; freeze a second weight
-  (`boundary_guard_human.json`) and have the app pick by label space.
+* ~~**The human-space guard is not frozen.**~~ **DONE 09-07.**
+  `3.4.2/weights/boundary_guard_human.json` now ships alongside the judge one
+  (tau 0.5505 against 0.5898). The app must PICK BY LABEL SPACE -- that wiring
+  is still to do. Fitting it exposed a bug: `fit_guard.py` took a single
+  `--bank-index`, but `anchor_idx` indexes the CONCATENATION of both banks, so
+  every anchor past the first bank was out of range. It now takes all of them.
 * **The bed bank is the fourth pre-fit and is not built.** `s15_bed_bank.py`
   reads `overlay_curation.csv` and writes `bed_bank.json`. Split it like the
   others: the build stays on the training side, `select_bed` is copied into

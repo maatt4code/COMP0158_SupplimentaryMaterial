@@ -123,6 +123,23 @@ def main():
     check("lookup baseline finds an arc at a rated context",
           lookup_best_arc(pool, gp, ctxs[0]) is not None)
 
+    # The conductor renders from the texture ladder and the arc metadata, so
+    # both must be reachable WITHOUT importing a training script, and there
+    # must be exactly one definition of the ladder.
+    from arc_policy import (TEXTURE_GAINS, texture_overrides, texture_signed,
+                            load_pool as inf_load_pool)
+    check("the texture ladder is on the inference side",
+          sorted(TEXTURE_GAINS) == [-1.0, -0.5, 0.0, 0.5, 1.0])
+    check("every ladder level maps to render overrides",
+          all(isinstance(texture_overrides(l), dict) for l in TEXTURE_GAINS))
+    check("texture_signed reads a plain arc as neutral",
+          texture_signed({}) == 0.0)
+    check("the ladder is defined ONCE, not copied into the trainer",
+          "TEXTURE_GAINS = {" not in (TRAIN / "fit_preference_gp.py").read_text())
+    check("arc metadata loads from inference", len(inf_load_pool()) == 230)
+    check("the trainer imports the ladder back from inference",
+          "from arc_policy import" in (TRAIN / "fit_preference_gp.py").read_text())
+
     print("\n5. scheduler")
     from scheduler import (preset, SemiMarkovScheduler, LiveBedScheduler,
                            example_va_gate, load_corpus, corpus_dwell_by_state,

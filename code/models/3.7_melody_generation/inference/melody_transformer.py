@@ -46,51 +46,25 @@ except ImportError as e:
     _ARRANGER = False
     _ARRANGER_ERR = str(e)
 
+# The loudness protocol is shared with the conductor and with the rated
+# stimuli, so it has ONE definition in common/. Two copies that drifted would
+# mean two different loudnesses and every level comparison against them would
+# be quietly wrong.
+from loudness import aw_rms, AW_TARGET, a_weighting_db      # noqa: E402
+
+try:
+    from decoupled_engine import DecoupledEngine
+    from arranger import RENDER_KW, apply_chord, ArrangedRenderer
+    _ARRANGER = True
+except ImportError as e:
+    _ARRANGER = False
+    _ARRANGER_ERR = str(e)
+
 # A-weighted RMS and its target live here rather than being imported, because
 # the loudness normalisation is what keeps the melody from spiking across
 # registers, and that must work whether or not the arranger is present.
-AW_TARGET = 0.015
-
-
-def aw_rms(x, sr=16000, n_fft=2048):
-    """A-weighted RMS: the level a listener perceives, not the raw one.
-
-    A melody an octave up at the same raw RMS reads far louder, because the ear
-    is more sensitive there. Weighting the spectrum by the A curve before
-    taking the level is what makes one gain setting hold across the register.
-    """
-    x = np.asarray(x, dtype=np.float64).ravel()
-    if x.size == 0:
-        return 0.0
-    n = int(min(len(x), n_fft * 8))
-    seg = x[:n]
-    X = np.abs(np.fft.rfft(seg))
-    f = np.fft.rfftfreq(len(seg), 1.0 / sr)
-    w = np.array([10.0 ** (iso226_a_weighting(fi) / 20.0) for fi in f])
-    # Parseval: weighted spectral energy back to a time-domain RMS.
-    return float(np.sqrt(np.sum((X * w) ** 2) / (len(seg) ** 2 / 2.0 + 1e-12)))
-
 SR = 16000
 DEFAULT_MELODY_LEVEL_DB = 0.0
-
-
-def iso226_a_weighting(f):
-    """
-    Computes ISO 226 / IEC 61672:2003 A-weighting sensitivity in dB for frequency f (Hz).
-    Reflects the human ear's non-linear frequency response (Fletcher-Munson curves).
-    """
-    f = np.maximum(float(f), 10.0)
-    f2 = f * f
-    c1 = 12194.217 ** 2
-    c2 = 20.598997 ** 2
-    c3 = 107.65265 ** 2
-    c4 = 737.86223 ** 2
-    
-    num = c1 * (f2 ** 2)
-    den = (f2 + c2) * np.sqrt((f2 + c3) * (f2 + c4)) * (f2 + c1)
-    r_a = num / (den + 1e-12)
-    a_db = 20.0 * np.log10(r_a + 1e-12) + 2.0
-    return a_db
 
 
 def iso226_note_gain(freq_hz, ref_freq=440.0, max_boost_db=15.0):
@@ -100,8 +74,8 @@ def iso226_note_gain(freq_hz, ref_freq=440.0, max_boost_db=15.0):
     do not sound drowned by low bass pads, and high notes (1-3 kHz) do not sound piercingly loud.
     Clamped at max_boost_db (+15 dB factor 5.62x) for low frequencies to prevent sub-bass gain spikes.
     """
-    a_note = iso226_a_weighting(freq_hz)
-    a_ref = iso226_a_weighting(ref_freq)
+    a_note = a_weighting_db(freq_hz)
+    a_ref = a_weighting_db(ref_freq)
     delta_db = a_ref - a_note
     delta_db = min(max_boost_db, delta_db)  # Clamp low-frequency gain boost at +15 dB
     return 10.0 ** (delta_db / 20.0)

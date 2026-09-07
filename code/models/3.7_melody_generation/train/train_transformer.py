@@ -265,13 +265,14 @@ def train(epochs=100, batch_size=32, lr=1e-3, patience=7, n_layers=6, d_model=25
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="Train MicroMelodicTransformer")
     parser.add_argument("--epochs", type=int, default=100)
-    parser.add_argument("--batch_size", type=int, default=32)
+    parser.add_argument("--batch-size", "--batch_size", dest="batch_size",
+                        type=int, default=32)
     parser.add_argument("--lr", type=float, default=1e-3)
     parser.add_argument("--patience", type=int, default=7)
-    parser.add_argument("--n_layers", type=int, default=6, help="Number of Causal Transformer layers (default: 6)")
-    parser.add_argument("--d_model", type=int, default=256, help="Model hidden dimension (default: 256)")
-    parser.add_argument("--n_heads", type=int, default=8, help="Number of attention heads (default: 8)")
-    parser.add_argument("--d_ffn", type=int, default=1024, help="Feed-forward dimension (default: 1024)")
+    parser.add_argument("--n-layers", "--n_layers", dest="n_layers", type=int, default=6, help="Number of Causal Transformer layers (default: 6)")
+    parser.add_argument("--d-model", "--d_model", dest="d_model", type=int, default=256, help="Model hidden dimension (default: 256)")
+    parser.add_argument("--n-heads", "--n_heads", dest="n_heads", type=int, default=8, help="Number of attention heads (default: 8)")
+    parser.add_argument("--d-ffn", "--d_ffn", dest="d_ffn", type=int, default=1024, help="Feed-forward dimension (default: 1024)")
     parser.add_argument("--no_scheduler", action="store_true", help="Disable Cosine Annealing learning rate scheduler")
     args = parser.parse_args()
     
