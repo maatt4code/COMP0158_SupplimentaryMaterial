@@ -4,9 +4,10 @@ Last updated **2026-09-07**. Written so a fresh session on
 another machine can continue without re-scanning the code tree. Everything
 marked *verified* was derived from source in that session: do not re-derive it.
 
-**Where we stopped.** §3.3 and §3.4.1 are both complete and dry-run. §3.3 is
-committed as `c2890bd`; §3.4.1 is written but NOT yet committed. Next session
-either commits §3.4.1 or starts §9 step 1, de-identifying the staged ratings. The report side is separately
+**Where we stopped.** §3.3, §3.4.1 and §3.4.2 are complete and dry-run. §3.3 is
+`c2890bd`, §3.4.1 is `2a95564`. **§3.4.2 is written but NOT yet committed.**
+§9 step 1 is DONE for the seed-valence set (§12); the other five staged rating
+sets belong to later sections. Next: §3.5. The report side is separately
 finished and committed, and its log is
 `THESIS_MYDIR/COMP0158_Report/notes/CLAUDE.md`, session 2026-09-06 (evening).
 
@@ -87,6 +88,10 @@ evaluation and protocols. §3.1 and §3.2 ship no code.
 - **READMEs** for all seven sections with dataset URLs and licences, plus
   `human_ratings/README.md` for each.
 - **Raw ratings staged** to `_raw_ratings_DO_NOT_COMMIT/`, 35 files, 2.2 MB.
+- **§3.4.2 migrated in full** (09-07). Six scripts in `train/`, four modules in
+  `inference/` (this section DOES reach the runtime), three artefacts in
+  `weights/`, pseudonymised ratings plus MERT features in `human_ratings/`, a
+  smoke test of 71 checks, four samples. See §12.
 - **§3.4.1 migrated in full** (09-07). Ten scripts in `train/`, an empty
   `inference/` with a README saying why, five artefacts in `weights/`, a smoke
   test of 63 checks, four committed samples, and a README carrying the
@@ -178,14 +183,18 @@ and 11.
 
 ## 9. Next steps, in order
 
-1. **De-identify.** Apply the `R01`…`R09` map to the staged ratings, re-key the
+1. ~~**De-identify** the seed-valence set~~ **done 09-07** (§12); the tool is
+   `_raw_ratings_DO_NOT_COMMIT/deidentify.py`, git-ignored. Still to do for the
+   other five staged sets when their sections land.
+   Original note: Apply the `R01`…`R09` map to the staged ratings, re-key the
    reverb bank off artist names (`code/README.md` §0.2), strip absolute paths
    (§0.4). Everything downstream copies these files, so this is first.
    Three name sites that must change together, because one is a lookup key:
    `s15_ladder_human_report.py:75` `by_rater["matthew"]`,
    `figs/ladder_human.json` `readback` field, `build_results.py:31` comment.
    `build_results.py:33` also has a real handle in `COMPLETERS`.
-2. ~~Migrate §3.4.1~~ **done 09-07, uncommitted.** Then 3.4.2, 3.5, 3.6, 3.7, 3.9. Each: copy, drop step
+2. ~~Migrate §3.4.1~~ (`2a95564`), ~~3.4.2~~ **done 09-07, uncommitted.**
+   Then 3.5, 3.6, 3.7, 3.9. Each: copy, drop step
    prefixes, split train from inference, dataset roots as arguments, run
    instructions in the docstring, README, smoke test, **dry run**, four sample
    outputs.
@@ -230,6 +239,64 @@ the username. That is decision 8's stated exemption. Everything else must be
 clean.
 
 Then work `code/README.md` §2.3 for §3.4.1, following §1a's conventions.
+
+## 12. §3.4.2, de-identification, and a correction
+
+**§9 step 1 is done for the seed-valence set.** The `R01`..`R09` map was
+recovered positionally against the report's own pseudonymised copy (same 713
+rows, same order, every non-rater column identical), verified one-to-one, and
+written to `_raw_ratings_DO_NOT_COMMIT/rater_map.json`, which is git-ignored
+along with the `deidentify.py` that produced it. Scrubbed: rater ids, absolute
+clip paths, `bank_files` inside `pool_meta.json` (a LIST of paths -- walking
+only top-level strings missed 3 per entry, 450 in all), and `wav_dir` in
+`pool_mert_meta.json`. The scrub is **behaviour-preserving**: the migrated IRR
+script on the pseudonymised CSV reproduces alpha = **0.096**, the stratified
+0.366 / -0.135, and unanimity 9/124 exactly.
+
+**CORRECTION to §6 and §10: the theta-KRR label source is `R03`, not `R01`.**
+The claim that it is one rater (N=1) is right; only the pseudonym was wrong.
+`"matthew"` never appears in the CSV -- it is synthesised by a hygiene rule that
+remaps a session-test account's real-day rows, and that account is `R03`.
+Checked, not assumed: propagating R03 gives MAE 0.566, rho **0.337**, sign
+**0.69**, exactly the report's row; R01 (who also rated all 150) gives 0.603 /
+0.211 / 0.64. `code/models/3.4.2.../human_ratings/README.md` has been corrected.
+
+**Verified reproduction.** alpha 0.096; theta-KRR winner RBF KRR alpha=1.0
+gamma=0.003 with MAE 0.566 / rho 0.337 / sign 0.69 over the 20,000-anchor bank,
+all 150 clips verified against their anchor rows; guard tau **0.5898** against
+the 0.590 recorded in the original; judge valence ceiling **+0.244** against the
+human axis's **+0.572**, which are the report's "+0.24" and "[-1.0, +0.57]".
+
+**Design decisions taken.**
+1. The guard splits so that **no rating data ships**. Posterior sigma depends
+   only on the rated COORDINATES and the kernel, never on the values, and the
+   live app reads sigma/tau/safe_points only. `weights/boundary_guard.json`
+   carries X, kernel, K_inv, tau and the safe set -- no ratings. The runtime
+   recomputes the posterior in numpy with no sklearn, and `fit_guard.py`
+   refuses to write a guard the runtime cannot reproduce (agrees to 3e-15).
+2. `inference/` must not import `paths` or resolve a dataset root; bank indexes
+   are passed in. The smoke test asserts it on all four modules. This is what
+   keeps the conductor startable with every dataset missing.
+3. The control ridge ships as `.npz`, matching §3.4.1's judge heads. Bit-exact
+   on the shipped float64 features.
+
+**Four files beyond §2.4's mapping**, all blocking something: `decoupled_engine.py`
+(the bank loader, also in 3 conductor trees), `pool_mert.npz` + `s05_extract_mert.py`
+(the control ridge is unrunnable without the features, and the pool audio is not
+shipped), and `s11_train_attention_retrieval.py` (trains the shipped
+`attn_retrieval.pt`). User approved shipping the npz + extractor, and the npz
+form of the control ridge.
+
+**Canonical copies.** `s06_boundary_guard.py` and `step01_gp_softknn_engine.py`
+each exist in TWO versions: the `Phase2/` originals match all three
+`FINAL_CONDUCTOR/` trees, while the `Phase3/jamai_demo*` copies are older and
+shorter. §2.4's Phase2 mapping points at what shipped.
+
+**Control-ridge result** (the amendment-5 disambiguation): MERT embeddings ->
+human valence is at chance. Best LOOCV rho 0.056 linear / 0.106 RBF, against a
+permutation null with median |rho| 0.091 and p95 0.216. theta-space propagation
+reaches 0.337. So parameters carry the human valence signal and the semantic
+embeddings do not -- which is what `methodology_stage.tex:65` argues.
 
 ## 11. §3.4.1, and what the dry run established
 

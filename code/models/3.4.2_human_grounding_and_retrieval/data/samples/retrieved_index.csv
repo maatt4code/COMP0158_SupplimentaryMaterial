@@ -1,0 +1,5 @@
+file,label_space,requested_v,requested_a,anchor_idx,anchor_v,anchor_a,f0_hz
+judge_vm0.8_am0.4.wav,judge,-0.8,-0.4,15909,-0.7954,-0.397,251.57
+judge_vp0.3_ap0.2.wav,judge,0.3,0.2,7929,0.192,0.3021,75.25
+human_vm0.8_am0.4.wav,human,-0.8,-0.4,6797,-0.8048,-0.3875,49.8
+human_vp0.3_ap0.2.wav,human,0.3,0.2,19730,0.2969,0.1948,135.91

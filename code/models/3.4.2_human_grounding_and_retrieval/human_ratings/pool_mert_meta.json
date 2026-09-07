@@ -1,0 +1,11 @@
+{
+ "model": "m-a-p/MERT-v1-95M",
+ "pooling": "last_hidden_state.mean(time)",
+ "sample_rate": 24000,
+ "chunking": "5.0s chunk-and-mean, length-weighted, tails < 0.5s dropped",
+ "normalization": "in-memory A-weighted (IEC 61672) to aw-RMS 0.015, peak guard 0.9 (files untouched)",
+ "embedding_dim": 768,
+ "n_clips": 150,
+ "wav_dir": "01_MIDI_DDSP/al_pool",
+ "extracted_at": "2026-07-03T23:33:25"
+}
