@@ -1,12 +1,12 @@
 # STATUS — supplementary code migration
 
-Last updated **2026-09-06, end of session**. Written so a fresh session on
+Last updated **2026-09-07**. Written so a fresh session on
 another machine can continue without re-scanning the code tree. Everything
 marked *verified* was derived from source in that session: do not re-derive it.
 
-**Where we stopped.** §3.3 is complete and dry-run. Nothing is committed yet:
-`git status` shows the whole migration as untracked. Next session starts at §9
-step 1, de-identifying the staged ratings. The report side is separately
+**Where we stopped.** §3.3 and §3.4.1 are both complete and dry-run. §3.3 is
+committed as `c2890bd`; §3.4.1 is written but NOT yet committed. Next session
+either commits §3.4.1 or starts §9 step 1, de-identifying the staged ratings. The report side is separately
 finished and committed, and its log is
 `THESIS_MYDIR/COMP0158_Report/notes/CLAUDE.md`, session 2026-09-06 (evening).
 
@@ -58,7 +58,7 @@ system `python3` has no torch: use the env above for anything that runs.
 
 ```
 code/
-  README.md            migration plan, working document, probably not shipped
+  README.md            reproduction guide, ships (decision 10)
   common/              ddsp_synth.py, device.py, paths.py
   models/<section>/    train/ weights/ inference/ human_ratings/ data/
                        plus README.md and smoke_test.py
@@ -87,6 +87,10 @@ evaluation and protocols. §3.1 and §3.2 ship no code.
 - **READMEs** for all seven sections with dataset URLs and licences, plus
   `human_ratings/README.md` for each.
 - **Raw ratings staged** to `_raw_ratings_DO_NOT_COMMIT/`, 35 files, 2.2 MB.
+- **§3.4.1 migrated in full** (09-07). Ten scripts in `train/`, an empty
+  `inference/` with a README saying why, five artefacts in `weights/`, a smoke
+  test of 63 checks, four committed samples, and a README carrying the
+  reference numbers. Dry-run against real data; see §11.
 
 ### §3.3, file by file
 
@@ -118,6 +122,8 @@ $E code/models/3.3_drone_synthesis_and_nsynth_prior/smoke_test.py   # expect exi
 | 7 | 09-06 | **Generated output goes to the section's own `data/`**, git-ignored, with three or four sample outputs committed under `data/samples/`. |
 | 8 | 09-06 | **Naming**: no personal names, no `JAMAI`, no tool names such as `Claude` in paths, no step-number prefixes. Environment variables are `DRONE_*`. |
 | 9 | 09-06 | **The measured timbre prior ships**, unchanged. `3.3/weights/timbre_prior/frames.npz`, 29 MB, sha256-verified identical to the source. Shipped at full float32 rather than halved to float16, so the artefact is bit-identical to the one that produced the results. §3.3 then runs with no NSynth download. |
+| 10 | 09-07 | **`code/README.md` ships.** It is rewritten from a migration plan into a reproduction guide addressed to a human grader and to a future Claude session: what each section does, how to run it, what it needs, what it produces. Consequence: it must **pass** the leak gate, so `--exclude=README.md` comes off, the five references to the private source tree go, and the banned strings it currently quotes as rules are re-expressed without naming them. |
+| 11 | 09-07 | **The melody-model discrepancy is not an error to fix.** All three transformers are offered in a UI drop-down, so deploying `L6_d128` does not contradict the parsimony argument for `L3_d128`. §10's live finding is closed; no report change. |
 
 ## 6. Verified — do not re-derive
 
@@ -167,9 +173,8 @@ $E code/models/3.3_drone_synthesis_and_nsynth_prior/smoke_test.py   # expect exi
 
 ## 8. Open questions for the user
 
-1. **Does `code/README.md` ship?** It is a working migration plan that quotes
-   source-tree paths as evidence. The reader-facing document is the top-level
-   `README.md`. My recommendation is that it stays out of the submission.
+None outstanding. Both former questions were answered 09-07; see decisions 10
+and 11.
 
 ## 9. Next steps, in order
 
@@ -180,7 +185,7 @@ $E code/models/3.3_drone_synthesis_and_nsynth_prior/smoke_test.py   # expect exi
    `s15_ladder_human_report.py:75` `by_rater["matthew"]`,
    `figs/ladder_human.json` `readback` field, `build_results.py:31` comment.
    `build_results.py:33` also has a real handle in `COMPLETERS`.
-2. **Migrate §3.4.1**, then 3.4.2, 3.5, 3.6, 3.7, 3.9. Each: copy, drop step
+2. ~~Migrate §3.4.1~~ **done 09-07, uncommitted.** Then 3.4.2, 3.5, 3.6, 3.7, 3.9. Each: copy, drop step
    prefixes, split train from inference, dataset roots as arguments, run
    instructions in the docstring, README, smoke test, **dry run**, four sample
    outputs.
@@ -191,6 +196,9 @@ $E code/models/3.3_drone_synthesis_and_nsynth_prior/smoke_test.py   # expect exi
    every dataset root pointed at `/nonexistent`. **Rename `JAMAI_DATA` in that
    script when you do**, or the test passes by reading nothing.
 5. Licence and attribution split, then packaging extras.
+6. **Rewrite `code/README.md` as the shipped reproduction guide** (decision 10).
+   Last, because it can only describe sections that exist. Then drop
+   `--exclude=README.md` from the §9a leak gate and re-run it.
 
 ## 9a. Exactly how to resume
 
@@ -208,6 +216,8 @@ $E code/models/3.3_drone_synthesis_and_nsynth_prior/train/generate_preset_bank.p
 # 3. the leak gate. Must print nothing.
 #    STATUS.md and code/README.md are excluded on purpose: they are the
 #    documents that STATE the rules, so they quote every banned string.
+#    code/README.md's exclusion is TEMPORARY: decision 10 ships that file, so
+#    step 6 rewrites it and this --exclude must then come off.
 grep -rIn --exclude=STATUS.md --exclude=README.md \
      -e JAMAI -e jamai -e Matthew -e matthew -e maatt -e Claude -e Gemini \
      code/ env/
@@ -220,6 +230,63 @@ the username. That is decision 8's stated exemption. Everything else must be
 clean.
 
 Then work `code/README.md` §2.3 for §3.4.1, following §1a's conventions.
+
+## 11. §3.4.1, and what the dry run established
+
+**Verified reproduction.** The port is not merely equivalent, it is bit-exact
+where it can be:
+
+- `label_dataset.py` re-labels the 60-clip calm probe to **byte-identical**
+  values in all four columns, against the committed `labeled_index.csv`.
+- The cycle chain reproduces exactly: valence MAE **0.337**, arousal MAE
+  **0.536**, Euclidean **0.678**, arousal bias **+0.380**. All 60 rendered wavs
+  are byte-identical to the originals'.
+- `cross_domain_indomain.py --n 150` returns **+0.72 / +0.85** for the
+  home-domain heads, which are the two numbers hard-coded into the original
+  script's figure title.
+- The proxy trainer's member-0 validation MSE matches the original run.
+
+**Four defects found and fixed.**
+
+1. **The float32 discovery.** `Ridge.predict` computes in **float32** when
+   handed a float32 array, and MERT embeddings are float32, so the published
+   labels were produced in float32. Reconstructing the heads in float64 shifted
+   every label by ~2e-7 and broke bit-exactness. `RidgeHead.predict` now
+   reproduces sklearn's dtype behaviour on purpose. **Check this anywhere a
+   fitted sklearn model is reconstructed from arrays.**
+2. **`common/paths.py` DEFAULTS were wrong for the build host** — `deam`,
+   `emo_soundscapes` and `echothief` all pointed at directories that do not
+   exist. Fixed to `DEAM`, `Emo-Soundscapes`, and
+   `reverbs/EchoThiefImpulseResponseLibrary`. §3.3 never noticed because it only
+   reads `nsynth`. **`essen` is still wrong/absent** — resolve it when §3.7
+   lands; the comment says music21 supplies it.
+3. **The §3.3 noise-seed defect recurred.** `resolution_experiment_v2.py` seeded
+   numpy but not torch, so its 75 clips were never reproducible. Seeded, two
+   runs are byte-identical. Regenerated audio differs from the shipped clips by
+   up to 0.019 on a 0.88 peak, but condition means agree to 0.002 and
+   inter-judge r to 0.004, so the reported conclusion is untouched.
+4. **Training scripts defaulted their output into the committed `models/`
+   directory.** All three now default `--out-dir` to the section's `data/`, and
+   the smoke test asserts it. This is the §1a rule about `weights/` made
+   mechanical.
+
+**Two extra decisions, both taken 09-07 with the user.** The three frozen ridge
+heads live OUTSIDE the migration source tree, at
+`THESIS/code/soundscapes/models`, and nothing in §3.4.1 runs without them: they
+now ship as one 20 KB `weights/affect_ridges.npz` rather than as pickles.
+`cross_domain_validity.py` had an unmapped input, so
+`resolution_experiment_v2.py` was migrated too, as
+`train/render_resolution_probe.py` — one file beyond §2.3's mapping.
+
+**An incident worth not repeating.** A dry run of the ORIGINAL `s08` was given
+no `--out-dir`, and its default is the committed `models/` directory, so a
+2-epoch toy fit overwrote the real `judge_proxy.pt` and `judge_proxy_e0.pt`.
+Both were restored from `RERUNS/20260905_prior_init/models/judge_proxy.pt`
+(byte-verified for `judge_proxy.pt`; `judge_proxy_e0.pt` reconstructed from it
+by the `shutil.copyfile` at `s08:239`, which makes the two identical by
+construction — sound, but no independent copy survives to prove it).
+`closed_loop_mapper.pt` escaped only because s09 saves from step 100 and the run
+was 20 steps. **Always pass `--out-dir` when dry-running the originals.**
 
 ## 10. Report-side findings this migration produced
 

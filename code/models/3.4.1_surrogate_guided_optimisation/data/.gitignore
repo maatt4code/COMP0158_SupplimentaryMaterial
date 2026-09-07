@@ -1,3 +1,5 @@
-# Generated outputs. Nothing here is committed.
+# Generated outputs. Nothing here is committed except the sample set.
 *
 !.gitignore
+!samples/
+!samples/**

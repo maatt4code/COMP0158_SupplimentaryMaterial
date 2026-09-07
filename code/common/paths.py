@@ -31,10 +31,10 @@ _CLUSTER = Path("/cs/student/msc/dsml/2023/myeung/THESIS_MYDIR/data")
 DEFAULTS: dict[str, Path] = {
     "data":            _CLUSTER / "generated_audio",  # written by this pipeline
     "nsynth":          _CLUSTER / "nsynth-train", # contains examples.json, audio/
-    "deam":            _CLUSTER / "deam",
-    "emo_soundscapes": _CLUSTER / "emo_soundscapes",
+    "deam":            _CLUSTER / "DEAM",       # annotations/, MEMD_audio/
+    "emo_soundscapes": _CLUSTER / "Emo-Soundscapes",
     "essen":           _CLUSTER / "essen",        # also reachable via music21
-    "echothief":       _CLUSTER / "echothief",    # impulse responses
+    "echothief":       _CLUSTER / "reverbs" / "EchoThiefImpulseResponseLibrary",
 }
 
 ENV_VARS: dict[str, str] = {
