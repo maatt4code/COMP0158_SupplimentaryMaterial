@@ -4,11 +4,12 @@ Last updated **2026-09-07**. Written so a fresh session on
 another machine can continue without re-scanning the code tree. Everything
 marked *verified* was derived from source in that session: do not re-derive it.
 
-**Where we stopped.** §3.3, §3.4.1, §3.4.2, §3.5 and §3.6 are complete and
-dry-run. §3.3 is `c2890bd`, §3.4.1 is `2a95564`. **§3.4.2, §3.5 and §3.6 are
-written but NOT yet committed.** De-identification is DONE for seed-valence,
-arc-pairwise, texture and reverb; longtrack and space-components remain, with
-§3.9. **Both §0.2 artist-name blockers are now closed** (§13, §14). Next: §3.7. The report side is separately
+**Where we stopped.** §3.3, §3.4.1, §3.4.2, §3.5, §3.6 and §3.7 are complete
+and dry-run -- every model section except §3.9. §3.3 is `c2890bd`, §3.4.1 is
+`2a95564`. **§3.4.2, §3.5, §3.6 and §3.7 are written but NOT yet committed.**
+De-identification is DONE for seed-valence, arc-pairwise, texture and reverb;
+longtrack and space-components remain, with §3.9. §0.2's artist-name blockers
+are closed (§13, §14, §15). Next: §3.9, then the conductor. The report side is separately
 finished and committed, and its log is
 `THESIS_MYDIR/COMP0158_Report/notes/CLAUDE.md`, session 2026-09-06 (evening).
 
@@ -89,6 +90,9 @@ evaluation and protocols. §3.1 and §3.2 ship no code.
 - **READMEs** for all seven sections with dataset URLs and licences, plus
   `human_ratings/README.md` for each.
 - **Raw ratings staged** to `_raw_ratings_DO_NOT_COMMIT/`, 35 files, 2.2 MB.
+- **§3.7 migrated in full** (09-07). Five scripts in `train/`, four modules in
+  `inference/`, the fitted grammar plus three checkpoints and the frozen anchor
+  in `weights/`, a smoke test of 63 checks, four melody samples. See §15.
 - **§3.6 migrated in full** (09-07). Two scripts in `train/`, two modules in
   `inference/`, two re-keyed banks plus three IRs in `weights/`, pseudonymised
   and re-keyed ratings, a smoke test of 60 checks, the whole ladder rendered as
@@ -202,8 +206,8 @@ and 11.
    `s15_ladder_human_report.py:75` `by_rater["matthew"]`,
    `figs/ladder_human.json` `readback` field, `build_results.py:31` comment.
    `build_results.py:33` also has a real handle in `COMPLETERS`.
-2. ~~Migrate §3.4.1~~ (`2a95564`), ~~3.4.2~~, ~~3.5~~, ~~3.6~~ **done 09-07,
-   uncommitted.** Then 3.7, 3.9. Each: copy, drop step
+2. ~~Migrate §3.4.1~~ (`2a95564`), ~~3.4.2~~, ~~3.5~~, ~~3.6~~, ~~3.7~~
+   **done 09-07, uncommitted.** Then 3.9. Each: copy, drop step
    prefixes, split train from inference, dataset roots as arguments, run
    instructions in the docstring, README, smoke test, **dry run**, four sample
    outputs.
@@ -254,6 +258,47 @@ the username. That is decision 8's stated exemption. Everything else must be
 clean.
 
 Then work `code/README.md` §2.3 for §3.4.1, following §1a's conventions.
+
+## 15. §3.7, and a third set of artist-derived identifiers
+
+**Verified reproduction.** Refitting the grammar from the corpus via music21
+reproduces the shipped `markov_order2.json` EXACTLY -- 8,514 tunes, 22,119
+phrases, and all four tables identical as dicts (trans 4,643, shapes 18,699,
+starts 104, phrase_len 173). The three architectures rebuild to the reported
+parameter counts exactly (612,387 / 1,207,203 / 4,773,667) and every checkpoint
+loads into the freshly built architecture. The migrated anchor picker returns
+the SAME anchor as the original (4174, from 4 candidates) and the same bed
+anchors (17713, 5747), now reading §3.4.2's pseudonymised pool.
+
+**Style names were artist initials.** Two of the four aesthetic registers were
+named after recording artists, including the DEFAULT parameter value. Re-keyed
+onto the knobs that separate them -- pace differs about 5x -- as
+`pentatonic_fast` and `pentatonic_slow`, alongside the genre names `folk` and
+`chant`. No numeric value changed. Twenty-one further name references in
+comments recording listening judgements were de-personalised; they remain
+judgements, which is the honest description.
+
+**Two train/inference splits were needed, both of the same kind as the guard.**
+(1) `EssenGrammar`/`PhraseBank` (sampling) moved to `inference/grammar.py` while
+fitting stayed in `train/build_markov_grammar.py`, so the runtime needs neither
+music21 nor a corpus. (2) `MicroMelodicTransformer` moved to
+`inference/transformer_model.py`; the runtime had been importing the model class
+from the TRAINING script to rebuild the architecture before loading a
+checkpoint, which the smoke test now forbids.
+
+**Two files beyond §2.7's mapping**, both fitters for shipped weights:
+`essen_model.py` -> `train/build_markov_grammar.py` (which now also takes
+`--essen-root`, so any notated corpus works), and the anchor picker extracted to
+`train/pick_melody_anchor.py`.
+
+**Placement deviation from §2.4:** `melody_anchor.json` ships in `3.7/weights/`,
+not `3.4.2/weights/`. The selection logic and the centroid band are melody
+concerns; the rated pool it reads stays in 3.4.2 and is referenced, not copied.
+
+**The promoted-copy alias does not ship.** `melodic_transformer_cpu.pt` was the
+L6/d128 weights under a second filename, which made the deployed app look like
+it carried a fourth model. Confirmed again by parameter count (1,207,203). The
+three real names ship and the smoke test asserts the alias is absent.
 
 ## 14. §3.6, and the second artist-name blocker
 

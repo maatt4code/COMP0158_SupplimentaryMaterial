@@ -1,0 +1,5 @@
+file,source,valence,arousal,scale,style,note_s,n_events,n_pitched,rhythm_ratio,rest_fraction,len_s
+phrase_bright.wav,phrase,0.6,0.3,major_pent,pentatonic_fast,1.69,19,16,2.0,0.107,38.7
+phrase_calm.wav,phrase,-0.4,-0.7,minor_pent,pentatonic_fast,2.93,12,10,2.0,0.126,42.9
+chain_bright.wav,markov,0.6,0.3,major_pent,pentatonic_fast,1.69,22,18,2.0,0.149,38.1
+authored_calm.wav,authored,-0.4,-0.7,minor_pent,pentatonic_fast,2.93,11,9,3.6,0.125,44.0

@@ -1,0 +1,33 @@
+{
+  "anchor_idx": 4174,
+  "n_candidates": 4,
+  "candidates": [
+    [
+      4174,
+      0.0110598212658816,
+      3.038052964183985
+    ],
+    [
+      13275,
+      0.0281712424377887,
+      1.664162331001673
+    ],
+    [
+      4026,
+      0.0333419880843019,
+      2.011393346393012
+    ],
+    [
+      13161,
+      0.5674725439320675,
+      1.9895824243135025
+    ]
+  ],
+  "min_rating": 1.0,
+  "centroid_range": [
+    1.6,
+    3.2
+  ],
+  "source": "Section 3.4.2 rated seed pool",
+  "note": "Chosen once so the runtime needs no rating data. Deterministic given the pool. The BED anchor is not frozen: it depends on live valence and arousal."
+}
