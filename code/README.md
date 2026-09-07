@@ -525,12 +525,22 @@ because the thesis has it wrong in one place (§7.2).
 | `logs/arc_types.json` | `weights/` | unchanged |
 | fitted GP posterior | `weights/` | `preference_gp.npz` |
 | `al_pool/arc_ratings.csv`, `arc_valence_ratings.csv` | `human_ratings/` | scrubbed per §0.1 |
-| `s13_corpus_hsmm_fit.py` | **does not ship** | see below |
+| `s13_corpus_hsmm_fit.py` | `train/` | `fit_corpus_hsmm.py` |
+| `s07b_transition_typology.py` | `train/` | `extract_transition_typology.py` |
 
-The HSMM fit runs on the commercial ambient corpus, so it stays out. The
-directory README documents what it did (Foote novelty segmentation, K-means,
-K=5), what it consumed, why it is absent, and the sha256 of
-`hsmm_transitions.json` so the shipped weight is traceable.
+**Revised 09-07: the HSMM fitter DOES ship, generalised.** The method is not
+the corpus. Both halves migrate and take `--audio-dir` as a list, so the
+pipeline retrains on any audio: each directory becomes a group label and is
+walked recursively. This also removes §0.2's artist-name blocker at the root --
+`ARTIST_DIRS` was a hardcoded map of artist names to directories, and it is
+replaced by whatever the caller passes.
+
+The corpus itself still does not ship. `weights/SHA256SUMS` records the fitted
+artefact so it stays traceable, and the directory README states which numbers
+are corpus-fit and which are authored.
+
+Verified: refitting from the original descriptor cache reproduces the shipped
+`hsmm_transitions.json` with **zero** differing fields.
 
 `s11_arrangement_scheduler.py:115` imports `s13_corpus_hsmm_fit` for
 "corpus-fit dwell/trans, opt-in". The module reads nothing at import time, only

@@ -4,10 +4,11 @@ Last updated **2026-09-07**. Written so a fresh session on
 another machine can continue without re-scanning the code tree. Everything
 marked *verified* was derived from source in that session: do not re-derive it.
 
-**Where we stopped.** §3.3, §3.4.1 and §3.4.2 are complete and dry-run. §3.3 is
-`c2890bd`, §3.4.1 is `2a95564`. **§3.4.2 is written but NOT yet committed.**
-§9 step 1 is DONE for the seed-valence set (§12); the other five staged rating
-sets belong to later sections. Next: §3.5. The report side is separately
+**Where we stopped.** §3.3, §3.4.1, §3.4.2 and §3.5 are complete and dry-run.
+§3.3 is `c2890bd`, §3.4.1 is `2a95564`. **§3.4.2 and §3.5 are written but NOT
+yet committed.** De-identification is DONE for seed-valence, arc-pairwise and
+texture (§12, §13); longtrack, space-components and reverb remain, with their
+sections. Next: §3.6. The report side is separately
 finished and committed, and its log is
 `THESIS_MYDIR/COMP0158_Report/notes/CLAUDE.md`, session 2026-09-06 (evening).
 
@@ -88,6 +89,9 @@ evaluation and protocols. §3.1 and §3.2 ship no code.
 - **READMEs** for all seven sections with dataset URLs and licences, plus
   `human_ratings/README.md` for each.
 - **Raw ratings staged** to `_raw_ratings_DO_NOT_COMMIT/`, 35 files, 2.2 MB.
+- **§3.5 migrated in full** (09-07). Four scripts in `train/`, three modules in
+  `inference/`, three artefacts in `weights/`, four pseudonymised data files in
+  `human_ratings/`, a smoke test of 87 checks, two sample CSVs. See §13.
 - **§3.4.2 migrated in full** (09-07). Six scripts in `train/`, four modules in
   `inference/` (this section DOES reach the runtime), three artefacts in
   `weights/`, pseudonymised ratings plus MERT features in `human_ratings/`, a
@@ -193,8 +197,8 @@ and 11.
    `s15_ladder_human_report.py:75` `by_rater["matthew"]`,
    `figs/ladder_human.json` `readback` field, `build_results.py:31` comment.
    `build_results.py:33` also has a real handle in `COMPLETERS`.
-2. ~~Migrate §3.4.1~~ (`2a95564`), ~~3.4.2~~ **done 09-07, uncommitted.**
-   Then 3.5, 3.6, 3.7, 3.9. Each: copy, drop step
+2. ~~Migrate §3.4.1~~ (`2a95564`), ~~3.4.2~~, ~~3.5~~ **done 09-07,
+   uncommitted.** Then 3.6, 3.7, 3.9. Each: copy, drop step
    prefixes, split train from inference, dataset roots as arguments, run
    instructions in the docstring, README, smoke test, **dry run**, four sample
    outputs.
@@ -239,6 +243,59 @@ the username. That is decision 8's stated exemption. Everything else must be
 clean.
 
 Then work `code/README.md` §2.3 for §3.4.1, following §1a's conventions.
+
+## 13. §3.5, and the global rater map
+
+**The report keeps ONE global rater numbering across studies**, and the tool now
+matches it. `deidentify.py` derives a map from EVERY file the report also ships
+pseudonymised, merges them, and aborts if two disagree. R03 is the primary rater
+in seed-valence, both arc files and texture. New arc raters are R11..R26 -- the
+report's own numbering, not invented here. Scrubbed arc files are byte-identical
+to the report's copies (17/17 and 16/16 columns, rater included), and §3.4.2's
+file is unchanged by the generalisation.
+
+**Two files beyond §2.5's mapping, both required**: `texture_ratings.csv` (122
+rows, feeds the GP's absolute term) and `arc_pool_meta.json` (230 arcs, the
+feature vocabulary; carried 230 absolute paths, scrubbed).
+
+**The preference GP is split like the guard.** `s01_arc_policy.py` imported the
+training modules and refit the GP live, which breaks the runtime boundary.
+`train/fit_preference_gp.py` now freezes the Laplace posterior to
+`weights/preference_gp.npz` and `inference/arc_policy.py` loads it. Verified:
+the frozen posterior reproduces `f` and `diag(Sigma)` at training rows to
+4.9e-4 / 7.0e-4 (the original's own 1e-3 tolerance) and batch-vs-single to
+3.6e-15.
+
+**DECISION REVERSED 09-07, at the user's instruction: the HSMM fitter SHIPS,
+generalised.** §2.5 had it excluded because it ran on a commercial corpus. The
+method is not the corpus. BOTH halves now migrate and take `--audio-dir` as a
+list, so the timing model retrains on any audio -- each directory becomes a
+group label, walked recursively:
+
+  `s07b_transition_typology.py` -> `train/extract_transition_typology.py`
+  `s13_corpus_hsmm_fit.py`      -> `train/fit_corpus_hsmm.py`
+
+This also kills **§0.2's artist-name blocker at the root**: `ARTIST_DIRS` was a
+hardcoded artist-name-to-directory map, now replaced by whatever the caller
+passes. `artist` became `group` throughout.
+
+Verified two ways. (1) Refitting from the ORIGINAL descriptor cache reproduces
+the shipped `hsmm_transitions.json` with **zero** differing fields (only
+`n_artists` -> `n_groups`, the deliberate rename). (2) The generic path runs end
+to end on three arbitrary directories: 6 tracks -> 256 transitions -> a full
+k=3 fit with its own dwell windows and a return rate of 0.430, against 0.039 on
+the shipped corpus.
+
+The corpus audio still does not ship. `weights/SHA256SUMS` records the fitted
+artefact's checksum. The s10 overlay-DSP dependency was dropped with the batch
+renderer; the scheduler core needs no audio.
+
+**Verified reproduction.** Tie rate 10.8%, Davidson nu 0.245, sign accuracy
+65.4%, 219 absolute ratings over 51 scenes; 293 seed pairs (96/96/96 + 5
+probes); rating target **125 of 711** possible pairs, both matching the numbers
+in the original docstrings; corpus active dwell (2.0, 28.6)s floored to
+(20.0, 28.6)s; live-vs-batch envelope equality to 1.2e-15, which is the
+join-click test the original called out.
 
 ## 12. §3.4.2, de-identification, and a correction
 

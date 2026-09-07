@@ -1,0 +1,367 @@
+{
+  "n_state_transitions": 1027,
+  "n_tracks": 95,
+  "n_consecutive_pairs": 932,
+  "n_artists": 14,
+  "settled_active_split": {
+    "type_hold_median_s": {
+      "type_0": 7.2,
+      "type_1": 8.2,
+      "type_2": 10.5,
+      "type_3": 11.1,
+      "type_4": 67.4
+    },
+    "sorted_gaps_s": [
+      1.0,
+      2.2,
+      0.6,
+      56.2
+    ],
+    "dominant_gap_s": 56.2,
+    "next_largest_gap_s": 2.2,
+    "gap_dominance_ratio": 25.0,
+    "settled_types": [
+      "type_4"
+    ],
+    "active_types": [
+      "type_0",
+      "type_1",
+      "type_2",
+      "type_3"
+    ],
+    "note": "split at the dominant gap; gap_dominance_ratio >> 1 means the settled/active distinction is robust, ~1 would mean the split is quantizing noise (the failure mode of the superseded tercile mapping)"
+  },
+  "dwell_window_s_by_group": {
+    "settled": [
+      15.5,
+      121.2
+    ],
+    "active": [
+      2.0,
+      28.6
+    ]
+  },
+  "dwell_window_s_pooled": [
+    2.2,
+    35.5
+  ],
+  "dwell_outlier_sensitivity": {
+    "with_exclusion": [
+      2.2,
+      35.5
+    ],
+    "without_exclusion": [
+      2.1,
+      36.1
+    ],
+    "note": "near-identical => s07b's outlier veto does not bias the shipped dwell numbers"
+  },
+  "return_rate_active_to_settled": 0.039,
+  "type_transition_counts": [
+    [
+      7.0,
+      32.0,
+      62.0,
+      18.0,
+      6.0
+    ],
+    [
+      28.0,
+      129.0,
+      74.0,
+      36.0,
+      18.0
+    ],
+    [
+      26.0,
+      92.0,
+      131.0,
+      74.0,
+      9.0
+    ],
+    [
+      50.0,
+      35.0,
+      46.0,
+      23.0,
+      4.0
+    ],
+    [
+      8.0,
+      12.0,
+      12.0,
+      6.0,
+      19.0
+    ]
+  ],
+  "corpus_type_model": {
+    "k": 5,
+    "desc_names": [
+      "duration_s",
+      "d_loudness",
+      "d_centroid",
+      "d_bandwidth",
+      "d_flatness",
+      "d_low_band",
+      "d_high_band",
+      "d_pitch_classes",
+      "d_peaks",
+      "d_layers",
+      "tonnetz_shift",
+      "total_magnitude",
+      "scale_s",
+      "pre_hold_s",
+      "post_hold_s"
+    ],
+    "cluster_dims": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14
+    ],
+    "cluster_dim_names": [
+      "duration_s",
+      "d_loudness",
+      "d_centroid",
+      "d_bandwidth",
+      "d_flatness",
+      "d_low_band",
+      "d_high_band",
+      "d_layers",
+      "tonnetz_shift",
+      "total_magnitude",
+      "scale_s",
+      "pre_hold_s",
+      "post_hold_s"
+    ],
+    "feature_mean": [
+      6.214869542753817,
+      0.12409271079004831,
+      -0.10637989891392202,
+      -0.14378725670026282,
+      -0.011660689208446769,
+      0.02397382947951653,
+      0.00814023000566927,
+      0.16514118792599802,
+      2.55715676728335,
+      -0.02142161635832521,
+      0.2022195467843133,
+      2.441954783683864,
+      14.582278481012658,
+      15.622000631476267,
+      15.7546565630472
+    ],
+    "feature_std": [
+      6.667445857311945,
+      0.8453081287040763,
+      1.1713867480382032,
+      0.9429926009542772,
+      0.27098069811816144,
+      0.9972250232961956,
+      1.1173269331992675,
+      2.6187088303189165,
+      34.88640455254766,
+      1.0829693154259445,
+      0.13522720359014484,
+      0.7298458064885794,
+      9.825735621151356,
+      19.68637885282921,
+      19.74371496226396
+    ],
+    "centroids_z": [
+      [
+        1.3383,
+        -0.1023,
+        -0.8351,
+        -0.7536,
+        -0.3241,
+        -0.2043,
+        -0.6298,
+        -0.2861,
+        0.1707,
+        0.1824,
+        1.4122,
+        -0.1428,
+        -0.0894
+      ],
+      [
+        -0.3556,
+        -0.4143,
+        0.3472,
+        0.3157,
+        0.2407,
+        0.0416,
+        0.3494,
+        0.2599,
+        -0.0686,
+        -0.5611,
+        -0.5554,
+        -0.2073,
+        -0.151
+      ],
+      [
+        -0.3176,
+        0.7839,
+        -0.7056,
+        -0.6229,
+        -0.5595,
+        0.36,
+        -0.7252,
+        -0.2351,
+        0.1559,
+        0.005,
+        -0.4861,
+        -0.1167,
+        -0.1297
+      ],
+      [
+        0.2501,
+        -0.7792,
+        1.4532,
+        1.2952,
+        1.0878,
+        -0.6168,
+        1.3849,
+        0.258,
+        -0.209,
+        1.0017,
+        0.8501,
+        -0.1222,
+        -0.0689
+      ],
+      [
+        0.1288,
+        0.0578,
+        -0.0061,
+        -0.0558,
+        -0.3961,
+        -0.1458,
+        -0.1675,
+        -0.1228,
+        -0.3448,
+        -0.2702,
+        0.3371,
+        2.5705,
+        2.0539
+      ]
+    ],
+    "transition_matrix": [
+      [
+        0.056,
+        0.256,
+        0.496,
+        0.144,
+        0.048
+      ],
+      [
+        0.0982,
+        0.4526,
+        0.2596,
+        0.1263,
+        0.0632
+      ],
+      [
+        0.0783,
+        0.2771,
+        0.3946,
+        0.2229,
+        0.0271
+      ],
+      [
+        0.3165,
+        0.2215,
+        0.2911,
+        0.1456,
+        0.0253
+      ],
+      [
+        0.1404,
+        0.2105,
+        0.2105,
+        0.1053,
+        0.3333
+      ]
+    ],
+    "transition_counts": [
+      [
+        7.0,
+        32.0,
+        62.0,
+        18.0,
+        6.0
+      ],
+      [
+        28.0,
+        129.0,
+        74.0,
+        36.0,
+        18.0
+      ],
+      [
+        26.0,
+        92.0,
+        131.0,
+        74.0,
+        9.0
+      ],
+      [
+        50.0,
+        35.0,
+        46.0,
+        23.0,
+        4.0
+      ],
+      [
+        8.0,
+        12.0,
+        12.0,
+        6.0,
+        19.0
+      ]
+    ],
+    "dwell_window_s_by_type": {
+      "type_0": [
+        2.5,
+        32.9
+      ],
+      "type_1": [
+        1.5,
+        29.5
+      ],
+      "type_2": [
+        3.0,
+        25.1
+      ],
+      "type_3": [
+        2.0,
+        29.6
+      ],
+      "type_4": [
+        15.5,
+        121.2
+      ]
+    },
+    "type_occupancy": {
+      "type_0": 131,
+      "type_1": 320,
+      "type_2": 350,
+      "type_3": 169,
+      "type_4": 57
+    },
+    "note": "5-state semi-Markov for the re-ranker (board 11b). To use: build a rendered arc's DESC_NAMES vector, classify_arc(vec, model) -> prev/candidate type, then re-rank the preference-GP's candidates by transition_matrix[prev_type][cand_type]. Human ratings still decide GOOD; this only breaks ties toward what follows COHERENTLY, never overriding a preference judgement. Classify by z-scoring with feature_mean/std, projecting onto cluster_dims, nearest centroids_z -- exactly fit_types' clustering projection. NOT the 3x3 bed layer (that is s11's synthesis control)."
+  },
+  "authored_active_split": {
+    "bed_duck": 0.6,
+    "bed_bursts": 0.4
+  },
+  "note": "STRONG (corpus-fit): per-group dwell windows + return_rate_active_to_settled. AUTHORED (corpus is silent): authored_active_split, i.e. duck-vs-bursts. type_transition_counts is the raw 5x5 type sequencing, reported for the thesis but NOT used to build the 3x3 (see module docstring -- the superseded tercile mapping did that and was unstable). corpus_type_model is the FULL 5-state semi-Markov (row-normalized 5x5 + per-type dwell + centroids) consumed by the sequential-coherence re-ranker (board 11b); the 3x3 stays s11's bed layer."
+}

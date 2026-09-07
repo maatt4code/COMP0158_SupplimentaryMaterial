@@ -1,0 +1,5 @@
+context_v,context_a,audible_dist,lookup_arc,lookup_f,gp_ramp_s,gp_chord,gp_glide,gp_texture,gp_mean,gp_std,gp_score
+-0.9009,0.1011,3.22,arc_144,0.3531,11.89,min->min,False,none,0.3324,0.1286,0.2038
+-0.8882,1.0,3.051,arc_111,0.3078,16.0,maj->min,False,none,0.1266,0.1091,0.0175
+-0.6371,-0.3126,3.451,arc_053,0.5242,6.42,min->min,False,none,0.3877,0.0802,0.3074
+-0.6094,0.4325,3.218,arc_041,0.3412,11.89,min->min,False,none,0.2044,0.0791,0.1253
