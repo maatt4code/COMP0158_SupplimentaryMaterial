@@ -1,0 +1,78 @@
+{
+  "wet": 0.5,
+  "fade_in_s": 0.005,
+  "fade_out_s": 1.0,
+  "fade_shape": "cos^2, as the scheduler's bed-gain crossfades",
+  "ir_bank": "ir_reverb_bank.json",
+  "measured_bank": "reverb_bank_measured.json",
+  "conditions": {
+    "dry": {
+      "id": "dry",
+      "kind": "dry",
+      "label": "dry (no reverb)",
+      "category": null,
+      "tail_s": 0.0,
+      "tone_hz": null
+    },
+    "nature": {
+      "id": "nature",
+      "kind": "ir",
+      "label": "Nature/FatMansMisery",
+      "category": "Nature",
+      "tail_s": 0.294,
+      "tone_hz": 2653.8,
+      "path": "/cs/student/project_msc/2025/dsml/myeung/COMP0158_SupplimentaryMaterial/code/models/3.6_differentiable_reverberation/weights/irs/Nature/FatMansMisery.wav",
+      "source": "measured IR (convolved)"
+    },
+    "brutalism": {
+      "id": "brutalism",
+      "kind": "ir",
+      "label": "Brutalism/PepperCanyonHall",
+      "category": "Brutalism",
+      "tail_s": 0.952,
+      "tone_hz": 3036.9,
+      "path": "/cs/student/project_msc/2025/dsml/myeung/COMP0158_SupplimentaryMaterial/code/models/3.6_differentiable_reverberation/weights/irs/Brutalism/PepperCanyonHall.wav",
+      "source": "measured IR (convolved)"
+    },
+    "stairwell": {
+      "id": "stairwell",
+      "kind": "ir",
+      "label": "Stairwells/CCRMAStairwell",
+      "category": "Stairwells",
+      "tail_s": 2.388,
+      "tone_hz": 2684.7,
+      "path": "/cs/student/project_msc/2025/dsml/myeung/COMP0158_SupplimentaryMaterial/code/models/3.6_differentiable_reverberation/weights/irs/Stairwells/CCRMAStairwell.wav",
+      "source": "measured IR (convolved)"
+    },
+    "long_bright": {
+      "id": "long_bright",
+      "kind": "measured",
+      "category": "long_bright",
+      "label": "long_bright (n=46)",
+      "tail_s": 5.053,
+      "tone_hz": 2434.3,
+      "params": {
+        "decay_time_s": 5.053,
+        "damping_hz": 2434.3,
+        "wet": 0.5,
+        "pre_delay_s": 0.02
+      },
+      "source": "fitted decay parameters"
+    },
+    "long_dark": {
+      "id": "long_dark",
+      "kind": "measured",
+      "category": "long_dark",
+      "label": "long_dark (n=7)",
+      "tail_s": 5.163,
+      "tone_hz": 438.4,
+      "params": {
+        "decay_time_s": 5.163,
+        "damping_hz": 438.4,
+        "wet": 0.5,
+        "pre_delay_s": 0.02
+      },
+      "source": "fitted decay parameters"
+    }
+  }
+}

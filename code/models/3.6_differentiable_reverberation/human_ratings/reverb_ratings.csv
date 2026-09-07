@@ -1,0 +1,381 @@
+timestamp,rater,mode,clip_id,path,reverb,valence_grade,use_grade,arousal,arousal_body,preference,note
+2026-07-25T16:10:56,R03,clips,pool_005,al_pool/pool_005.wav,long_dark,red,maybe,-0.2961,-0.8262,,"the tail - yes,. The first part - no"
+2026-07-25T16:11:02,R03,clips,pool_003,al_pool/pool_003.wav,brutalism,red,no,0.0507,-0.4134,,
+2026-07-25T16:11:13,R03,clips,pool_000,al_pool/pool_000.wav,long_dark,red,maybe,0.5256,-0.0501,,
+2026-07-25T16:11:53,R03,clips,pool_008,al_pool/pool_008.wav,long_dark,green,yes,0.7721,0.0537,,"againm, I would only use the tail"
+2026-07-25T16:12:02,R03,clips,pool_002,al_pool/pool_002.wav,long_bright,red,yes,0.1426,0.0447,,
+2026-07-25T16:12:24,R03,clips,pool_011,al_pool/pool_011.wav,long_bright,green,maybe,0.8038,0.7097,,first 4 secs is really farty
+2026-07-25T16:12:34,R03,clips,pool_009,al_pool/pool_009.wav,stairwell,neutral,maybe,0.2615,-0.0174,,
+2026-07-25T16:12:42,R03,clips,pool_005,al_pool/pool_005.wav,dry,neutral,maybe,-0.4816,-0.4816,,
+2026-07-25T16:12:58,R03,clips,pool_001,al_pool/pool_001.wav,brutalism,red,no,0.2441,-0.3227,,this sounds like a motorbike
+2026-07-25T16:13:05,R03,clips,pool_007,al_pool/pool_007.wav,stairwell,red,yes,0.7629,0.6775,,
+2026-07-25T16:13:14,R03,clips,pool_007,al_pool/pool_007.wav,nature,neutral,maybe,0.8025,0.491,,
+2026-07-25T16:13:24,R03,clips,pool_007,al_pool/pool_007.wav,brutalism,red,no,0.9095,0.7226,,
+2026-07-25T16:13:32,R03,clips,pool_000,al_pool/pool_000.wav,long_bright,neutral,yes,0.4839,-0.1223,,
+2026-07-25T16:13:47,R03,clips,pool_011,al_pool/pool_011.wav,nature,neutral,no,1.4812,0.9655,,this sounds like a race car
+2026-07-25T16:14:04,R03,clips,pool_009,al_pool/pool_009.wav,nature,red,no,0.2296,-0.1561,,still like a race car tho more distant
+2026-07-25T16:14:17,R03,clips,pool_005,al_pool/pool_005.wav,long_bright,neutral,yes,-0.4746,-0.7581,,
+2026-07-25T16:14:28,R03,clips,pool_004,al_pool/pool_004.wav,stairwell,red,no,0.0127,-0.2541,,race car
+2026-07-25T16:14:38,R03,clips,pool_007,al_pool/pool_007.wav,dry,red,no,0.4286,0.4286,,
+2026-07-25T16:14:50,R03,clips,pool_003,al_pool/pool_003.wav,nature,red,no,0.9858,0.5539,,lawnmower
+2026-07-25T16:15:11,R03,clips,pool_003,al_pool/pool_003.wav,long_dark,red,maybe,0.1649,-0.0879,,"motobike at the start, tail seems OK"
+2026-07-25T16:20:37,R03,clips,vtrans_002,texture_pool/vtrans_002.wav,long_dark,neutral,yes,1.3343,1.1427,,
+2026-07-25T16:20:50,R03,clips,vwander_020,texture_pool/vwander_020.wav,brutalism,neutral,yes,-0.1155,-0.304,,
+2026-07-25T16:21:03,R03,clips,vtrans_028,texture_pool/vtrans_028.wav,long_dark,green,yes,0.7366,0.8818,,
+2026-07-25T16:22:10,R03,clips,vwander_026,texture_pool/vwander_026.wav,long_dark,green,yes,0.5121,0.331,,
+2026-07-25T16:23:05,R03,clips,vtrans_019,texture_pool/vtrans_019.wav,long_bright,neutral,yes,0.8392,0.8085,,
+2026-07-25T16:23:18,R03,clips,vtrans_031,texture_pool/vtrans_031.wav,long_bright,green,yes,1.04,1.2471,,
+2026-07-25T16:23:33,R03,clips,vtrans_022,texture_pool/vtrans_022.wav,stairwell,neutral,maybe,1.3436,1.5046,,
+2026-07-25T16:23:50,R03,clips,vtrans_002,texture_pool/vtrans_002.wav,dry,green,yes,2.0373,2.0373,,
+2026-07-25T16:24:04,R03,clips,vwander_049,texture_pool/vwander_049.wav,brutalism,green,yes,1.2697,1.1654,,
+2026-07-25T16:24:15,R03,clips,vwander_059,texture_pool/vwander_059.wav,stairwell,neutral,yes,0.8469,1.0369,,
+2026-07-25T16:24:29,R03,clips,vwander_059,texture_pool/vwander_059.wav,nature,green,yes,0.1828,-0.0155,,
+2026-07-25T16:24:40,R03,clips,vwander_059,texture_pool/vwander_059.wav,brutalism,green,yes,0.7677,0.7303,,
+2026-07-25T16:24:54,R03,clips,vtrans_028,texture_pool/vtrans_028.wav,long_bright,neutral,yes,0.8482,0.9933,,
+2026-07-25T16:25:05,R03,clips,vtrans_031,texture_pool/vtrans_031.wav,nature,red,yes,1.9153,1.6982,,
+2026-07-25T16:25:17,R03,clips,vtrans_022,texture_pool/vtrans_022.wav,nature,red,yes,1.5866,1.3419,,
+2026-07-25T16:25:30,R03,clips,vtrans_002,texture_pool/vtrans_002.wav,long_bright,green,yes,1.3523,1.1607,,
+2026-07-25T16:25:41,R03,clips,vtrans_013,texture_pool/vtrans_013.wav,stairwell,green,yes,1.0239,1.0239,,
+2026-07-25T16:25:53,R03,clips,vwander_059,texture_pool/vwander_059.wav,dry,neutral,yes,0.578,0.578,,
+2026-07-25T16:27:09,R03,clips,vwander_020,texture_pool/vwander_020.wav,nature,neutral,yes,-0.3911,-0.5986,,
+2026-07-25T16:27:22,R03,clips,vwander_020,texture_pool/vwander_020.wav,long_dark,neutral,yes,-0.521,-0.8338,,
+2026-07-25T16:28:33,R03,clips,vwander_049,texture_pool/vwander_049.wav,long_bright,neutral,yes,0.8187,0.506,,
+2026-07-25T16:28:45,R03,clips,vtrans_031,texture_pool/vtrans_031.wav,dry,green,yes,1.6163,1.6163,,
+2026-07-25T16:28:55,R03,clips,vtrans_028,texture_pool/vtrans_028.wav,brutalism,red,yes,1.1988,0.9558,,
+2026-07-25T16:29:10,R03,clips,vtrans_031,texture_pool/vtrans_031.wav,long_dark,red,yes,1.1564,1.3005,,
+2026-07-25T16:29:23,R03,clips,vtrans_031,texture_pool/vtrans_031.wav,brutalism,neutral,yes,1.098,1.1907,,
+2026-07-25T16:29:32,R03,clips,vwander_001,texture_pool/vwander_001.wav,brutalism,green,yes,0.5812,0.2874,,
+2026-07-25T16:29:47,R03,clips,vwander_049,texture_pool/vwander_049.wav,long_dark,neutral,yes,0.7727,0.1967,,
+2026-07-25T16:30:09,R03,clips,vtrans_019,texture_pool/vtrans_019.wav,long_dark,neutral,maybe,0.5921,0.6938,,confusing
+2026-07-25T16:30:21,R03,clips,vwander_059,texture_pool/vwander_059.wav,long_dark,green,yes,0.2409,0.0999,,
+2026-07-25T16:31:00,R03,clips,vtrans_013,texture_pool/vtrans_013.wav,long_bright,green,yes,0.8961,1.1514,,got a bit busy in the middle
+2026-07-25T16:31:23,R03,clips,vtrans_022,texture_pool/vtrans_022.wav,long_bright,neutral,maybe,0.4952,0.841,,got really busy in the middle
+2026-07-25T16:31:33,R03,clips,vwander_020,texture_pool/vwander_020.wav,dry,neutral,yes,-0.7752,-0.7752,,
+2026-07-25T16:31:43,R03,clips,vwander_034,texture_pool/vwander_034.wav,stairwell,green,yes,1.3335,1.3917,,
+2026-07-25T16:32:10,R03,clips,vtrans_028,texture_pool/vtrans_028.wav,stairwell,neutral,maybe,0.9727,0.8593,,same got busy in the middle and a bit metalic
+2026-07-25T16:32:21,R03,clips,vtrans_028,texture_pool/vtrans_028.wav,nature,green,yes,1.4452,1.282,,
+2026-07-25T16:32:31,R03,clips,vwander_034,texture_pool/vwander_034.wav,dry,green,yes,1.1049,1.1049,,
+2026-07-25T16:32:51,R03,clips,vtrans_013,texture_pool/vtrans_013.wav,dry,neutral,maybe,1.5042,1.5042,,too rich
+2026-07-25T16:33:05,R03,clips,vwander_020,texture_pool/vwander_020.wav,stairwell,green,yes,-0.303,-0.4738,,
+2026-07-25T16:33:18,R03,clips,vtrans_028,texture_pool/vtrans_028.wav,dry,neutral,yes,1.1363,1.1363,,
+2026-07-25T16:33:40,R03,clips,vwander_049,texture_pool/vwander_049.wav,dry,neutral,yes,1.1281,1.1281,,too reverby towartds the end
+2026-07-25T16:33:54,R03,clips,vwander_020,texture_pool/vwander_020.wav,long_bright,green,yes,-0.57,-0.6906,,
+2026-07-25T16:34:09,R03,clips,vtrans_013,texture_pool/vtrans_013.wav,brutalism,green,yes,1.3867,1.3512,,
+2026-07-25T16:34:19,R03,clips,vwander_034,texture_pool/vwander_034.wav,nature,neutral,yes,1.1042,0.9325,,
+2026-07-25T16:34:40,R03,clips,vtrans_031,texture_pool/vtrans_031.wav,stairwell,green,yes,1.3342,1.1566,,maybe a bit too thick in the middle
+2026-07-25T16:34:52,R03,clips,vwander_026,texture_pool/vwander_026.wav,long_bright,green,yes,0.3072,0.3181,,
+2026-07-25T16:35:03,R03,clips,vwander_026,texture_pool/vwander_026.wav,brutalism,green,yes,0.7047,0.6095,,
+2026-07-25T16:35:13,R03,clips,vwander_001,texture_pool/vwander_001.wav,dry,green,yes,1.0543,1.0543,,
+2026-07-25T16:35:29,R03,clips,vwander_001,texture_pool/vwander_001.wav,long_dark,green,yes,1.1086,0.812,,
+2026-07-25T16:35:40,R03,clips,vtrans_019,texture_pool/vtrans_019.wav,stairwell,neutral,yes,1.2877,1.3302,,
+2026-07-25T16:35:52,R03,clips,vwander_026,texture_pool/vwander_026.wav,nature,green,yes,0.3471,0.156,,
+2026-07-25T16:36:02,R03,clips,vtrans_002,texture_pool/vtrans_002.wav,brutalism,neutral,yes,1.8094,1.8307,,
+2026-07-25T16:36:12,R03,clips,vtrans_013,texture_pool/vtrans_013.wav,nature,neutral,maybe,1.6442,1.4552,,
+2026-07-25T16:36:25,R03,clips,vwander_059,texture_pool/vwander_059.wav,long_bright,neutral,yes,0.2762,0.2674,,
+2026-07-25T16:36:50,R03,clips,vtrans_019,texture_pool/vtrans_019.wav,brutalism,green,yes,1.3693,1.2042,,
+2026-07-25T16:37:02,R03,clips,vwander_049,texture_pool/vwander_049.wav,stairwell,green,yes,0.9909,0.9293,,
+2026-07-25T16:37:17,R03,clips,vwander_034,texture_pool/vwander_034.wav,brutalism,green,yes,1.1906,1.1411,,
+2026-07-25T16:37:30,R03,clips,vwander_001,texture_pool/vwander_001.wav,long_bright,neutral,yes,1.0701,0.6393,,
+2026-07-25T16:37:43,R03,clips,vwander_026,texture_pool/vwander_026.wav,stairwell,green,yes,1.1252,1.1959,,
+2026-07-25T16:37:52,R03,clips,vtrans_002,texture_pool/vtrans_002.wav,nature,green,yes,1.7128,1.6937,,
+2026-07-25T16:38:01,R03,clips,vwander_001,texture_pool/vwander_001.wav,nature,red,yes,1.3474,1.172,,
+2026-07-25T16:38:12,R03,clips,vwander_034,texture_pool/vwander_034.wav,long_bright,green,yes,1.1144,0.9875,,
+2026-07-25T16:38:21,R03,clips,vwander_026,texture_pool/vwander_026.wav,dry,neutral,maybe,0.7466,0.7466,,
+2026-07-25T16:38:34,R03,clips,vtrans_019,texture_pool/vtrans_019.wav,nature,neutral,yes,1.5381,1.3597,,
+2026-07-25T16:38:53,R03,clips,vtrans_019,texture_pool/vtrans_019.wav,dry,neutral,yes,1.322,1.322,,
+2026-07-25T16:39:06,R03,clips,vwander_049,texture_pool/vwander_049.wav,nature,neutral,yes,1.3027,1.1217,,
+2026-07-25T16:39:16,R03,clips,vwander_001,texture_pool/vwander_001.wav,stairwell,green,yes,1.393,1.1621,,
+2026-07-25T16:39:40,R03,clips,vtrans_022,texture_pool/vtrans_022.wav,long_dark,neutral,no,0.6155,0.9471,,"too meesy in the ,iddle. too thick and too much going on"
+2026-07-25T16:39:52,R03,clips,vtrans_022,texture_pool/vtrans_022.wav,dry,green,yes,1.4414,1.4414,,
+2026-07-25T16:40:08,R03,clips,vtrans_013,texture_pool/vtrans_013.wav,long_dark,green,maybe,1.0199,1.2526,,
+2026-07-25T16:40:22,R03,clips,vwander_034,texture_pool/vwander_034.wav,long_dark,neutral,yes,1.1285,0.9211,,
+2026-07-25T16:40:31,R03,clips,vtrans_022,texture_pool/vtrans_022.wav,brutalism,neutral,no,1.1576,1.0567,,
+2026-07-25T16:40:43,R03,clips,vtrans_002,texture_pool/vtrans_002.wav,stairwell,red,yes,1.5279,1.7921,,
+2026-07-25T17:10:34,R03,soundscapes,r_0human214147_1661766-hq,human/r_0human214147_1661766-hq.wav,long_dark,red,no,0.0218,0.1509,,
+2026-07-25T17:10:40,R03,soundscapes,r_0human166175_1773681-hq,human/r_0human166175_1773681-hq.wav,brutalism,neutral,yes,0.2372,0.0613,,
+2026-07-25T17:10:52,R03,soundscapes,r_0human106568_7037-hq,human/r_0human106568_7037-hq.wav,long_dark,neutral,maybe,0.3877,0.3548,,
+2026-07-25T17:11:02,R03,soundscapes,r_0indicator13712_37876-hq,indicator/r_0indicator13712_37876-hq.wav,long_dark,neutral,maybe,0.1822,0.2079,,
+2026-07-25T17:11:11,R03,soundscapes,r_0human118096_29541-hq,human/r_0human118096_29541-hq.wav,long_bright,green,yes,-0.2574,-0.0081,,
+2026-07-25T17:11:18,R03,soundscapes,r_0indicator36047_8043-hq,indicator/r_0indicator36047_8043-hq.wav,long_bright,green,yes,0.2419,0.3509,,
+2026-07-25T17:11:24,R03,soundscapes,r_0indicator143963_18799-hq,indicator/r_0indicator143963_18799-hq.wav,stairwell,green,yes,0.7645,0.7647,,
+2026-07-25T17:11:32,R03,soundscapes,r_0human214147_1661766-hq,human/r_0human214147_1661766-hq.wav,dry,red,no,0.5086,0.5086,,
+2026-07-25T17:11:38,R03,soundscapes,r_0human113598_1015240-hq,human/r_0human113598_1015240-hq.wav,brutalism,green,yes,0.4397,0.3298,,
+2026-07-25T17:11:43,R03,soundscapes,r_0indicator114474_1962040-hq,indicator/r_0indicator114474_1962040-hq.wav,stairwell,neutral,maybe,0.6028,0.421,,
+2026-07-25T17:11:51,R03,soundscapes,r_0indicator114474_1962040-hq,indicator/r_0indicator114474_1962040-hq.wav,nature,red,yes,0.635,0.512,,
+2026-07-25T17:11:59,R03,soundscapes,r_0indicator114474_1962040-hq,indicator/r_0indicator114474_1962040-hq.wav,brutalism,neutral,yes,0.7105,0.4765,,
+2026-07-25T17:12:08,R03,soundscapes,r_0human106568_7037-hq,human/r_0human106568_7037-hq.wav,long_bright,green,yes,0.3817,0.3699,,
+2026-07-25T17:12:15,R03,soundscapes,r_0indicator36047_8043-hq,indicator/r_0indicator36047_8043-hq.wav,nature,neutral,yes,1.0108,0.793,,
+2026-07-25T17:12:21,R03,soundscapes,r_0indicator143963_18799-hq,indicator/r_0indicator143963_18799-hq.wav,nature,neutral,yes,1.026,0.8516,,
+2026-07-25T17:12:30,R03,soundscapes,r_0human214147_1661766-hq,human/r_0human214147_1661766-hq.wav,long_bright,neutral,no,0.1765,0.4242,,
+2026-07-25T17:12:37,R03,soundscapes,r_0human179928_3223507-hq,human/r_0human179928_3223507-hq.wav,stairwell,neutral,yes,0.5112,0.2942,,
+2026-07-25T17:12:46,R03,soundscapes,r_0indicator114474_1962040-hq,indicator/r_0indicator114474_1962040-hq.wav,dry,red,yes,0.5153,0.5153,,
+2026-07-25T17:12:53,R03,soundscapes,r_0human166175_1773681-hq,human/r_0human166175_1773681-hq.wav,nature,neutral,maybe,0.7722,0.493,,
+2026-07-25T17:12:58,R03,soundscapes,r_0human166175_1773681-hq,human/r_0human166175_1773681-hq.wav,long_dark,neutral,yes,0.1725,0.2636,,
+2026-07-25T17:13:04,R03,soundscapes,r_0human113598_1015240-hq,human/r_0human113598_1015240-hq.wav,long_bright,green,maybe,0.6327,0.6026,,
+2026-07-25T17:13:09,R03,soundscapes,r_0indicator36047_8043-hq,indicator/r_0indicator36047_8043-hq.wav,dry,green,yes,0.4715,0.4715,,
+2026-07-25T17:13:15,R03,soundscapes,r_0human106568_7037-hq,human/r_0human106568_7037-hq.wav,brutalism,green,yes,0.3975,0.3419,,
+2026-07-25T17:13:24,R03,soundscapes,r_0indicator36047_8043-hq,indicator/r_0indicator36047_8043-hq.wav,long_dark,neutral,maybe,0.0466,0.2208,,
+2026-07-25T17:13:32,R03,soundscapes,r_0indicator36047_8043-hq,indicator/r_0indicator36047_8043-hq.wav,brutalism,neutral,yes,0.0297,0.0802,,
+2026-07-25T17:13:42,R03,soundscapes,r_0indicator19369_8043-hq,indicator/r_0indicator19369_8043-hq.wav,brutalism,neutral,maybe,0.0074,-0.1511,,
+2026-07-25T17:13:49,R03,soundscapes,r_0human113598_1015240-hq,human/r_0human113598_1015240-hq.wav,long_dark,green,no,0.2214,0.2584,,
+2026-07-25T17:13:58,R03,soundscapes,r_0human118096_29541-hq,human/r_0human118096_29541-hq.wav,long_dark,neutral,yes,-0.233,-0.0347,,
+2026-07-25T17:14:07,R03,soundscapes,r_0indicator114474_1962040-hq,indicator/r_0indicator114474_1962040-hq.wav,long_dark,red,maybe,0.2041,0.1381,,
+2026-07-25T17:14:20,R03,soundscapes,r_0human179928_3223507-hq,human/r_0human179928_3223507-hq.wav,long_bright,neutral,yes,0.7958,0.5042,,
+2026-07-25T17:14:30,R03,soundscapes,r_0indicator143963_18799-hq,indicator/r_0indicator143963_18799-hq.wav,long_bright,red,yes,0.572,0.4822,,
+2026-07-25T17:14:47,R03,soundscapes,r_0human166175_1773681-hq,human/r_0human166175_1773681-hq.wav,dry,neutral,maybe,0.3457,0.3457,,
+2026-07-25T17:14:58,R03,soundscapes,r_0human50865_118241-hq,human/r_0human50865_118241-hq.wav,stairwell,neutral,yes,0.3677,0.0676,,
+2026-07-25T17:16:45,R03,soundscapes,r_0human106568_7037-hq,human/r_0human106568_7037-hq.wav,stairwell,green,maybe,0.3752,0.3948,,
+2026-07-25T17:16:50,R03,soundscapes,r_0human106568_7037-hq,human/r_0human106568_7037-hq.wav,nature,green,maybe,0.5591,0.4115,,
+2026-07-25T17:16:57,R03,soundscapes,r_0human50865_118241-hq,human/r_0human50865_118241-hq.wav,dry,neutral,yes,0.3744,0.3744,,
+2026-07-25T17:17:04,R03,soundscapes,r_0human179928_3223507-hq,human/r_0human179928_3223507-hq.wav,dry,neutral,yes,0.2612,0.2612,,
+2026-07-25T17:17:15,R03,soundscapes,r_0human166175_1773681-hq,human/r_0human166175_1773681-hq.wav,stairwell,neutral,yes,0.2942,0.1449,,
+2026-07-25T17:17:24,R03,soundscapes,r_0human106568_7037-hq,human/r_0human106568_7037-hq.wav,dry,green,yes,0.5036,0.5036,,
+2026-07-25T17:17:31,R03,soundscapes,r_0human113598_1015240-hq,human/r_0human113598_1015240-hq.wav,dry,green,yes,0.5241,0.5241,,
+2026-07-25T17:17:46,R03,soundscapes,r_0human166175_1773681-hq,human/r_0human166175_1773681-hq.wav,long_bright,neutral,yes,0.2916,0.3684,,
+2026-07-25T17:17:54,R03,soundscapes,r_0human179928_3223507-hq,human/r_0human179928_3223507-hq.wav,brutalism,red,yes,0.4223,0.0995,,
+2026-07-25T17:18:02,R03,soundscapes,r_0human50865_118241-hq,human/r_0human50865_118241-hq.wav,nature,neutral,yes,0.5122,0.3724,,
+2026-07-25T17:18:46,R03,soundscapes,r_0indicator36047_8043-hq,indicator/r_0indicator36047_8043-hq.wav,stairwell,neutral,yes,0.3758,0.3746,,
+2026-07-25T17:18:53,R03,soundscapes,r_0indicator13712_37876-hq,indicator/r_0indicator13712_37876-hq.wav,long_bright,red,yes,0.4202,0.5124,,
+2026-07-25T17:19:00,R03,soundscapes,r_0indicator13712_37876-hq,indicator/r_0indicator13712_37876-hq.wav,brutalism,red,yes,0.6416,0.8268,,
+2026-07-25T17:19:07,R03,soundscapes,r_0indicator19369_8043-hq,indicator/r_0indicator19369_8043-hq.wav,dry,green,yes,0.1497,0.1497,,
+2026-07-25T17:19:12,R03,soundscapes,r_0indicator19369_8043-hq,indicator/r_0indicator19369_8043-hq.wav,long_dark,green,yes,0.1082,-0.014,,
+2026-07-25T17:19:19,R03,soundscapes,r_0human118096_29541-hq,human/r_0human118096_29541-hq.wav,stairwell,neutral,yes,0.2694,0.2751,,
+2026-07-25T17:19:24,R03,soundscapes,r_0indicator13712_37876-hq,indicator/r_0indicator13712_37876-hq.wav,nature,neutral,yes,0.6226,0.5459,,
+2026-07-25T17:19:31,R03,soundscapes,r_0human214147_1661766-hq,human/r_0human214147_1661766-hq.wav,brutalism,red,maybe,0.1288,0.1746,,
+2026-07-25T17:19:39,R03,soundscapes,r_0human179928_3223507-hq,human/r_0human179928_3223507-hq.wav,nature,neutral,yes,0.3625,0.0845,,
+2026-07-25T17:19:44,R03,soundscapes,r_0indicator114474_1962040-hq,indicator/r_0indicator114474_1962040-hq.wav,long_bright,red,maybe,0.4005,0.2923,,
+2026-07-25T17:19:50,R03,soundscapes,r_0human118096_29541-hq,human/r_0human118096_29541-hq.wav,brutalism,green,yes,0.3837,0.155,,
+2026-07-25T17:19:56,R03,soundscapes,r_0human113598_1015240-hq,human/r_0human113598_1015240-hq.wav,stairwell,green,no,0.2844,0.2968,,
+2026-07-25T17:20:00,R03,soundscapes,r_0human50865_118241-hq,human/r_0human50865_118241-hq.wav,brutalism,neutral,yes,0.2003,-0.0014,,
+2026-07-25T17:20:06,R03,soundscapes,r_0indicator19369_8043-hq,indicator/r_0indicator19369_8043-hq.wav,long_bright,green,yes,0.0582,-0.0236,,
+2026-07-25T17:20:13,R03,soundscapes,r_0indicator13712_37876-hq,indicator/r_0indicator13712_37876-hq.wav,stairwell,red,yes,0.2588,0.7535,,
+2026-07-25T17:20:16,R03,soundscapes,r_0human214147_1661766-hq,human/r_0human214147_1661766-hq.wav,nature,red,no,0.6723,0.543,,
+2026-07-25T17:20:22,R03,soundscapes,r_0indicator19369_8043-hq,indicator/r_0indicator19369_8043-hq.wav,nature,neutral,yes,0.5393,0.32,,
+2026-07-25T17:20:25,R03,soundscapes,r_0human50865_118241-hq,human/r_0human50865_118241-hq.wav,long_bright,neutral,yes,0.2212,0.1642,,
+2026-07-25T17:20:29,R03,soundscapes,r_0indicator13712_37876-hq,indicator/r_0indicator13712_37876-hq.wav,dry,neutral,yes,0.5114,0.5114,,
+2026-07-25T17:20:34,R03,soundscapes,r_0human118096_29541-hq,human/r_0human118096_29541-hq.wav,nature,neutral,yes,0.4521,0.3834,,
+2026-07-25T17:20:38,R03,soundscapes,r_0human118096_29541-hq,human/r_0human118096_29541-hq.wav,dry,neutral,yes,0.2659,0.2659,,
+2026-07-25T17:20:44,R03,soundscapes,r_0human113598_1015240-hq,human/r_0human113598_1015240-hq.wav,nature,green,maybe,0.9535,0.7849,,
+2026-07-25T17:20:52,R03,soundscapes,r_0indicator19369_8043-hq,indicator/r_0indicator19369_8043-hq.wav,stairwell,green,yes,0.2258,0.0039,,
+2026-07-25T17:21:00,R03,soundscapes,r_0indicator143963_18799-hq,indicator/r_0indicator143963_18799-hq.wav,long_dark,neutral,yes,0.2609,0.4669,,
+2026-07-25T17:21:11,R03,soundscapes,r_0indicator143963_18799-hq,indicator/r_0indicator143963_18799-hq.wav,dry,red,yes,0.7223,0.7223,,
+2026-07-25T17:21:15,R03,soundscapes,r_0human179928_3223507-hq,human/r_0human179928_3223507-hq.wav,long_dark,red,yes,0.5918,0.2416,,
+2026-07-25T17:21:20,R03,soundscapes,r_0human50865_118241-hq,human/r_0human50865_118241-hq.wav,long_dark,red,yes,0.2434,0.0084,,
+2026-07-25T17:21:24,R03,soundscapes,r_0indicator143963_18799-hq,indicator/r_0indicator143963_18799-hq.wav,brutalism,red,yes,0.6569,0.5142,,
+2026-07-25T17:21:28,R03,soundscapes,r_0human214147_1661766-hq,human/r_0human214147_1661766-hq.wav,stairwell,red,no,0.1187,0.4037,,
+2026-07-25T17:31:00,R03,soundscapes,r_0quiet127242_116752-hq,quiet/r_0quiet127242_116752-hq.wav,long_dark,red,yes,-0.1795,-1.0646,,
+2026-07-25T17:31:48,R03,soundscapes,r_0nature129336_2355772-hq,nature/r_0nature129336_2355772-hq.wav,long_bright,green,maybe,0.0544,-0.0812,,
+2026-07-25T17:32:13,R03,soundscapes,r_0quiet319150_1648170-hq,quiet/r_0quiet319150_1648170-hq.wav,long_bright,green,maybe,-0.3093,-0.6131,,t
+2026-07-25T17:32:45,R03,soundscapes,r_0nature15542_2-hq,nature/r_0nature15542_2-hq.wav,dry,red,yes,-0.1147,-0.1147,,
+2026-07-25T17:32:54,R03,soundscapes,r_0mechanical134922_2461495-hq,mechanical/r_0mechanical134922_2461495-hq.wav,long_bright,red,no,0.3324,0.4534,,
+2026-07-25T17:33:09,R03,soundscapes,r_0mechanical134922_2461495-hq,mechanical/r_0mechanical134922_2461495-hq.wav,dry,red,no,0.5987,0.5987,,this is already really busy - no need for reverb
+2026-07-25T17:33:20,R03,soundscapes,r_0nature17535_17129-hq,nature/r_0nature17535_17129-hq.wav,long_bright,neutral,yes,-0.3813,-0.5319,,
+2026-07-25T17:45:15,R03,soundscapes,r_0mechanical120385_288-hq,mechanical/r_0mechanical120385_288-hq.wav,long_bright,red,maybe,-0.1719,-0.496,,
+2026-07-25T17:45:23,R03,soundscapes,r_0quiet319150_1648170-hq,quiet/r_0quiet319150_1648170-hq.wav,brutalism,green,yes,0.0771,-0.1667,,
+2026-07-25T17:45:31,R03,soundscapes,r_0nature129336_2355772-hq,nature/r_0nature129336_2355772-hq.wav,nature,green,yes,0.6033,0.4821,,
+2026-07-25T17:45:41,R03,soundscapes,r_0mechanical237743_691206-hq,mechanical/r_0mechanical237743_691206-hq.wav,brutalism,red,yes,0.2474,0.0933,,
+2026-07-25T17:45:48,R03,soundscapes,r_0mechanical134922_2461495-hq,mechanical/r_0mechanical134922_2461495-hq.wav,stairwell,red,no,0.4593,0.3686,,
+2026-07-25T17:45:56,R03,soundscapes,r_0mechanical165696_354987-hq,mechanical/r_0mechanical165696_354987-hq.wav,stairwell,red,yes,0.8447,0.662,,
+2026-07-25T17:46:08,R03,soundscapes,r_0nature17535_17129-hq,nature/r_0nature17535_17129-hq.wav,stairwell,green,yes,-0.127,-0.3693,,
+2026-07-25T17:46:14,R03,soundscapes,r_0quiet106869_1635617-hq,quiet/r_0quiet106869_1635617-hq.wav,dry,red,yes,-0.4053,-0.4053,,
+2026-07-25T17:46:59,R03,soundscapes,r_0nature118777_1708550-hq,nature/r_0nature118777_1708550-hq.wav,dry,green,yes,-0.4892,-0.4892,,
+2026-07-25T17:47:07,R03,soundscapes,r_0quiet127242_116752-hq,quiet/r_0quiet127242_116752-hq.wav,dry,red,yes,-0.6352,-0.6352,,
+2026-07-25T17:47:15,R03,soundscapes,r_0quiet106869_1635617-hq,quiet/r_0quiet106869_1635617-hq.wav,brutalism,red,no,-0.3087,-0.5302,,
+2026-07-25T17:47:20,R03,soundscapes,r_0quiet157007_1815320-hq,quiet/r_0quiet157007_1815320-hq.wav,stairwell,red,yes,-0.1739,-0.2985,,
+2026-07-25T17:47:34,R03,soundscapes,r_0mechanical237743_691206-hq,mechanical/r_0mechanical237743_691206-hq.wav,long_dark,red,maybe,-0.4059,-0.14,,
+2026-07-25T17:47:43,R03,soundscapes,r_0indicator36181_341440-hq,indicator/r_0indicator36181_341440-hq.wav,long_dark,neutral,no,-0.0656,-0.4096,,
+2026-07-25T17:47:50,R03,soundscapes,r_0quiet157007_1815320-hq,quiet/r_0quiet157007_1815320-hq.wav,nature,red,yes,0.2367,0.1099,,
+2026-07-25T17:47:57,R03,soundscapes,r_0nature119124_1970026-hq,nature/r_0nature119124_1970026-hq.wav,long_bright,neutral,maybe,-0.1331,-0.0549,,
+2026-07-25T17:48:03,R03,soundscapes,r_0mechanical237743_691206-hq,mechanical/r_0mechanical237743_691206-hq.wav,long_bright,red,maybe,-0.3769,-0.1531,,
+2026-07-25T17:48:13,R03,soundscapes,r_0indicator36181_341440-hq,indicator/r_0indicator36181_341440-hq.wav,brutalism,red,maybe,-0.0651,-0.2803,,
+2026-07-25T17:48:24,R03,soundscapes,r_0nature120105_957391-hq,nature/r_0nature120105_957391-hq.wav,long_bright,neutral,yes,-0.4179,-0.4671,,
+2026-07-25T17:49:35,R03,soundscapes,r_0quiet127242_116752-hq,quiet/r_0quiet127242_116752-hq.wav,stairwell,red,yes,-0.0439,-0.3951,,
+2026-07-25T17:50:13,R03,soundscapes,r_0nature15542_2-hq,nature/r_0nature15542_2-hq.wav,nature,red,yes,0.0592,-0.1158,,
+2026-07-25T17:51:13,R03,soundscapes,r_0mechanical237743_691206-hq,mechanical/r_0mechanical237743_691206-hq.wav,stairwell,red,yes,0.3194,0.0065,,
+2026-07-25T17:51:37,R03,soundscapes,r_0nature15542_2-hq,nature/r_0nature15542_2-hq.wav,brutalism,red,yes,0.047,-0.4761,,
+2026-07-25T17:51:42,R03,soundscapes,r_0quiet127242_116752-hq,quiet/r_0quiet127242_116752-hq.wav,brutalism,red,yes,-0.311,-0.7413,,
+2026-07-25T17:51:52,R03,soundscapes,r_0indicator36181_341440-hq,indicator/r_0indicator36181_341440-hq.wav,long_bright,red,maybe,-0.1511,-0.4302,,
+2026-07-25T17:52:00,R03,soundscapes,r_0indicator36181_341440-hq,indicator/r_0indicator36181_341440-hq.wav,nature,red,no,0.2771,0.0554,,
+2026-07-25T17:52:08,R03,soundscapes,r_0quiet127242_116752-hq,quiet/r_0quiet127242_116752-hq.wav,long_bright,red,yes,-0.4783,-1.1063,,
+2026-07-25T17:52:13,R03,soundscapes,r_0quiet157007_1815320-hq,quiet/r_0quiet157007_1815320-hq.wav,dry,red,yes,-0.4826,-0.4826,,
+2026-07-25T17:52:20,R03,soundscapes,r_0nature17535_17129-hq,nature/r_0nature17535_17129-hq.wav,nature,neutral,maybe,-0.0387,-0.269,,
+2026-07-25T17:52:27,R03,soundscapes,r_0mechanical165696_354987-hq,mechanical/r_0mechanical165696_354987-hq.wav,long_dark,red,maybe,0.445,0.4602,,
+2026-07-25T17:52:32,R03,soundscapes,r_0nature118777_1708550-hq,nature/r_0nature118777_1708550-hq.wav,nature,green,yes,0.1954,0.0131,,
+2026-07-25T17:52:41,R03,soundscapes,r_0nature119124_1970026-hq,nature/r_0nature119124_1970026-hq.wav,brutalism,neutral,yes,0.0776,-0.1028,,
+2026-07-25T17:52:45,R03,soundscapes,r_0nature129336_2355772-hq,nature/r_0nature129336_2355772-hq.wav,long_dark,green,yes,-0.3194,-0.325,,
+2026-07-25T17:52:51,R03,soundscapes,r_0quiet106869_1635617-hq,quiet/r_0quiet106869_1635617-hq.wav,stairwell,red,yes,0.3583,-0.0068,,
+2026-07-25T17:52:58,R03,soundscapes,r_0nature17535_17129-hq,nature/r_0nature17535_17129-hq.wav,dry,green,yes,-0.1736,-0.1736,,
+2026-07-25T17:53:02,R03,soundscapes,r_0mechanical134922_2461495-hq,mechanical/r_0mechanical134922_2461495-hq.wav,nature,red,no,1.005,0.7983,,
+2026-07-25T17:53:08,R03,soundscapes,r_0nature129336_2355772-hq,nature/r_0nature129336_2355772-hq.wav,stairwell,neutral,yes,0.2125,0.0737,,
+2026-07-25T17:53:12,R03,soundscapes,r_0nature120105_957391-hq,nature/r_0nature120105_957391-hq.wav,dry,red,yes,-0.2939,-0.2939,,
+2026-07-25T17:53:18,R03,soundscapes,r_0nature120105_957391-hq,nature/r_0nature120105_957391-hq.wav,long_dark,red,yes,-0.2503,-0.4959,,
+2026-07-25T17:53:24,R03,soundscapes,r_0mechanical165696_354987-hq,mechanical/r_0mechanical165696_354987-hq.wav,brutalism,red,yes,0.5704,0.4034,,
+2026-07-25T17:53:32,R03,soundscapes,r_0quiet319150_1648170-hq,quiet/r_0quiet319150_1648170-hq.wav,long_dark,neutral,maybe,-0.4218,-0.7064,,
+2026-07-25T17:53:39,R03,soundscapes,r_0mechanical165696_354987-hq,mechanical/r_0mechanical165696_354987-hq.wav,long_bright,red,yes,0.4088,0.4284,,
+2026-07-25T17:53:47,R03,soundscapes,r_0indicator36181_341440-hq,indicator/r_0indicator36181_341440-hq.wav,dry,neutral,yes,-0.2045,-0.2045,,
+2026-07-25T17:53:54,R03,soundscapes,r_0mechanical120385_288-hq,mechanical/r_0mechanical120385_288-hq.wav,long_dark,red,no,0.1086,-0.3974,,
+2026-07-25T17:53:59,R03,soundscapes,r_0quiet157007_1815320-hq,quiet/r_0quiet157007_1815320-hq.wav,long_bright,red,yes,-0.3205,-0.5221,,
+2026-07-25T17:54:06,R03,soundscapes,r_0nature118777_1708550-hq,nature/r_0nature118777_1708550-hq.wav,stairwell,green,maybe,-0.1189,-0.3373,,
+2026-07-25T17:54:13,R03,soundscapes,r_0indicator36181_341440-hq,indicator/r_0indicator36181_341440-hq.wav,stairwell,red,maybe,0.2987,-0.0769,,
+2026-07-25T17:54:19,R03,soundscapes,r_0nature119124_1970026-hq,nature/r_0nature119124_1970026-hq.wav,stairwell,neutral,yes,0.2486,-0.118,,
+2026-07-25T17:55:20,R03,soundscapes,r_0mechanical134922_2461495-hq,mechanical/r_0mechanical134922_2461495-hq.wav,long_dark,red,no,0.442,0.7185,,
+2026-07-25T17:55:28,R03,soundscapes,r_0nature119124_1970026-hq,nature/r_0nature119124_1970026-hq.wav,nature,red,maybe,0.4686,0.2297,,
+2026-07-25T17:56:31,R03,soundscapes,r_0nature15542_2-hq,nature/r_0nature15542_2-hq.wav,long_dark,red,yes,0.3586,-0.3495,,
+2026-07-25T17:56:40,R03,soundscapes,r_0mechanical120385_288-hq,mechanical/r_0mechanical120385_288-hq.wav,dry,red,maybe,-0.1058,-0.1058,,
+2026-07-25T17:56:45,R03,soundscapes,r_0mechanical120385_288-hq,mechanical/r_0mechanical120385_288-hq.wav,brutalism,red,no,-0.261,-0.4189,,
+2026-07-25T17:57:03,R03,soundscapes,r_0nature15542_2-hq,nature/r_0nature15542_2-hq.wav,stairwell,neutral,yes,0.3578,-0.0458,,
+2026-07-25T17:57:24,R03,soundscapes,r_0quiet157007_1815320-hq,quiet/r_0quiet157007_1815320-hq.wav,brutalism,red,yes,-0.4148,-0.639,,
+2026-07-25T17:57:30,R03,soundscapes,r_0mechanical120385_288-hq,mechanical/r_0mechanical120385_288-hq.wav,stairwell,red,no,0.0861,-0.1615,,
+2026-07-25T17:57:36,R03,soundscapes,r_0nature119124_1970026-hq,nature/r_0nature119124_1970026-hq.wav,long_dark,neutral,maybe,0.0438,-0.0012,,
+2026-07-25T17:57:43,R03,soundscapes,r_0quiet319150_1648170-hq,quiet/r_0quiet319150_1648170-hq.wav,dry,green,yes,-0.2059,-0.2059,,
+2026-07-25T17:57:49,R03,soundscapes,r_0nature17535_17129-hq,nature/r_0nature17535_17129-hq.wav,brutalism,green,yes,-0.1776,-0.4418,,
+2026-07-25T17:58:01,R03,soundscapes,r_0nature119124_1970026-hq,nature/r_0nature119124_1970026-hq.wav,dry,neutral,maybe,-0.0683,-0.0683,,
+2026-07-25T17:58:11,R03,soundscapes,r_0quiet319150_1648170-hq,quiet/r_0quiet319150_1648170-hq.wav,stairwell,green,yes,-0.0088,-0.2651,,
+2026-07-25T17:58:20,R03,soundscapes,r_0mechanical120385_288-hq,mechanical/r_0mechanical120385_288-hq.wav,nature,red,maybe,0.4633,0.2036,,
+2026-07-25T17:58:27,R03,soundscapes,r_0nature129336_2355772-hq,nature/r_0nature129336_2355772-hq.wav,dry,green,yes,-0.0664,-0.0664,,
+2026-07-25T17:58:33,R03,soundscapes,r_0mechanical165696_354987-hq,mechanical/r_0mechanical165696_354987-hq.wav,nature,red,maybe,0.8374,0.652,,
+2026-07-25T17:58:39,R03,soundscapes,r_0nature120105_957391-hq,nature/r_0nature120105_957391-hq.wav,brutalism,red,yes,-0.1173,-0.1846,,
+2026-07-25T17:58:45,R03,soundscapes,r_0nature118777_1708550-hq,nature/r_0nature118777_1708550-hq.wav,brutalism,green,yes,-0.4778,-0.5194,,
+2026-07-25T17:58:51,R03,soundscapes,r_0quiet157007_1815320-hq,quiet/r_0quiet157007_1815320-hq.wav,long_dark,red,yes,-0.1982,-0.4888,,
+2026-07-25T17:58:56,R03,soundscapes,r_0nature15542_2-hq,nature/r_0nature15542_2-hq.wav,long_bright,red,yes,0.0918,-0.3419,,
+2026-07-25T17:59:02,R03,soundscapes,r_0nature118777_1708550-hq,nature/r_0nature118777_1708550-hq.wav,long_bright,neutral,yes,-0.5678,-0.416,,
+2026-07-25T17:59:11,R03,soundscapes,r_0nature129336_2355772-hq,nature/r_0nature129336_2355772-hq.wav,brutalism,green,yes,0.0884,-0.1152,,
+2026-07-25T17:59:16,R03,soundscapes,r_0quiet106869_1635617-hq,quiet/r_0quiet106869_1635617-hq.wav,nature,red,yes,-0.2056,-0.3937,,
+2026-07-25T17:59:21,R03,soundscapes,r_0quiet127242_116752-hq,quiet/r_0quiet127242_116752-hq.wav,nature,red,yes,-0.3144,-0.598,,
+2026-07-25T17:59:25,R03,soundscapes,r_0nature120105_957391-hq,nature/r_0nature120105_957391-hq.wav,nature,red,yes,0.2793,0.0769,,
+2026-07-25T17:59:29,R03,soundscapes,r_0mechanical134922_2461495-hq,mechanical/r_0mechanical134922_2461495-hq.wav,brutalism,red,no,0.4185,0.4477,,
+2026-07-25T17:59:33,R03,soundscapes,r_0quiet106869_1635617-hq,quiet/r_0quiet106869_1635617-hq.wav,long_dark,red,yes,-0.2098,-0.4675,,
+2026-07-25T17:59:35,R03,soundscapes,r_0quiet106869_1635617-hq,quiet/r_0quiet106869_1635617-hq.wav,long_bright,red,yes,-0.3203,-0.4585,,
+2026-07-25T17:59:46,R03,soundscapes,r_0nature17535_17129-hq,nature/r_0nature17535_17129-hq.wav,long_dark,neutral,maybe,-0.4348,-0.5505,,
+2026-07-25T17:59:52,R03,soundscapes,r_0quiet319150_1648170-hq,quiet/r_0quiet319150_1648170-hq.wav,nature,neutral,maybe,-0.1556,-0.3958,,
+2026-07-25T18:00:01,R03,soundscapes,r_0mechanical237743_691206-hq,mechanical/r_0mechanical237743_691206-hq.wav,nature,red,yes,0.2212,0.1536,,
+2026-07-25T18:00:05,R03,soundscapes,r_0mechanical165696_354987-hq,mechanical/r_0mechanical165696_354987-hq.wav,dry,red,yes,0.756,0.756,,
+2026-07-25T18:00:08,R03,soundscapes,r_0mechanical237743_691206-hq,mechanical/r_0mechanical237743_691206-hq.wav,dry,red,yes,0.104,0.104,,
+2026-07-25T18:00:13,R03,soundscapes,r_0nature118777_1708550-hq,nature/r_0nature118777_1708550-hq.wav,long_dark,neutral,yes,-0.5748,-0.527,,
+2026-07-25T18:00:19,R03,soundscapes,r_0nature120105_957391-hq,nature/r_0nature120105_957391-hq.wav,stairwell,neutral,yes,-0.1381,-0.162,,
+2026-07-26T10:23:35,R03,soundscapes,rain__r_0indicator36181_341440-hq,context_mixes/rain__r_0indicator36181_341440-hq.wav,long_dark,neutral,maybe,,,,"you can really hear the bed, and the bed sounds like it's just placed there rather than integrated and planned"
+2026-07-26T10:24:34,R03,soundscapes,birds__r_0nature118777_1708550-hq,context_mixes/birds__r_0nature118777_1708550-hq.wav,brutalism,green,maybe,,,,"the drone is too dominant for this bed, you need to burst this bed such that it fades in and out"
+2026-07-26T10:25:52,R03,soundscapes,bells-church__r_0human113598_1015240-hq,context_mixes/bells-church__r_0human113598_1015240-hq.wav,long_dark,neutral,yes,,,,"the drone is lowkey so nowthe bed becomes a feature. the fact that the drone is minor contrasts with the slightly positive singing, creating a mixed feeling, which in this case works well"
+2026-07-26T10:26:14,R03,soundscapes,street-crowd__r_0human118096_29541-hq,context_mixes/street-crowd__r_0human118096_29541-hq.wav,long_dark,red,maybe,,,,you can barely hear the bed
+2026-07-26T10:27:50,R03,soundscapes,birds__r_0human179928_3223507-hq,context_mixes/birds__r_0human179928_3223507-hq.wav,long_bright,green,yes,,,,"i think i can hear singing, which creates a very subtle melody over the drone f0. this create some kind of hopeful and yearning emotion"
+2026-07-26T10:28:36,R03,soundscapes,wind__r_0nature15542_2-hq,context_mixes/wind__r_0nature15542_2-hq.wav,long_bright,green,maybe,,,,"again, I can barely hear the bed. it may be creating a faint rumble but I cannot tell"
+2026-07-26T10:29:12,R03,soundscapes,thunder-storm__r_0nature120105_957391-hq,context_mixes/thunder-storm__r_0nature120105_957391-hq.wav,stairwell,red,yes,,,,"i can just about hear the birds. this again is a contradictory mix, and works in this case"
+2026-07-26T10:29:52,R03,soundscapes,rain__r_0indicator36181_341440-hq,context_mixes/rain__r_0indicator36181_341440-hq.wav,dry,neutral,maybe,,,,"the ben and the drone separately they are good sounds, but they sounds like they are just working in parallel"
+2026-07-26T10:31:06,R03,soundscapes,bells-church__r_0human50865_118241-hq,context_mixes/bells-church__r_0human50865_118241-hq.wav,brutalism,red,no,,,,"the work too much in parallel and therefore the combo does not work. the grittiness of the drome does not go well with human voice, whch itself is also featurous"
+2026-07-26T10:40:09,R03,soundscapes,street-crowd__r_0human106568_7037-hq,context_mixes/street-crowd__r_0human106568_7037-hq.wav,stairwell,neutral,no,,,,"again, they just sound like separate things happening"
+2026-07-26T10:47:54,R03,soundscapes,street-crowd__r_0human106568_7037-hq,context_mixes/street-crowd__r_0human106568_7037-hq.wav,nature,neutral,no,,,,ben too fait. also they don;'t go together
+2026-07-26T10:48:13,R03,soundscapes,street-crowd__r_0human106568_7037-hq,context_mixes/street-crowd__r_0human106568_7037-hq.wav,brutalism,neutral,no,,,,bed does not go with drone
+2026-07-26T10:50:01,R03,soundscapes,bells-church__r_0human113598_1015240-hq,context_mixes/bells-church__r_0human113598_1015240-hq.wav,long_bright,neutral,yes,,,,"if the bed started sometime in the middle of the drone rather than at the same time, that would sound much better.  tho they don;t go together 100%"
+2026-07-26T10:50:40,R03,soundscapes,wind__r_0nature15542_2-hq,context_mixes/wind__r_0nature15542_2-hq.wav,nature,neutral,no,,,,cannot hear the bed
+2026-07-26T10:52:11,R03,soundscapes,thunder-storm__r_0nature120105_957391-hq,context_mixes/thunder-storm__r_0nature120105_957391-hq.wav,nature,red,yes,,,,i can just about hear the ben - it';s really really faint. I like the contradictory birds with minor drone
+2026-07-26T10:52:35,R03,soundscapes,rain__r_0indicator36181_341440-hq,context_mixes/rain__r_0indicator36181_341440-hq.wav,long_bright,neutral,yes,,,,mediocre
+2026-07-26T10:56:46,R03,soundscapes,night-insects__r_0nature129336_2355772-hq,context_mixes/night-insects__r_0nature129336_2355772-hq.wav,stairwell,neutral,maybe,,,,"to make the bed work with the drone, the bed needs some reverbs and fading"
+2026-07-26T11:02:04,R03,soundscapes,street-crowd__r_0human106568_7037-hq,context_mixes/street-crowd__r_0human106568_7037-hq.wav,dry,neutral,maybe,,,,the bed is too rhythmic for this drone
+2026-07-26T11:02:29,R03,soundscapes,birds__r_0nature118777_1708550-hq,context_mixes/birds__r_0nature118777_1708550-hq.wav,nature,green,maybe,,,,yeah the birds don't really go with this drone
+2026-07-26T11:02:49,R03,soundscapes,birds__r_0nature118777_1708550-hq,context_mixes/birds__r_0nature118777_1708550-hq.wav,long_dark,neutral,maybe,,,,the birds don;t really go with this drone
+2026-07-26T11:03:16,R03,soundscapes,bells-church__r_0human50865_118241-hq,context_mixes/bells-church__r_0human50865_118241-hq.wav,long_bright,red,no,,,,drone too gritty to have human voice as a bed
+2026-07-26T11:03:32,R03,soundscapes,wind__r_0nature15542_2-hq,context_mixes/wind__r_0nature15542_2-hq.wav,dry,neutral,maybe,,,,can barely hear the drone
+2026-07-26T11:04:09,R03,soundscapes,bells-church__r_0human113598_1015240-hq,context_mixes/bells-church__r_0human113598_1015240-hq.wav,brutalism,neutral,no,,,,this bed and this drone don;t go together
+2026-07-26T11:04:39,R03,soundscapes,wind__r_0nature15542_2-hq,context_mixes/wind__r_0nature15542_2-hq.wav,long_dark,neutral,yes,,,,i can barely hear the drone. maybe it is perturbing the drone I but but I cannot tell
+2026-07-26T11:06:15,R03,soundscapes,wind__r_0nature15542_2-hq,context_mixes/wind__r_0nature15542_2-hq.wav,brutalism,neutral,yes,,,,I think I am hearing some bed as perturbation
+2026-07-26T11:06:26,R03,soundscapes,water-stream__r_0indicator13712_37876-hq,context_mixes/water-stream__r_0indicator13712_37876-hq.wav,brutalism,neutral,no,,,,this bed and this drone don;t go together
+2026-07-26T11:07:01,R03,soundscapes,bells-church__r_0human50865_118241-hq,context_mixes/bells-church__r_0human50865_118241-hq.wav,long_dark,neutral,no,,,,drone has too much of a presence to have a human voice
+2026-07-26T11:09:08,R03,soundscapes,birds__r_0human179928_3223507-hq,context_mixes/birds__r_0human179928_3223507-hq.wav,long_dark,green,yes,,,,i think i can hear some human voice in the background but not sure
+2026-07-26T11:10:04,R03,soundscapes,street-crowd__r_0human106568_7037-hq,context_mixes/street-crowd__r_0human106568_7037-hq.wav,long_dark,red,yes,,,,the faint human bed under a loud drone makes it sounds like a political battle with human fighting for revolution
+2026-07-26T11:10:20,R03,soundscapes,night-insects__r_0nature129336_2355772-hq,context_mixes/night-insects__r_0nature129336_2355772-hq.wav,long_bright,red,maybe,,,,this bed and this drone don;t go together
+2026-07-26T11:10:54,R03,soundscapes,thunder-storm__r_0nature120105_957391-hq,context_mixes/thunder-storm__r_0nature120105_957391-hq.wav,long_bright,red,yes,,,,"i can barely hear the thunder, which makes the thunder a good subbase"
+2026-07-26T11:11:12,R03,soundscapes,birds__r_0nature118777_1708550-hq,context_mixes/birds__r_0nature118777_1708550-hq.wav,dry,neutral,maybe,,,,the bed here offers nothing
+2026-07-26T11:11:43,R03,soundscapes,rain__r_0mechanical120385_288-hq,context_mixes/rain__r_0mechanical120385_288-hq.wav,stairwell,red,yes,,,,the bed offers good textural subbase. thunps up
+2026-07-26T11:12:08,R03,soundscapes,bells-church__r_0human113598_1015240-hq,context_mixes/bells-church__r_0human113598_1015240-hq.wav,stairwell,red,yes,,,,this creates a horror movie-like sound
+2026-07-26T11:12:29,R03,soundscapes,bells-church__r_0human113598_1015240-hq,context_mixes/bells-church__r_0human113598_1015240-hq.wav,nature,red,yes,,,,same horrow movie sound. maybe better  than the previous one
+2026-07-26T11:12:58,R03,soundscapes,rain__r_0mechanical120385_288-hq,context_mixes/rain__r_0mechanical120385_288-hq.wav,dry,red,yes,,,,drone offer audible subbase with clear soundscapes
+2026-07-26T11:13:26,R03,soundscapes,night-insects__r_0nature129336_2355772-hq,context_mixes/night-insects__r_0nature129336_2355772-hq.wav,dry,neutral,no,,,,this bed and this drone don;t go together. the birds are too happy to create a contrast with a negative drone
+2026-07-26T11:13:52,R03,soundscapes,birds__r_0nature118777_1708550-hq,context_mixes/birds__r_0nature118777_1708550-hq.wav,stairwell,neutral,maybe,,,,the bed is too loud here I would say
+2026-07-26T11:14:42,R03,soundscapes,bells-church__r_0human113598_1015240-hq,context_mixes/bells-church__r_0human113598_1015240-hq.wav,dry,red,maybe,,,,"in this instance, the drone and bed just sound like parallel tracks. neither had any reverbs applied so they do not blend"
+2026-07-26T11:15:22,R03,soundscapes,bells-church__r_0human50865_118241-hq,context_mixes/bells-church__r_0human50865_118241-hq.wav,dry,red,yes,,,,more reverb on the bed would so that we cannot distinguish the words would make  it sound much better
+2026-07-26T11:16:15,R03,soundscapes,birds__r_0nature118777_1708550-hq,context_mixes/birds__r_0nature118777_1708550-hq.wav,long_bright,neutral,yes,,,,"the birds here tilt the drone towards positive, and it's in the process of doing so rather than having arrived there already - hence neutral rating"
+2026-07-26T11:16:23,R03,soundscapes,night-insects__r_0nature129336_2355772-hq,context_mixes/night-insects__r_0nature129336_2355772-hq.wav,brutalism,red,no,,,,this bed and this drone don;t go together
+2026-07-26T11:16:47,R03,soundscapes,rain__r_0mechanical120385_288-hq,context_mixes/rain__r_0mechanical120385_288-hq.wav,nature,red,yes,,,,the bed happens to make this sound crackly
+2026-07-26T11:17:07,R03,soundscapes,wind__r_0nature15542_2-hq,context_mixes/wind__r_0nature15542_2-hq.wav,stairwell,neutral,yes,,,,can hear the bed really - but it is doing somethin
+2026-07-26T11:17:50,R03,soundscapes,street-crowd__r_0human118096_29541-hq,context_mixes/street-crowd__r_0human118096_29541-hq.wav,long_bright,red,yes,,,,the faint bed created barely noticeable grumbling in the distance
+2026-07-26T11:18:42,R03,soundscapes,street-crowd__r_0human118096_29541-hq,context_mixes/street-crowd__r_0human118096_29541-hq.wav,brutalism,red,yes,,,,the church bells creates confusion and therefore panic when combined with this drone. nice combo
+2026-07-26T11:18:49,R03,soundscapes,water-stream__r_0indicator13712_37876-hq,context_mixes/water-stream__r_0indicator13712_37876-hq.wav,dry,neutral,no,,,,this bed and this drone don;t go together
+2026-07-26T11:18:57,R03,soundscapes,water-stream__r_0indicator13712_37876-hq,context_mixes/water-stream__r_0indicator13712_37876-hq.wav,long_dark,neutral,no,,,,this bed and this drone don;t go together
+2026-07-26T11:20:14,R03,soundscapes,birds__r_0human179928_3223507-hq,context_mixes/birds__r_0human179928_3223507-hq.wav,stairwell,neutral,yes,,,,I give this neutral because  it is one of those that are good for VA transitions and lifts you out of the previous VA state and journey you into the next. Great combo
+2026-07-26T11:20:37,R03,soundscapes,street-crowd__r_0human118096_29541-hq,context_mixes/street-crowd__r_0human118096_29541-hq.wav,nature,red,yes,,,,faint bed makes this sound panicky
+2026-07-26T11:20:57,R03,soundscapes,rain__r_0indicator36181_341440-hq,context_mixes/rain__r_0indicator36181_341440-hq.wav,brutalism,red,no,,,,this bed and this drone don;t go together - they cross-talk too much
+2026-07-26T11:21:24,R03,soundscapes,night-insects__r_0nature129336_2355772-hq,context_mixes/night-insects__r_0nature129336_2355772-hq.wav,nature,red,no,,,,this bed and this drone don;t go together. the birds and the drone are fighting each other
+2026-07-26T11:22:21,R03,soundscapes,street-crowd__r_0human106568_7037-hq,context_mixes/street-crowd__r_0human106568_7037-hq.wav,long_bright,neutral,maybe,,,,the bed does not add much
+2026-07-26T11:23:13,R03,soundscapes,birds__r_0human179928_3223507-hq,context_mixes/birds__r_0human179928_3223507-hq.wav,brutalism,neutral,yes,,,,this is a great combo for breaking up the boredom of being in the same VA state for too long and makes you guess what's coming next. great combo
+2026-07-26T11:24:03,R03,soundscapes,bells-church__r_0human50865_118241-hq,context_mixes/bells-church__r_0human50865_118241-hq.wav,stairwell,red,yes,,,,i only say YES to this since there is reverb applied to the bed and the human voice now in distant and not in your face
+2026-07-26T11:24:32,R03,soundscapes,rain__r_0mechanical120385_288-hq,context_mixes/rain__r_0mechanical120385_288-hq.wav,brutalism,neutral,maybe,,,,kind of ok. the bed may be fighting for attention with the dron a bit too much
+2026-07-26T11:25:00,R03,soundscapes,water-stream__r_0indicator13712_37876-hq,context_mixes/water-stream__r_0indicator13712_37876-hq.wav,long_bright,neutral,maybe,,,,you need to reverb the bed and make it fade in and out for this to work
+2026-07-26T11:25:38,R03,soundscapes,street-crowd__r_0human118096_29541-hq,context_mixes/street-crowd__r_0human118096_29541-hq.wav,stairwell,red,yes,,,,the grumbling bells in the background makes the drone even darker. great combo
+2026-07-26T11:25:56,R03,soundscapes,rain__r_0indicator36181_341440-hq,context_mixes/rain__r_0indicator36181_341440-hq.wav,nature,neutral,maybe,,,,the bed does not offer anything here
+2026-07-26T11:26:03,R03,soundscapes,water-stream__r_0indicator13712_37876-hq,context_mixes/water-stream__r_0indicator13712_37876-hq.wav,nature,neutral,no,,,,this bed and this drone don;t go together
+2026-07-26T11:26:23,R03,soundscapes,rain__r_0mechanical120385_288-hq,context_mixes/rain__r_0mechanical120385_288-hq.wav,long_bright,red,yes,,,,"again, this is the grumbling be that makes this work"
+2026-07-26T11:27:11,R03,soundscapes,street-crowd__r_0human118096_29541-hq,context_mixes/street-crowd__r_0human118096_29541-hq.wav,dry,red,yes,,,,the works as the drone and bed are out of phase enough to create a sense of chaos. great combo that should be used sparingly
+2026-07-26T11:27:58,R03,soundscapes,birds__r_0human179928_3223507-hq,context_mixes/birds__r_0human179928_3223507-hq.wav,nature,red,yes,,,,the voice in the backgroupd now makes this sound liek despair - somewhere between Neutral and Negative
+2026-07-26T11:28:10,R03,soundscapes,birds__r_0human179928_3223507-hq,context_mixes/birds__r_0human179928_3223507-hq.wav,dry,red,yes,,,,same as before
+2026-07-26T11:28:29,R03,soundscapes,bells-church__r_0human50865_118241-hq,context_mixes/bells-church__r_0human50865_118241-hq.wav,nature,red,yes,,,,human voice too visible. otherwise good
+2026-07-26T11:28:36,R03,soundscapes,water-stream__r_0indicator13712_37876-hq,context_mixes/water-stream__r_0indicator13712_37876-hq.wav,stairwell,neutral,no,,,,this bed and this drone don;t go together
+2026-07-26T11:29:03,R03,soundscapes,thunder-storm__r_0nature120105_957391-hq,context_mixes/thunder-storm__r_0nature120105_957391-hq.wav,long_dark,red,yes,,,,the bird is so faint t hat it adds texture to the drone
+2026-07-26T11:29:25,R03,soundscapes,thunder-storm__r_0nature120105_957391-hq,context_mixes/thunder-storm__r_0nature120105_957391-hq.wav,dry,red,yes,,,,the wind definitely adds texture to the drone. nice
+2026-07-26T11:29:45,R03,soundscapes,night-insects__r_0nature129336_2355772-hq,context_mixes/night-insects__r_0nature129336_2355772-hq.wav,long_dark,red,yes,,,,the birds here somehow works
+2026-07-26T11:30:06,R03,soundscapes,rain__r_0mechanical120385_288-hq,context_mixes/rain__r_0mechanical120385_288-hq.wav,long_dark,red,yes,,,,the thunder brings it to the negative territory
+2026-07-26T11:30:30,R03,soundscapes,thunder-storm__r_0nature120105_957391-hq,context_mixes/thunder-storm__r_0nature120105_957391-hq.wav,brutalism,red,yes,,,,"same as before,. the faint birds adds texture"
+2026-07-26T11:31:29,R03,soundscapes,rain__r_0indicator36181_341440-hq,context_mixes/rain__r_0indicator36181_341440-hq.wav,stairwell,neutral,yes,,,,"the train whistle at the end changes the VA to positive t hem brings it back down, so I have to give it Neutral."
+2026-07-26T12:05:51,R03,transitions,vtrans_028__vwander_020,,bloom_vs_dry:long_bright,,,,,same,"they offer different types of journey. both sounds technically good. the former is better for wandering around local VA space, the latter is better for changing VA state"
+2026-07-26T12:06:44,R03,transitions,vtrans_019__vtrans_002,,bloom_vs_dry:long_bright,,,,,reverb,A is better as reverb for B creates confusion
+2026-07-26T12:07:20,R03,transitions,vtrans_028__vtrans_013,,bloom_vs_dry:long_bright,,,,,same,"they offer different types of journey. both sounds technically good. the former is better for wandering around local VA space, the latter is better for changing VA state"
+2026-07-26T12:08:30,R03,transitions,vtrans_019__vtrans_013,,bloom_vs_dry:long_bright,,,,,same,"they offer different types of journey. both sounds technically good. the latter is better for wandering around local VA space, the former is better for changing VA state"
+2026-07-26T12:09:35,R03,transitions,vtrans_028__vwander_049,,bloom_vs_dry:long_bright,,,,,same,"they offer different types of journey. both sounds technically good. the former is better for wandering around local VA space, the latter is better for changing VA state"
+2026-07-26T12:10:26,R03,transitions,vtrans_028__vtrans_002,,bloom_vs_dry:long_bright,,,,,dry,this one flips it around. latter is better for local wandering
+2026-07-26T12:11:29,R03,transitions,vwander_049__vtrans_013,,bloom_vs_dry:long_bright,,,,,same,again different use cases
+2026-07-26T13:33:58,R03,transitions,vtrans_028__vwander_020,,bloom_vs_dry:long_bright:A=reverb,,,,,same,
+2026-07-26T13:34:18,R03,transitions,vtrans_019__vtrans_002,,bloom_vs_dry:long_bright:A=dry,,,,,dry,
+2026-07-26T13:34:57,R03,transitions,vtrans_028__vtrans_013,,bloom_vs_dry:long_bright:A=dry,,,,,reverb,
+2026-07-26T13:35:41,R03,transitions,vtrans_019__vtrans_013,,bloom_vs_dry:long_bright:A=reverb,,,,,reverb,the last 1sec is too messy in B
+2026-07-26T13:36:10,R03,transitions,vtrans_028__vwander_049,,bloom_vs_dry:long_bright:A=reverb,,,,,same,
+2026-07-26T13:36:33,R03,transitions,vtrans_028__vtrans_002,,bloom_vs_dry:long_bright:A=dry,,,,,reverb,
+2026-07-26T13:37:13,R03,transitions,vwander_049__vtrans_013,,bloom_vs_dry:long_bright:A=reverb,,,,,reverb,again - B is too messy in the final second
+2026-07-26T13:37:49,R03,transitions,vwander_049__vtrans_019,,bloom_vs_dry:long_bright:A=reverb,,,,,reverb,too messy in final second of B
+2026-07-26T13:38:37,R03,transitions,vtrans_013__vtrans_002,,bloom_vs_dry:long_bright:A=reverb,,,,,reverb,
+2026-07-26T13:38:57,R03,transitions,vwander_020__vtrans_013,,bloom_vs_dry:long_bright:A=dry,,,,,dry,
+2026-07-26T13:39:22,R03,transitions,vwander_049__vwander_020,,bloom_vs_dry:long_bright:A=reverb,,,,,same,
+2026-07-26T13:39:43,R03,transitions,vtrans_019__vwander_020,,bloom_vs_dry:long_bright:A=dry,,,,,same,
+2026-07-26T13:40:06,R03,transitions,vwander_020__vtrans_002,,bloom_vs_dry:long_bright:A=reverb,,,,,same,
+2026-07-26T13:40:30,R03,transitions,vwander_049__vtrans_002,,bloom_vs_dry:long_bright:A=dry,,,,,dry,
+2026-07-26T13:40:54,R03,transitions,vtrans_028__vtrans_019,,bloom_vs_dry:long_bright:A=reverb,,,,,same,
+2026-07-26T14:01:03,rater_0a2e,soundscapes,vtrans_000__L18__street-crowd__r_0society121787_2168040-hq,crossed_mixes/vtrans_000__L18__street-crowd__r_0society121787_2168040-hq.wav,dry,red,no,,,,there is too much going on with both the drone and the bed. this just sounds messy
+2026-07-26T14:01:31,rater_0a2e,soundscapes,vtrans_002__L18__water-stream__r_0nature149743_1050391-hq,crossed_mixes/vtrans_002__L18__water-stream__r_0nature149743_1050391-hq.wav,dry,neutral,maybe,,,,the wated soundscape is too repetitive and prominent
+2026-07-26T14:02:09,rater_0a2e,soundscapes,vtrans_008__L18__birds__r_0quiet324938_1648170-hq,crossed_mixes/vtrans_008__L18__birds__r_0quiet324938_1648170-hq.wav,dry,neutral,maybe,,,,the soundscape does not go well with a strong drone like this one
+2026-07-26T14:02:42,rater_0a2e,soundscapes,vtrans_004__L8__birds__r_0quiet324938_1648170-hq,crossed_mixes/vtrans_004__L8__birds__r_0quiet324938_1648170-hq.wav,dry,neutral,maybe,,,,soundscape too prominent. I can go with this drone if it's a lot quieter
+2026-07-26T14:03:26,rater_0a2e,soundscapes,vtrans_002__L18__street-crowd__r_0society121787_2168040-hq,crossed_mixes/vtrans_002__L18__street-crowd__r_0society121787_2168040-hq.wav,dry,neutral,maybe,,,,the bed does not go with the drone. it's like two different things happening with no relations to each other
+2026-07-26T14:04:13,rater_0a2e,soundscapes,vtrans_000__L8__bells-church__r_1mechanical155859_179538-hq,crossed_mixes/vtrans_000__L8__bells-church__r_1mechanical155859_179538-hq.wav,dry,red,yes,,,,good drone and bed combo - but the bed is a bit too loud and lacks reverb
+2026-07-26T14:04:35,rater_0a2e,soundscapes,vtrans_008__L8__birds__r_0quiet324938_1648170-hq,crossed_mixes/vtrans_008__L8__birds__r_0quiet324938_1648170-hq.wav,dry,neutral,maybe,,,,birds too loud to do with the drone
+2026-07-26T14:05:08,rater_0a2e,soundscapes,vtrans_004__L18__bells-church__r_1mechanical155859_179538-hq,crossed_mixes/vtrans_004__L18__bells-church__r_1mechanical155859_179538-hq.wav,dry,neutral,yes,,,,nice nondiscript bed for this drone. creats a but of a journey
+2026-07-26T14:05:40,rater_0a2e,soundscapes,vtrans_004__L8__water-stream__r_0nature149743_1050391-hq,crossed_mixes/vtrans_004__L8__water-stream__r_0nature149743_1050391-hq.wav,dry,red,maybe,,,,this bed should not go on for so long and through the transition
+2026-07-26T14:06:23,rater_0a2e,soundscapes,vtrans_000__L8__street-crowd__r_0society121787_2168040-hq,crossed_mixes/vtrans_000__L8__street-crowd__r_0society121787_2168040-hq.wav,dry,red,maybe,,,,"the bed is too busy for this drone. if the bed is barely audible, then it woudl act as texture to the drone"
+2026-07-26T14:06:55,rater_0a2e,soundscapes,vtrans_004__L18__street-crowd__r_0society121787_2168040-hq,crossed_mixes/vtrans_004__L18__street-crowd__r_0society121787_2168040-hq.wav,dry,neutral,yes,,,,"the bed is naturally quieter compared to the drone, so adds texture"
+2026-07-26T14:09:16,rater_0a2e,soundscapes,vtrans_008__L18__street-crowd__r_0society121787_2168040-hq,crossed_mixes/vtrans_008__L18__street-crowd__r_0society121787_2168040-hq.wav,dry,neutral,yes,,,,the bed is barely audible here and what I can hear adds texture to the drone
+2026-07-26T14:09:46,rater_0a2e,soundscapes,vtrans_000__L18__water-stream__r_0nature149743_1050391-hq,crossed_mixes/vtrans_000__L18__water-stream__r_0nature149743_1050391-hq.wav,dry,red,maybe,,,,the ben should not be sustained like this when paired with a busy drone
+2026-07-26T14:11:16,rater_0a2e,soundscapes,vtrans_008__L8__street-crowd__r_0society121787_2168040-hq,crossed_mixes/vtrans_008__L8__street-crowd__r_0society121787_2168040-hq.wav,dry,neutral,no,,,,"human voices should not be paired with busy drone. we are not clever enough to make this work here. people are attracted to human voices, so this draws attentions to it. coupled with a busy dron, it would sound like a mess"
+2026-07-26T14:11:58,rater_0a2e,soundscapes,vtrans_002__L18__bells-church__r_1mechanical155859_179538-hq,crossed_mixes/vtrans_002__L18__bells-church__r_1mechanical155859_179538-hq.wav,dry,neutral,yes,,,,non descript bed with no distinct features for a transition can work
+2026-07-26T14:12:18,rater_0a2e,soundscapes,vtrans_000__L18__bells-church__r_1mechanical155859_179538-hq,crossed_mixes/vtrans_000__L18__bells-church__r_1mechanical155859_179538-hq.wav,dry,red,no,,,,again - 2 busy things clashing with each other
+2026-07-26T14:12:52,rater_0a2e,soundscapes,vtrans_004__L18__water-stream__r_0nature149743_1050391-hq,crossed_mixes/vtrans_004__L18__water-stream__r_0nature149743_1050391-hq.wav,dry,red,yes,,,,this can work as wated is nondescript. tho this particular bed is a bit loud
+2026-07-26T14:13:10,rater_0a2e,soundscapes,vtrans_002__L8__bells-church__r_1mechanical155859_179538-hq,crossed_mixes/vtrans_002__L8__bells-church__r_1mechanical155859_179538-hq.wav,dry,neutral,no,,,,the bed eats into the drone too much
+2026-07-26T14:13:32,rater_0a2e,soundscapes,vtrans_004__L8__bells-church__r_1mechanical155859_179538-hq,crossed_mixes/vtrans_004__L8__bells-church__r_1mechanical155859_179538-hq.wav,dry,neutral,yes,,,,this combo harmonically work together
+2026-07-26T14:14:04,rater_0a2e,soundscapes,vtrans_002__L8__birds__r_0quiet324938_1648170-hq,crossed_mixes/vtrans_002__L8__birds__r_0quiet324938_1648170-hq.wav,dry,neutral,maybe,,,,this kind of work - tho listeners can tell there were no thoughts put into this combo
+2026-07-26T14:14:16,rater_0a2e,soundscapes,vtrans_000__L8__water-stream__r_0nature149743_1050391-hq,crossed_mixes/vtrans_000__L8__water-stream__r_0nature149743_1050391-hq.wav,dry,red,no,,,,2 busy things together again
+2026-07-26T14:14:34,rater_0a2e,soundscapes,vtrans_000__L8__birds__r_0quiet324938_1648170-hq,crossed_mixes/vtrans_000__L8__birds__r_0quiet324938_1648170-hq.wav,dry,red,yes,,,,the ben needs to be quieter for this to work
+2026-07-26T14:14:55,rater_0a2e,soundscapes,vtrans_004__L18__birds__r_0quiet324938_1648170-hq,crossed_mixes/vtrans_004__L18__birds__r_0quiet324938_1648170-hq.wav,dry,neutral,yes,,,,this works as neither tracks work against the other
+2026-07-26T14:15:25,rater_0a2e,soundscapes,vtrans_002__L8__street-crowd__r_0society121787_2168040-hq,crossed_mixes/vtrans_002__L8__street-crowd__r_0society121787_2168040-hq.wav,dry,neutral,maybe,,,,the bed needs to be quieter to add texture to this drone rather than becoming a feature
+2026-07-26T14:15:38,rater_0a2e,soundscapes,vtrans_008__L18__water-stream__r_0nature149743_1050391-hq,crossed_mixes/vtrans_008__L18__water-stream__r_0nature149743_1050391-hq.wav,dry,neutral,yes,,,,nice combo
+2026-07-26T14:16:11,rater_0a2e,soundscapes,vtrans_004__L8__street-crowd__r_0society121787_2168040-hq,crossed_mixes/vtrans_004__L8__street-crowd__r_0society121787_2168040-hq.wav,dry,neutral,no,,,,same reasoning with human voices drawing attention and therefore clashing with moving drone
+2026-07-26T14:16:39,rater_0a2e,soundscapes,vtrans_002__L18__birds__r_0quiet324938_1648170-hq,crossed_mixes/vtrans_002__L18__birds__r_0quiet324938_1648170-hq.wav,dry,neutral,maybe,,,,this is fine - tho again sounds like no thoughts put into this combo
+2026-07-26T14:16:56,rater_0a2e,soundscapes,vtrans_008__L8__bells-church__r_1mechanical155859_179538-hq,crossed_mixes/vtrans_008__L8__bells-church__r_1mechanical155859_179538-hq.wav,dry,neutral,yes,,,,the bed should be quieter and act as texture instead
+2026-07-26T14:17:18,rater_0a2e,soundscapes,vtrans_008__L18__bells-church__r_1mechanical155859_179538-hq,crossed_mixes/vtrans_008__L18__bells-church__r_1mechanical155859_179538-hq.wav,dry,neutral,yes,,,,this is what I said to do in the previoud pair :-)
+2026-07-26T14:17:26,rater_0a2e,soundscapes,vtrans_000__L18__birds__r_0quiet324938_1648170-hq,crossed_mixes/vtrans_000__L18__birds__r_0quiet324938_1648170-hq.wav,dry,red,no,,,,bad combo
+2026-07-26T14:17:40,rater_0a2e,soundscapes,vtrans_002__L8__water-stream__r_0nature149743_1050391-hq,crossed_mixes/vtrans_002__L8__water-stream__r_0nature149743_1050391-hq.wav,dry,neutral,no,,,,bed too loud for this transition
+2026-07-26T14:18:03,rater_0a2e,soundscapes,vtrans_008__L8__water-stream__r_0nature149743_1050391-hq,crossed_mixes/vtrans_008__L8__water-stream__r_0nature149743_1050391-hq.wav,dry,neutral,maybe,,,,the bed needs to be quieter for this to work

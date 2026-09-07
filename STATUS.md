@@ -4,11 +4,11 @@ Last updated **2026-09-07**. Written so a fresh session on
 another machine can continue without re-scanning the code tree. Everything
 marked *verified* was derived from source in that session: do not re-derive it.
 
-**Where we stopped.** §3.3, §3.4.1, §3.4.2 and §3.5 are complete and dry-run.
-§3.3 is `c2890bd`, §3.4.1 is `2a95564`. **§3.4.2 and §3.5 are written but NOT
-yet committed.** De-identification is DONE for seed-valence, arc-pairwise and
-texture (§12, §13); longtrack, space-components and reverb remain, with their
-sections. Next: §3.6. The report side is separately
+**Where we stopped.** §3.3, §3.4.1, §3.4.2, §3.5 and §3.6 are complete and
+dry-run. §3.3 is `c2890bd`, §3.4.1 is `2a95564`. **§3.4.2, §3.5 and §3.6 are
+written but NOT yet committed.** De-identification is DONE for seed-valence,
+arc-pairwise, texture and reverb; longtrack and space-components remain, with
+§3.9. **Both §0.2 artist-name blockers are now closed** (§13, §14). Next: §3.7. The report side is separately
 finished and committed, and its log is
 `THESIS_MYDIR/COMP0158_Report/notes/CLAUDE.md`, session 2026-09-06 (evening).
 
@@ -89,6 +89,10 @@ evaluation and protocols. §3.1 and §3.2 ship no code.
 - **READMEs** for all seven sections with dataset URLs and licences, plus
   `human_ratings/README.md` for each.
 - **Raw ratings staged** to `_raw_ratings_DO_NOT_COMMIT/`, 35 files, 2.2 MB.
+- **§3.6 migrated in full** (09-07). Two scripts in `train/`, two modules in
+  `inference/`, two re-keyed banks plus three IRs in `weights/`, pseudonymised
+  and re-keyed ratings, a smoke test of 60 checks, the whole ladder rendered as
+  samples. See §14.
 - **§3.5 migrated in full** (09-07). Four scripts in `train/`, three modules in
   `inference/`, three artefacts in `weights/`, four pseudonymised data files in
   `human_ratings/`, a smoke test of 87 checks, two sample CSVs. See §13.
@@ -132,6 +136,7 @@ $E code/models/3.3_drone_synthesis_and_nsynth_prior/smoke_test.py   # expect exi
 | 8 | 09-06 | **Naming**: no personal names, no `JAMAI`, no tool names such as `Claude` in paths, no step-number prefixes. Environment variables are `DRONE_*`. |
 | 9 | 09-06 | **The measured timbre prior ships**, unchanged. `3.3/weights/timbre_prior/frames.npz`, 29 MB, sha256-verified identical to the source. Shipped at full float32 rather than halved to float16, so the artefact is bit-identical to the one that produced the results. §3.3 then runs with no NSynth download. |
 | 10 | 09-07 | **`code/README.md` ships.** It is rewritten from a migration plan into a reproduction guide addressed to a human grader and to a future Claude session: what each section does, how to run it, what it needs, what it produces. Consequence: it must **pass** the leak gate, so `--exclude=README.md` comes off, the five references to the private source tree go, and the banned strings it currently quotes as rules are re-expressed without naming them. |
+| 12 | 09-07 | **`conductor/` is SELF-CONTAINED.** It carries its OWN copy of every weight, parameter file and asset it loads, rather than importing or symlinking from `models/<section>/`. The directory is meant to stand alone: someone should be able to take `conductor/` and run it. Consequence: artefacts are duplicated on purpose (reverb banks and IRs, `preference_gp.npz`, `boundary_guard.json`, `hsmm_transitions.json`, `arc_types.json`, the melody checkpoints), and duplication can drift — so packaging must VERIFY the copies are byte-identical to the section originals, by checksum, and fail if they are not. |
 | 11 | 09-07 | **The melody-model discrepancy is not an error to fix.** All three transformers are offered in a UI drop-down, so deploying `L6_d128` does not contradict the parsimony argument for `L3_d128`. §10's live finding is closed; no report change. |
 
 ## 6. Verified — do not re-derive
@@ -197,8 +202,8 @@ and 11.
    `s15_ladder_human_report.py:75` `by_rater["matthew"]`,
    `figs/ladder_human.json` `readback` field, `build_results.py:31` comment.
    `build_results.py:33` also has a real handle in `COMPLETERS`.
-2. ~~Migrate §3.4.1~~ (`2a95564`), ~~3.4.2~~, ~~3.5~~ **done 09-07,
-   uncommitted.** Then 3.6, 3.7, 3.9. Each: copy, drop step
+2. ~~Migrate §3.4.1~~ (`2a95564`), ~~3.4.2~~, ~~3.5~~, ~~3.6~~ **done 09-07,
+   uncommitted.** Then 3.7, 3.9. Each: copy, drop step
    prefixes, split train from inference, dataset roots as arguments, run
    instructions in the docstring, README, smoke test, **dry run**, four sample
    outputs.
@@ -208,6 +213,12 @@ and 11.
 4. **Migrate the conductor**, then run `s06_pack_demo.py`'s `verify()` with
    every dataset root pointed at `/nonexistent`. **Rename `JAMAI_DATA` in that
    script when you do**, or the test passes by reading nothing.
+   Per decision 12 the conductor carries its own copies of every weight and
+   asset, so packaging must also checksum them against the section originals
+   and fail on drift. §3.6's three IRs and both reverb banks are the first
+   case: `reverb_bank.py` resolves IR paths relative to its own `weights/`, so
+   a copied tree works unchanged — that resolution rule exists precisely to
+   make a self-contained copy possible.
 5. Licence and attribution split, then packaging extras.
 6. **Rewrite `code/README.md` as the shipped reproduction guide** (decision 10).
    Last, because it can only describe sections that exist. Then drop
@@ -243,6 +254,63 @@ the username. That is decision 8's stated exemption. Everything else must be
 clean.
 
 Then work `code/README.md` §2.3 for §3.4.1, following §1a's conventions.
+
+## 14. §3.6, and the second artist-name blocker
+
+**§0.2 is now fully closed.** §3.5 killed the hardcoded `ARTIST_DIRS` map; this
+closes the other half, the reverb bank. Two ladder condition ids WERE artist
+names. They are re-keyed onto the measurement -- `long_bright` (5.05 s,
+2434 Hz) and `long_dark` (5.16 s, 438 Hz) -- which is what the experiment
+actually manipulates. The re-key is DERIVED from each category's own measured
+medians (tail and tone buckets), not hand-assigned, and the tool aborts if the
+mapping is not one-to-one. Track names and paths are dropped entirely from the
+measured bank; only the measurements survive. The ratings' `reverb` column was
+re-keyed in the SAME operation, including compound ids, because the ratings
+must join to their stimulus.
+
+**A pandas bug the audit caught, affecting every earlier section.**
+`df[col].dtype == object` NEVER FIRES on this pandas: text columns come back as
+a dedicated `str` dtype, so the path-rewriting step was silently skipped in all
+three scrubbers. Absolute paths had been surviving into shipped files. Fixed
+with a `scrub_text_columns` helper that tests numeric-ness instead, and every
+section re-scrubbed and re-verified against the report's copies. This is exactly
+what the audit step exists for.
+
+**A real defect in the study's loudness control, kept and documented.**
+Conditions are RMS-matched to dry so a level difference cannot masquerade as a
+reverb effect -- but the peak guard runs AFTER the match and pulls a clipping
+condition back down, undoing it. On the smoke test's source it costs
+`stairwell` **-4.69 dB**, the longest real space, which is where a level
+confound matters most. NOT fixed: these are the stimuli the listeners actually
+heard, and re-levelling now would make the shipped code render something they
+did not hear. The fix for a future round is one common headroom scalar across
+all conditions. The smoke test asserts the MECHANISM (any deviation must be
+downward and coincide with the peak ceiling), because which conditions bind
+depends on source level.
+
+**Verified.** The three shipped IRs reproduce their banked RT60 and centroid
+exactly (0.952/3036.9, 0.294/2653.8, 2.388/2684.7); IR-supervised fitting
+recovers decay 0.25 s, damping 900 Hz and gain 0.60 from a planted target; the
+tone-matched pair holds at 0.11 s tail difference and a 5.6x tone ratio.
+
+**`weights/` holds three .wav files, and that is correct.** For the IR
+conditions the WAV IS THE MODEL: the runtime convolves the actual measurement,
+and the fitted params only choose which one represents a category. §1a's rule
+is "artefacts that ship", not "only numbers". Putting them elsewhere would give
+the section a runtime dependency outside `weights/`, and decision 12's
+self-contained conductor copy would then need two source directories.
+
+**Gap found and closed (user's question, 09-07):** §3.6 was shipping
+third-party audio with NO attribution, while every other section carries a
+licence table and §0.3 names those three EchoThief IRs explicitly. Added a
+licence table to the section README and `weights/irs/ATTRIBUTION.md` beside the
+files, so a copied `weights/` carries its own credit. The smoke test now
+asserts the attribution exists, names the source and URL, and lists every
+shipped IR.
+
+**Report-side finding:** the thesis's own data directory still ships
+`reverb_ratings.csv` with the original artist-derived condition ids, which
+`appendix_datasets.tex`'s scrubbing claim covers. Report-side fix, not code.
 
 ## 13. §3.5, and the global rater map
 

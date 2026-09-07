@@ -568,6 +568,12 @@ runtime intentionally carries components the report does not cover.
 `reverb_bank.py:149` imports `load_ir` from `learn_from_irs`. That one function
 moves to the inference side so the runtime stops importing a fitting script.
 
+The three IRs stay in `3.6/weights/irs/` AND are copied into the conductor when
+that ships (decision 12: `conductor/` is self-contained and carries its own
+copy of everything it loads). `reverb_bank.py` resolves IR paths relative to
+its own `weights/`, so a copied tree works with no path rewriting. Packaging
+must checksum the copies against these originals and fail on drift.
+
 The fitted model is three `nn.Parameter` scalars per impulse response, not a
 network. There is no checkpoint to ship: `weights/` holds the JSON banks.
 

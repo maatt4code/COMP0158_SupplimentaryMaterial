@@ -1,0 +1,7 @@
+condition,kind,tail_s,tone_hz,source,out_len_s,level_vs_dry_db
+dry,dry,0.0,,,4.0,-0.0
+nature,ir,0.294,2653.8,measured IR (convolved),4.36,0.0
+brutalism,ir,0.952,3036.9,measured IR (convolved),5.05,-0.0
+stairwell,ir,2.388,2684.7,measured IR (convolved),6.27,-3.51
+long_bright,measured,5.053,2434.3,fitted decay parameters,9.02,-0.77
+long_dark,measured,5.163,438.4,fitted decay parameters,9.02,-0.3
