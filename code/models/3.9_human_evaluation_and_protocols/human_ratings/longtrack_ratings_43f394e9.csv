@@ -1,0 +1,12 @@
+timestamp,rater,session_id,block,order_index,track_id,trajectory,chain,condition,stage,scheduled_s,elapsed_s,rating
+2026-07-12T11:57:33,R03,80f57c39,-1,-1,lt_practice,practice,,practice,probe1,15.0,19.1,1.0
+2026-07-12T11:57:51,R03,80f57c39,-1,-1,lt_practice,practice,,practice,probe2,35.0,37.5,-1.0
+2026-07-12T11:58:20,R03,80f57c39,-1,-1,lt_practice,practice,,practice,overall,60.0,65.7,0.0
+2026-07-12T11:59:09,R03,80f57c39,0,0,lt_down_c2_noarc,down,2.0,noarc,probe1,42.0,45.1,1.0
+2026-07-12T11:59:36,R03,80f57c39,0,0,lt_down_c2_noarc,down,2.0,noarc,probe2,70.0,72.9,-1.0
+2026-07-12T12:00:22,R03,80f57c39,0,0,lt_down_c2_noarc,down,2.0,noarc,probe3,112.0,118.3,0.0
+2026-07-12T12:00:27,R03,80f57c39,0,0,lt_down_c2_noarc,down,2.0,noarc,overall,120.0,123.4,0.0
+2026-07-12T12:02:08,R03,5b0b779b,-1,-1,lt_practice,practice,,practice,probe1,15.0,17.6,1.0
+2026-07-12T12:02:27,R03,5b0b779b,-1,-1,lt_practice,practice,,practice,probe2,35.0,36.8,-1.0
+2026-07-12T12:02:53,R03,5b0b779b,-1,-1,lt_practice,practice,,practice,overall,60.0,62.4,0.0
+2026-07-12T12:03:40,R03,5b0b779b,0,0,lt_down_c2_noarc,down,2.0,noarc,probe1,42.0,44.6,-1.0

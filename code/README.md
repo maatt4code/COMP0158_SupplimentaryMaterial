@@ -616,22 +616,142 @@ with before describing it in the report.
 
 ### 2.8 `conductor/` (§3.8)
 
-`s02_conductor_app.py` becomes `conductor/app.py`. `s20_skins.py`,
-`s21_faders.py`, `s22_visuals.py`, `s19_webaudio.py`, `s18_ring_player.py` and
-`s10_overlay_explorer.py` become `conductor/UI/skins.py`, `faders.py`,
-`visuals.py`, `webaudio.py`, `ring_player.py`, `overlay_mixer.py`.
+**Rewritten 09-07.** The conductor is assembled from TWO sources, and the split
+is the whole point:
 
-`Phase2/Gemini/step02_arranger.py` becomes `conductor/engine/arranger.py`.
-`stereo/stereo_pad.py`, `stereo/distance.py` and `crackle/crackle.py` become
-`conductor/runtime/`. `soundscape_synth.py` goes to `common/`.
+  * everything the runtime COMPUTES with is copied from
+    `code/models/*/inference/` and `code/models/*/weights/` -- the already
+    migrated, already de-identified, already smoke-tested versions;
+  * only the APPLICATION comes from the original tree: the app itself, the UI
+    modules, the arranger, and the small runtime glue.
 
-`conductor/weights/` holds the four build-time pre-fits (§3.3) plus the bank
-indexes. Everything else it needs is imported from `models/*/inference/`.
+Nothing is re-derived from the original tree that has already been migrated.
+That matters because the migrated versions differ from their originals in ways
+that took real work: they load frozen weights instead of refitting at boot,
+they carry no rating data, they resolve no dataset roots, and their identifiers
+are de-identified. Re-migrating any of them would silently undo that.
 
-`step02_arranger.py:25` does `import paths` and never uses it. Dead import.
-Delete it and `paths.py` leaves the conductor payload entirely.
+Per decision 12 the directory is **self-contained**: it carries its own copies
+rather than importing across the tree, so `conductor/` can be lifted out and
+run. Copies must therefore be checksum-verified at packaging time, or a fix in
+a section silently fails to reach the app.
 
----
+#### 2.8a Target layout
+
+```
+conductor/
+  app.py                  <- s02_conductor_app.py (4,205 lines)
+  engine/                 COPIES of migrated inference code
+    arc_policy.py         <- 3.5/inference/
+    scheduler.py          <- 3.5/inference/
+    coherence_reranker.py <- 3.5/inference/
+    retrieval.py          <- 3.4.2/inference/
+    decoupled_engine.py   <- 3.4.2/inference/
+    guard.py              <- 3.4.2/inference/
+    reverb.py             <- 3.6/inference/
+    reverb_bank.py        <- 3.6/inference/
+    melody_markov.py      <- 3.7/inference/
+    melody_transformer.py <- 3.7/inference/
+    transformer_model.py  <- 3.7/inference/
+    grammar.py            <- 3.7/inference/
+    arranger.py           <- Phase2/Gemini/step02_arranger.py (617)   NEW
+    render_params.py      extracted constants, see 2.8c              NEW
+    bed_bank.py           <- s15_bed_bank.py, apply half (277)       NEW
+  UI/
+    skins.py              <- s20_skins.py (1,611)
+    visuals.py            <- s22_visuals.py (1,965)
+    faders.py             <- s21_faders.py (602)
+    overlay_mixer.py      <- s10_overlay_explorer.py (770)
+    webaudio.py           <- s19_webaudio.py (305)
+    ring_player.py        <- s18_ring_player.py (213)
+  runtime/
+    crackle.py            <- SideProjects/crackle/
+    stereo_pad.py         <- SideProjects/stereo/
+    distance.py           <- SideProjects/stereo/
+  weights/                COPIES of migrated weights + the bed bank
+  assets/                 bed audio + the three IRs, with ATTRIBUTION.md
+```
+
+UI and glue to migrate: about 10,500 lines. Engine and weights: copied, not
+rewritten.
+
+#### 2.8b What the app imports, and where each now comes from
+
+Measured from `s02_conductor_app.py`, not guessed.
+
+| app import | uses | resolution |
+|---|---|---|
+| `s01_arc_policy` | `lookup_best_arc`, `lookup_candidates`, `best_by_gp_predict`, `pool_contexts`, `nearest_context`, `TEXTURE_CHOICES/NAMES` | copy 3.5/inference/arc_policy.py |
+| `s11_arrangement_scheduler` | `LiveBedScheduler`, `preset`, `SchedState` | copy 3.5/inference/scheduler.py |
+| `s17_coherence_reranker` | `load_coherence`, `rerank` | copy 3.5/inference/coherence_reranker.py |
+| `s06_boundary_guard` | `HybridBoundaryGuard(label_space=...)` | copy 3.4.2/inference/guard.py — **signature changes**, see 2.8d |
+| `step01_gp_softknn_engine` | `PaperGuidedGPSoftKNNEngine`, `calculate_harmonic_centroid` | copy 3.4.2/inference/retrieval.py (`GPSoftKNNEngine`, `harmonic_centroid`) |
+| `decoupled_engine` | `DecoupledEngine` | copy 3.4.2/inference/decoupled_engine.py |
+| `reverb_bank` | the ladder | copy 3.6/inference/ (both modules) |
+| `melodic_drone` | melody line | copy 3.7/inference/melody_markov.py |
+| `runtime_melodic_drone` | `LiveMelodicDroneRuntime` | copy 3.7/inference/melody_transformer.py |
+| `s08_arc_rating_app` | **`load_pool` only** | see 2.8c |
+| `s09_arc_fusion` | `run`, `TEXTURE_GAINS`, `texture_overrides`, `texture_signed` | see 2.8c — `run` DISAPPEARS |
+| `s07_arc_pool` | `apply_chord`, `HOLD_S`, `RENDER_KW`, `aw_rms`, `AW_TARGET` | see 2.8c |
+| `s15_bed_bank` | `select_bed` | split: fit stays out, apply half copied |
+| `s10_overlay_explorer` | `load_mono_`, `loop_to_len` | UI/overlay_mixer.py |
+| `s20/s21/s22/s19/s18` | UI | UI/, verbatim but for import paths |
+| `crackle`, `distance` | optional overlays | runtime/ |
+
+#### 2.8c Four extractions still to do, all small
+
+These are the only places the app still reaches into training code.
+
+1. **`s09.run` disappears entirely.** It refits the preference GP at boot. The
+   frozen posterior already ships (`3.5/weights/preference_gp.npz`) and
+   `arc_policy.PreferenceGP.load()` replaces it. This is decision 2's whole
+   point, and it is already built and verified.
+2. **The texture ladder moves to inference.** `TEXTURE_GAINS`,
+   `texture_overrides` and `texture_signed` currently live in
+   `3.5/train/fit_preference_gp.py`, but the conductor RENDERS with them, so
+   they belong beside `TEXTURE_CHOICES`. Move to
+   `3.5/inference/arc_policy.py`; the trainer imports them back. ONE canonical
+   map, so the level the GP learned a preference for is voiced identically.
+3. **`load_pool` moves to inference.** The app needs arc metadata, not the
+   rating app. Expose `load_pool()` from `3.5/inference/arc_policy.py`
+   (it already reads the manifest inline in `main`).
+4. **`render_params`**: `apply_chord`, `HOLD_S`, `RENDER_KW`, `aw_rms`,
+   `AW_TARGET` out of the 21 KB pool builder. `aw_rms`/`AW_TARGET` are ALSO
+   used by 3.7's melody runtime, which currently carries a local copy — so put
+   the canonical pair in `common/loudness.py` and have both import it, rather
+   than shipping two definitions of a loudness protocol.
+
+#### 2.8d Known gaps to close before the app will run
+
+* **The human-space guard is not frozen.** The app constructs the guard with
+  `label_space="judge"` but the UI lets a session retrieve on `valence_human`,
+  and a judge-space guard fences a human-space walk out of exactly the
+  territory the human axis opens up. `3.4.2/train/fit_guard.py` already
+  supports `--label-space human`; freeze a second weight
+  (`boundary_guard_human.json`) and have the app pick by label space.
+* **The bed bank is the fourth pre-fit and is not built.** `s15_bed_bank.py`
+  reads `overlay_curation.csv` and writes `bed_bank.json`. Split it like the
+  others: the build stays on the training side, `select_bed` is copied into
+  `engine/bed_bank.py`, and the JSON ships in `conductor/weights/`.
+* **Bed audio and its licence.** 86 bed wavs plus the three IRs go to
+  `assets/` with `ATTRIBUTION.md` (§0.3). §3.6 already ships that IR
+  attribution file; the bed audio needs its own.
+* **`melodic_transformer_cpu.pt` is gone.** The app loads that alias by label.
+  Point the loader at the three real names (§2.7).
+
+#### 2.8e Acceptance tests
+
+* `s06_pack_demo.py`'s `verify()` with every dataset root at `/nonexistent`,
+  after renaming its `JAMAI_DATA`, or the test passes by reading nothing.
+* No module under `conductor/` imports `paths`, resolves a dataset root, or
+  reads a rating file. `step02_arranger.py:25` imports `paths` and never uses
+  it — deleting that line removes `paths.py` from the conductor payload
+  entirely.
+* Every file in `conductor/engine/` and `conductor/weights/` is byte-identical
+  to its section original, by checksum. This is what stops decision 12's
+  duplication from drifting.
+* The app starts, the reverb dropdown offers all six conditions, and all three
+  melody checkpoints are selectable.
 
 ## 3. Breaking the training to inference dependencies
 

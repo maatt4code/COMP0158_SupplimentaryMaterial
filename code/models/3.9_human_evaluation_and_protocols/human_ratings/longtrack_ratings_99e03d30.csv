@@ -1,0 +1,4 @@
+timestamp,rater,session_id,block,order_index,track_id,trajectory,chain,condition,stage,scheduled_s,elapsed_s,rating
+2026-07-11T13:29:38,R03,45419233,-1,-1,lt_practice,practice,,practice,probe1,15.0,33.1,1.0
+2026-07-11T13:29:42,R03,45419233,-1,-1,lt_practice,practice,,practice,probe2,35.0,37.1,0.0
+2026-07-11T13:30:38,R03,45419233,-1,-1,lt_practice,practice,,practice,overall,60.0,92.5,0.0

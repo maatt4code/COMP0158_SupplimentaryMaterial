@@ -1,0 +1,3 @@
+timestamp,rater,test,item_id,response,response2,elapsed_s,note,params
+2026-07-26T19:29:37,rater_daa5,melody,v0__folk__lead,neutral,maybe,47.16,R18,"{""style"": ""folk"", ""role"": ""lead"", ""level_db"": -8.0, ""articulated"": true, ""own_voice"": true, ""octave"": 0, ""root_hz"": 171.4, ""valence"": -0.88, ""arousal"": 0.45, ""has_melody"": true}"
+2026-07-26T19:30:17,rater_daa5,melody,v0__boc__texture,neutral,maybe,40.12,R18,"{""style"": ""boc"", ""role"": ""texture"", ""level_db"": -16.0, ""articulated"": false, ""own_voice"": false, ""octave"": -1, ""root_hz"": 85.7, ""valence"": -0.88, ""arousal"": 0.45, ""has_melody"": true}"

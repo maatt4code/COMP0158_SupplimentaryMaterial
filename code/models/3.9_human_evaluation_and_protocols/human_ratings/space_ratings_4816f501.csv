@@ -1,0 +1,5 @@
+timestamp,rater,test,item_id,response,response2,elapsed_s,note,params
+2026-07-26T19:03:00,rater_4b0a,reverb_clips,vtrans_028__long_bright,neutral,maybe,29.81,a bit too crowded in the middle of the clip,"{""clip_id"": ""vtrans_028"", ""reverb"": ""long_bright""}"
+2026-07-26T19:03:18,rater_4b0a,reverb_clips,vtrans_002__long_bright,neutral,yes,17.76,,"{""clip_id"": ""vtrans_002"", ""reverb"": ""long_bright""}"
+2026-07-26T19:03:36,rater_4b0a,reverb_clips,vtrans_002__dry,neutral,yes,18.24,,"{""clip_id"": ""vtrans_002"", ""reverb"": ""dry""}"
+2026-07-26T19:18:19,rater_4b0a,melody,v0__folk__lead,neutral,no,96.86,"the main drone itself souns like shit. the whole thing sounds like a child playing on a music instrument. the base drone is so nice tho. also, you have not normalized the loudness so the higher freq is just screaming at me","{""style"": ""folk"", ""role"": ""lead"", ""level_db"": 0.0, ""articulated"": true, ""own_voice"": true, ""octave"": 0, ""root_hz"": 171.4, ""valence"": -0.88, ""arousal"": 0.45, ""has_melody"": true}"

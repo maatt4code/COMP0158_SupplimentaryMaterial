@@ -4,12 +4,25 @@ Last updated **2026-09-07**. Written so a fresh session on
 another machine can continue without re-scanning the code tree. Everything
 marked *verified* was derived from source in that session: do not re-derive it.
 
-**Where we stopped.** §3.3, §3.4.1, §3.4.2, §3.5, §3.6 and §3.7 are complete
-and dry-run -- every model section except §3.9. §3.3 is `c2890bd`, §3.4.1 is
-`2a95564`. **§3.4.2, §3.5, §3.6 and §3.7 are written but NOT yet committed.**
-De-identification is DONE for seed-valence, arc-pairwise, texture and reverb;
-longtrack and space-components remain, with §3.9. §0.2's artist-name blockers
-are closed (§13, §14, §15). Next: §3.9, then the conductor. The report side is separately
+**Where we stopped.** §3.3 through §3.7 are complete, dry-run and COMMITTED
+(latest `71a497f`). §3.9 is IN PROGRESS: its rating data is de-identified and
+in place, its CODE is not migrated yet.
+
+**§9 step 1 is now FULLY DONE.** All six staged rating studies are
+de-identified, audited and shipped. §0.2's artist-name blockers are closed
+(§13, §14, §15).
+
+**The conductor restructure is now PLANNED, not built.** `code/README.md` §2.8
+was rewritten 09-07 from a measurement of what `s02_conductor_app.py` actually
+imports. Read it before touching §3.8. The shape: engine and weights are
+COPIED from `code/models/*/inference` and `*/weights`; only the app, UI,
+arranger and small runtime glue come from the original tree (~10,500 lines).
+Nothing already migrated gets re-derived from the original -- the migrated
+versions load frozen weights instead of refitting, carry no rating data,
+resolve no dataset roots and are de-identified, and re-migrating would undo
+all of that silently.
+
+Next: §3.9's code, then §3.8 following that plan. The report side is separately
 finished and committed, and its log is
 `THESIS_MYDIR/COMP0158_Report/notes/CLAUDE.md`, session 2026-09-06 (evening).
 
@@ -90,6 +103,9 @@ evaluation and protocols. §3.1 and §3.2 ship no code.
 - **READMEs** for all seven sections with dataset URLs and licences, plus
   `human_ratings/README.md` for each.
 - **Raw ratings staged** to `_raw_ratings_DO_NOT_COMMIT/`, 35 files, 2.2 MB.
+- **§3.9 human ratings de-identified and shipped** (09-07): 12 longtrack
+  shards (335 rows, 10 raters) and 14 space-component shards (760 rows, 17
+  raters) plus both merged files. §3.9's CODE is still to migrate. See §16.
 - **§3.7 migrated in full** (09-07). Five scripts in `train/`, four modules in
   `inference/`, the fitted grammar plus three checkpoints and the frozen anchor
   in `weights/`, a smoke test of 63 checks, four melody samples. See §15.
@@ -258,6 +274,39 @@ the username. That is decision 8's stated exemption. Everything else must be
 clean.
 
 Then work `code/README.md` §2.3 for §3.4.1, following §1a's conventions.
+
+## 16. §3.9's rating data, and which pull the report actually used
+
+**The global rater map now covers 24 identities** (R01-R18, R22-R26, plus one
+app-minted anonymous id), derived from the report across every paired study and
+consistent throughout -- R03 is the same person in all six.
+
+**A trap STATUS §6 warned about, resolved differently than expected.** The
+staged space-component copies ARE from `downloaded_fresh` and match §6's
+verified 14 shards / 709 rows / 15 raters. But **the report analysed a LATER
+pull**: 760 rows, with session `211dc68d` grown from 68 to 119 between pulls
+(staged latest timestamp 2026-08-18, the report's 2026-08-21). No raw copy of
+the newer rows exists anywhere in the code tree.
+
+So §3.9 ships **the report's own already-pseudonymised copies** for the space
+study, not a re-derivation. Shipping the staged 709-row version would have made
+the supplementary data disagree with the thesis it accompanies. §6's 709/708
+figures describe the staged pull and remain correct about it; they are not what
+the report analysed. `deidentify.py` records this in `scrub_space`.
+
+**`020fff1f` is not a missing session.** §6 warns that longtrack's `logs/`
+subfolder lacks it. The report does ship it -- under
+`hf_longtrack_ratings_sparse/`, a second directory beside the main one. All 12
+shards are present, and longtrack staged and report agree exactly at 335 rows,
+so its map WAS derived positionally.
+
+**Two bugs found and fixed in the de-identifier.**
+1. The condition re-key regex used `(?<![A-Za-z0-9_])`, so `vtrans_028__sotl`
+   never matched -- underscore is a SEPARATOR in these ids, not part of the
+   token. 37 `sotl` and 29 `basinski` occurrences had survived. Now zero
+   across both §3.6 and §3.9.
+2. A shell leak-gate check was reading `head`'s exit status instead of
+   `grep`'s, so it reported clean regardless. (Second time; watch for it.)
 
 ## 15. §3.7, and a third set of artist-derived identifiers
 

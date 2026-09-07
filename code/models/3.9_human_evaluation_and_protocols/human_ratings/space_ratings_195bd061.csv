@@ -1,0 +1,3 @@
+timestamp,rater,test,item_id,response,response2,elapsed_s,note,params
+2026-07-26T16:50:40,rater_ef9f,bed_level,vtrans_002__bells-church,works,-24,59.83,TEST_RATING_DO_NOT_USE,"{""bed_id"": ""r_1mechanical155859_179538-hq"", ""bed_type"": ""bells-church"", ""bed_va"": [-0.986809563, 0.924154988], ""drone"": ""vtrans_002"", ""drone_va"": [-0.9009, 0.1011], ""reverb"": ""long_bright""}"
+2026-07-26T16:51:35,R20,bed_level,vtrans_002__bells-church,works,-24,23.04,,"{""bed_id"": ""r_1mechanical155859_179538-hq"", ""bed_type"": ""bells-church"", ""bed_va"": [-0.986809563, 0.924154988], ""drone"": ""vtrans_002"", ""drone_va"": [-0.9009, 0.1011], ""reverb"": ""long_bright""}"
