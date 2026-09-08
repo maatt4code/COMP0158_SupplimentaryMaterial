@@ -13,9 +13,21 @@ runs in report order, and every stage can be run on its own.
 | Rendered audio referenced by the report | [`audio/`](audio/) |
 | Interactive figures | [`figures_3d/`](figures_3d/) |
 
-`LICENSE` covers the code. `ATTRIBUTION.md` governs the third-party audio under
-`code/conductor/assets/`, which carries different terms. See
-[`code/README.md`](code/README.md) §0.3.
+`LICENSE` covers the code. [`ATTRIBUTION.md`](ATTRIBUTION.md) governs
+everything else: the three impulse responses redistributed with credit, the
+material that was measured but is **not** redistributed, and the
+pseudonymisation of the rating data.
+
+Before anything else, check the package works on your machine:
+
+```bash
+python code/verify.py
+```
+
+It runs every section's smoke test, checks that no shipped file names a
+participant or an artist, verifies that every command in this README exists
+with real flags, and confirms the shipped weights match their checksums. No
+dataset, no network, no GPU.
 
 ---
 

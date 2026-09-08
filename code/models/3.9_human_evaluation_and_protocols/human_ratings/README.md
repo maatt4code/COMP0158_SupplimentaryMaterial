@@ -1,44 +1,123 @@
-# Human ratings — evaluation studies
+# Human ratings — the two listening studies
 
-Two studies, both fragmented across web-app restarts. **Read §0.1b of the
-top-level README before touching either.** Naive concatenation is wrong in both
-cases and the merge scripts already exist.
+Everything in this directory was collected for this project and is
+pseudonymised. No participant supplied anything beyond their ratings.
 
-## Long-track recency study
+Two studies ran, months apart, on two different rating apps. Both apps wrote
+**one CSV per boot**, so a session that survived a restart is split across
+shards. That is the single fact to hold onto before touching any of this:
+naive concatenation is wrong, and the correct merge already exists in
+[`../train/`](../train). Writing a new one produces a different dataset from
+the one the thesis analysed.
 
-12 session shards, `longtrack_ratings_<session>.csv`, one schema throughout
-(17 columns, `timestamp,rater,session_id,block,order_index,track_id,trajectory,
-chain,condition,stage,scheduled_s,elapsed_s,…`).
+## Identifiers
 
-Source of truth is `longtrack_pool/huggingface_ratings/`. Its `logs/`
-subdirectory holds byte-identical copies of 11 of the 12 and is **missing**
-`longtrack_ratings_020fff1f.csv` (64 rows), so the parent is the superset. Both
-carry a zero-byte `longtrack_ratings.csv`; drop it.
+Two forms appear in the `rater` column and both are pseudonyms:
 
-Three trajectory conditions: unchanged static baseline, major-ending arc,
-minor-ending arc. Each track carries three in-track probes plus a retrospective
-rating, which is what the recency analysis contrasts.
+- `R03`, `R12`, `R21`, … — study participants, under the global map used
+  across every section of this material.
+- `rater_22cd`, `rater_7895`, … — the anonymous four-hex handle the
+  component-preference app minted for a walk-up listener who never identified
+  themselves. These were never linked to a person.
 
-## Component preference study
+`session_id` is an opaque eight-hex boot handle. It is not a person: one
+listener holds several, and it is used only to detect shards of the same
+session. Note that some of them (`5e836502`) are valid scientific notation, so
+**read these files as text**, not with a CSV reader that infers dtypes — a
+naive `pd.read_csv` turns that one into `inf`.
 
-14 session shards, `space_ratings_<session>.csv`, 9 columns raw.
+## Long-track recency study — 12 shards, 335 rows, 10 raters
 
-Source of truth is `rating_space/downloaded_fresh/logs/`. The sibling
-`downloaded/` folder is an **earlier pull and a subset**: `8c842679` grew from
-156 to 312 rows between pulls and three sessions appear only in the fresh one.
-Merging both double-counts. Discard `downloaded/`.
+`longtrack_ratings_<session>.csv`, one schema throughout:
 
-Merged output is `ratings_all_flagged.csv` (708 rows, 14 raters) and its clean
-subset `ratings_clean.csv` (617 rows, 6 raters). Produced by
-`analyze_space_ratings.load()` then `build_results.py`, both of which ship in
-`../train/`. Verified 2026-09-06: the shards hold 709 rows across 15 raters, and
-the one row and rater that do not survive is the `setup_check` deploy smoke row.
+```
+timestamp,rater,session_id,block,order_index,track_id,trajectory,chain,
+condition,stage,scheduled_s,elapsed_s,rating
+```
 
-Eight tabs, by row count: melody 181, reverb_clips 170, pairing 113,
-bed_level 64, modulation 64, transitions 43, stereo 43, sensitivity 30.
+Listeners sat through whole multi-minute tracks, 11–18 July 2026. Three
+trajectory conditions: `noarc` (a plain crossfade), `arc_majend` and
+`arc_minend` (an arc boundary ending on a major or minor chord), plus
+`practice` warm-ups that are excluded from every analysis but kept as a
+scale-use check.
 
-Two hygiene flags drive `clean`, and `build_results.py:27-33` documents how they
-were derived. `superseded_audio` marks ratings made before that tab's audio was
-last re-rendered, which matters because filenames are content hashed, so a
-changed file set means the rated audio no longer exists. `is_tester` marks six
-short smoke sessions from the 26 July deploy.
+Each track carries three in-track probes at roughly 40 s, 70 s and 115 s
+(`stage` = `probe1`/`probe2`/`probe3`) and one retrospective `overall`. **That
+design is what makes the recency result possible**, because it puts the last
+judgement and the summary judgement on the same track and the same person.
+
+Two session types are pooled here and must be split, not merged:
+
+| branch | `stage` values | feeds |
+|---|---|---|
+| timed probes | `probe1/2/3`, `overall` | the three contrasts and the recency test |
+| sparse (free-timed) | `event`, `overall` | the peri-event analysis only |
+
+`analyse_recency.py` excludes the sparse branch by design — any session that
+emitted an `event` row — rather than by filename, so the split survives the
+shards being reorganised.
+
+**The data is thinner than 335 rows suggests.** Excluding practice, one
+listener supplied 112 rows and the next 75; three supplied fewer than ten.
+Five raters are usable for the condition contrasts. Report this as a pilot,
+and never quote a group mean without saying who it came from.
+
+`longtrack_meta.json` is the stimulus set: 19 rendered tracks with their
+waypoints, probe times, transition times, loudness targets and the arranger's
+code hash. Paths in it are basenames; the audio is not distributed, because it
+is reproducible from [`3.3`](../../3.3_drone_synthesis_and_nsynth_prior) and
+the conductor.
+
+## Component preference study — 14 shards, 760 rows, 17 raters
+
+`space_ratings_<session>.csv`, nine columns raw:
+
+```
+timestamp,rater,test,item_id,response,response2,elapsed_s,note,params
+```
+
+Eight tabs, 26 July – 21 August 2026, each asking listeners to compare
+settings for one component:
+
+| tab | rows | |
+|---|---|---|
+| `melody` | 207 | melody style and level |
+| `reverb_clips` | 195 | the six reverb conditions |
+| `pairing` | 113 | background bed type |
+| `bed_level` | 65 | how loud the bed should sit |
+| `modulation` | 64 | chorus / flange / phaser, mild or strong |
+| `transitions` | 43 | staged vs direct |
+| `stereo` | 43 | width treatments |
+| `sensitivity` | 30 | scale-use check |
+
+`params` is a JSON blob whose keys differ per tab; the merge expands it into
+one column per key and maps `response`/`response2` onto a numeric `score` and
+a boolean `use`. **Anything reading these raw shards directly is reading a
+different, unusable shape** — the merged table has 28 columns.
+
+### The merged tables, and the three flags
+
+`ratings_all_flagged.csv` (760 rows, 17 raters) and its clean subset
+`ratings_clean.csv` (668 rows, 8 raters) are shipped so a reader can start
+from the analysed dataset without rebuilding it. Both are regenerated exactly
+by `python ../train/build_results.py`.
+
+Three derived columns drive the cleaning, and
+[`../train/build_results.py`](../train/build_results.py) documents each:
+
+- `superseded_audio` (76 rows) — the rating predates the last re-render of
+  that tab's audio. Stimulus filenames are content-hashed, so a changed file
+  set means the rated audio no longer exists.
+- `is_tester` (24 rows) — one of six short sessions from the 26 July deploy
+  window. Smoke tests, not listening data.
+- `clean` — neither of the above.
+
+### One condition was renamed
+
+Two reverb conditions had been named after the commercial albums they were
+measured from. They are re-keyed throughout this material onto descriptors of
+the measurement itself: `sotl` → `long_bright`, `basinski` → `long_dark`. The
+ratings and the reverb bank were re-keyed in the same commit, because a
+stimulus id that no longer joins to its bank fails silently rather than
+loudly. Reproducing a report table that names the old ids means mapping them
+forward; nothing numeric changed.

@@ -40,6 +40,33 @@ all of that silently.
    the CONCATENATION of both banks, so every anchor past the first was out of
    range and the human path had never been exercised. Fixed to take all banks.
 
+**Packaging started 09-08 (§9 step 5).** Done:
+- `code/verify.py` -- ONE command a grader runs first. Smoke tests, an
+  identifier sweep, a check that every command in the top-level README exists
+  with real flags, and checksum verification. No dataset, no network, no GPU.
+  It found three real defects on its first run: `3.6/data/samples/
+  stimulus_conditions.json` shipped an ABSOLUTE build-host path (its `dump()`
+  wrote resolved condition dicts -- now relative), 3.5's `SHA256SUMS` recorded
+  names relative to the section rather than to itself so it verified nothing,
+  and `paths.py` needed an explicit exemption for decision 8's stated
+  build-host DEFAULTS.
+- `SHA256SUMS` for every section's `weights/` (28 artefacts). This is also the
+  mechanism decision 12 needs to stop the conductor's copies drifting.
+- `ATTRIBUTION.md` at top level, which the README had been PROMISING while the
+  file did not exist. Covers the three redistributed IRs, what was measured but
+  not redistributed, the label re-keys, and the pseudonymisation. Notes that
+  the conductor's bed audio must be added before it ships.
+
+- `LICENSE`: **Apache 2.0, chosen by the user 09-08**, scoped to CODE ONLY with
+  that scope stated explicitly in the file, because ESC-50's CC BY-NC cannot be
+  relicensed permissively (decision 3). `ATTRIBUTION.md` governs the rest.
+
+**One open item before public release.** The copyright line reads "COMP0158
+supplementary material, author pending" on purpose: this accompanies an
+anonymously marked thesis, and a real name in `LICENSE` would both de-anonymise
+it and trip `verify.py`'s own identifier sweep. Replace it once marking is
+done. The note is in the file itself, so it cannot be missed.
+
 Next: §3.9's code, then §3.8 following the §2.8 plan. The report side is separately
 finished and committed, and its log is
 `THESIS_MYDIR/COMP0158_Report/notes/CLAUDE.md`, session 2026-09-06 (evening).
@@ -121,9 +148,12 @@ evaluation and protocols. §3.1 and §3.2 ship no code.
 - **READMEs** for all seven sections with dataset URLs and licences, plus
   `human_ratings/README.md` for each.
 - **Raw ratings staged** to `_raw_ratings_DO_NOT_COMMIT/`, 35 files, 2.2 MB.
-- **§3.9 human ratings de-identified and shipped** (09-07): 12 longtrack
-  shards (335 rows, 10 raters) and 14 space-component shards (760 rows, 17
-  raters) plus both merged files. §3.9's CODE is still to migrate. See §16.
+- **§3.9 migrated in full** (09-08). Four scripts in `train/`, `inference/` and
+  `weights/` empty-but-documented by design, 26 pseudonymised shards plus both merged tables and
+  the stimulus metadata in `human_ratings/`, a smoke test of 33 checks. Both
+  studies reproduce the report exactly. The de-identification tool was
+  corrupting a session id and every float column; fixed and all sections
+  regenerated. See §17, then §16 for which pull the report used.
 - **§3.7 migrated in full** (09-07). Five scripts in `train/`, four modules in
   `inference/`, the fitted grammar plus three checkpoints and the frozen anchor
   in `weights/`, a smoke test of 63 checks, four melody samples. See §15.
@@ -292,6 +322,85 @@ the username. That is decision 8's stated exemption. Everything else must be
 clean.
 
 Then work `code/README.md` §2.3 for §3.4.1, following §1a's conventions.
+
+## 17. §3.9 migrated, and a CSV reader that was destroying data
+
+Both studies ship, both reproduce, and the section has no inference side by
+design: nothing in it runs at synthesis time and nothing is fitted. Following
+§3.4.1's precedent, `inference/` and `weights/` are kept with a README each
+rather than deleted, so a reader can tell a deliberate absence from a
+packaging slip; the smoke test asserts both stay empty and both stay
+explained.
+
+**Four scripts in `train/`.** `analyse_space_ratings.py` (the merge of record)
+and `build_results.py` (hygiene + 11 tables + 5 figures) were already planned
+in §2.5. The long-track half was NOT in the plan's table -- §2.5 listed only
+its shards -- so `analyse_longtrack.py` (from the report tree's
+`s14_longtrack_analysis.py`) and `analyse_recency.py` migrated too. Without
+them the shards ship with no way to recompute the recency result, which is the
+headline finding of the section.
+
+**Everything reproduces, verified against the report's own outputs.**
+
+| output | check |
+|---|---|
+| 11 component-preference tables | identical to `06_component_preferences/data/analysed/`, once the deliberate `sotl`/`basinski` re-key is mapped back |
+| `longtrack_analysis.json` | every value identical to the report's; only rater LIST ORDER differs, because the report sorted raw handles and this sorts pseudonyms (same sets, asserted) |
+| `recency_probe_vs_overall.csv` | byte-identical |
+| headline numbers | 760/668 rows, 255 experimental, rho +0.359/+0.457/+0.744, H1/H2/H3 -0.431/+0.1708/+0.5903 |
+
+**A CSV reader was silently corrupting the shipped ratings.** `deidentify.py`
+read every rating file with a plain `pd.read_csv` and wrote the frame straight
+back, so each dtype inference was an unreviewed edit of shipped data. Two bit:
+
+  * `chain` holds 1, 2 and blanks, so pandas made it float and wrote `2.0`
+    where the source said `2`;
+  * the session id **`5e836502` is valid scientific notation**, so it was
+    parsed as a float that overflows and written as **`inf`** -- one session's
+    identity gone, and with it half of the merge's dedup key
+    `(rater, session_id, track_id, stage, timestamp)`.
+
+Fixed with a single `read_csv` helper reading `dtype=str, keep_default_na=False`;
+nothing in the tool does arithmetic, so this is safe everywhere. All five
+scrubbers were regenerated. The longtrack and space shards now match the
+report's own pseudonymised copies **field for field** (the only remaining
+difference is CRLF vs LF, and LF is correct for the repo).
+
+The same round-trip had been dropping the 17th significant digit of every
+float column in three ALREADY-COMMITTED sections. In `texture_ratings.csv`
+that moved values by up to 4.5e-13. Regenerated
+`3.4.2/human_ratings/valence_ratings.csv` and `3.5/human_ratings/arc_ratings.csv`,
+`arc_valence_ratings.csv`, `texture_ratings.csv`; all sections still pass
+their smoke tests, so no published number moved.
+
+**Two defects found in the analysis code itself.**
+
+  * `build_results.py`'s docstring documented `--out-dir` and the script had
+    **no argparse at all**. Added, with `--ratings`.
+  * The peri-event split never used the stimulus metadata: it searched for
+    `transition_s` / `arc_boundary_s` / `boundary_s`, and the renderer writes
+    `transition_start_s`. No key ever matched, so the meta was treated as
+    absent and the report's peri-event numbers use a median-elapsed split. The
+    key list is corrected but the corrected path is **opt-in**
+    (`--use-meta-transitions`), so the default still reproduces the report.
+
+**One unexplained flake, and a reporting fix.** §3.3's smoke test failed once
+under `verify.py` and has passed every run since, standalone and under
+`verify.py`, and nothing in that section had changed. Cause unknown -- most
+likely transient on this shared host. What it exposed is real: `verify.py`
+reported only the LAST line of stdout, and a test that crashes mid-section
+leaves a section header there while the traceback goes to stderr and is
+discarded. It now prints the failing checks, or the tail of stderr when the
+test died. **If §3.3 fails again, the output will say why; treat a second
+occurrence as a real defect, not a flake.**
+
+**`verify.py` was scanning git-ignored files.** It flagged a generated
+`build_meta.json` under `data/`, which a fresh clone would never have. It now
+skips anything `git ls-files --others --ignored` reports.
+
+One real leak closed: `build_results.py` recorded the upstream HuggingFace
+dataset as `<account>/jamai-listening-ratings`, and the account handle is the
+author's.
 
 ## 16. §3.9's rating data, and which pull the report actually used
 
@@ -604,6 +713,6 @@ figures make the argument thin anyway, 1.5202 against 1.5194 nats. This is a
 factual error in Chapter 3 that the whole-report review missed.
 
 Also logged there, and **not** an error despite an earlier note saying so:
-`appendix_datasets.tex:33`'s `N=1` is the theta-KRR fitting set, R01 alone, and
-`human_grounding_and_retrieval.tex:19` already says so. The 9-rater figures are
-the separate reliability study.
+`appendix_datasets.tex:33`'s `N=1` is the theta-KRR fitting set -- **R03**, not
+R01 (see the correction in §12) -- and `human_grounding_and_retrieval.tex:19`
+already says so. The 9-rater figures are the separate reliability study.

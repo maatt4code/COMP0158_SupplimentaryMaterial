@@ -323,11 +323,23 @@ def dump(out, conds=None):
     c = conds or conditions()
     out = Path(out)
     out.parent.mkdir(parents=True, exist_ok=True)
+    # Condition dicts carry a RESOLVED absolute path to the impulse response,
+    # which is a build-host path and must not travel in a shipped sidecar.
+    # Record it the way the bank does: relative to weights/.
+    portable = {}
+    for cid, e in c.items():
+        e = dict(e)
+        if "path" in e:
+            try:
+                e["path"] = str(Path(e["path"]).relative_to(WEIGHTS))
+            except ValueError:
+                e["path"] = Path(e["path"]).name
+        portable[cid] = e
     out.write_text(json.dumps(
         dict(wet=WET, fade_in_s=FADE_IN_S, fade_out_s=FADE_OUT_S,
              fade_shape="cos^2, as the scheduler's bed-gain crossfades",
              ir_bank=IR_BANK.name, measured_bank=MEASURED_BANK.name,
-             conditions=c), indent=2))
+             conditions=portable), indent=2))
     return out
 
 

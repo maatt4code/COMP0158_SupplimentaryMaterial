@@ -100,6 +100,14 @@ scrub.
 | `longtrack/` | 12 session shards | `3.9_human_evaluation_and_protocols/human_ratings/` |
 | `space_components/` | 14 session shards + 2 merged outputs | `3.9_human_evaluation_and_protocols/human_ratings/` |
 
+**Superseded on migration.** This table lists the long-track SHARDS but no code
+to read them, which would have shipped the study's data with no way to
+recompute its result. Its analysis migrated too, from the report tree:
+`s14_longtrack_analysis.py` -> `train/analyse_longtrack.py` (the three
+contrasts and the mixed model) and `analyse_recency.py` -> `train/analyse_recency.py`
+(the recency test, which is the headline finding of the section). Neither was
+in this plan.
+
 #### Fragments, and the two traps in them
 
 The rating web apps wrote one CSV per boot, so a session that survived a
@@ -993,11 +1001,11 @@ Logged here so they reach the report.
 | 2026-09-06 | Conventions fixed (§1a): naming, structure, smoke test, dry run | done |
 | 2026-09-06 | 6a. **§3.3 migrated**: 3 train scripts, 1 inference module, smoke test (26 checks), README | done |
 | 2026-09-06 | 6a. §3.3 dry-run end to end on real NSynth; 8,269 notes matches the report | done |
-| | 6b. §3.4.1 surrogate-guided optimisation | not started |
-| | 6c. §3.4.2 human grounding and retrieval | not started |
-| | 6d. §3.5 transition dynamics | not started |
-| | 6e. §3.6 differentiable reverberation | not started |
-| | 6f. §3.7 melody generation | not started |
-| | 6g. §3.9 human evaluation and protocols | not started |
-| | 7. Licence and attribution split | not started |
-| | 8. Packaging extras | not started |
+| 2026-09-07 | 6b. **§3.4.1 migrated**: 10 train scripts, 5 weights, smoke test (63 checks), dry run bit-exact | done |
+| 2026-09-07 | 6c. **§3.4.2 migrated**: 6 train, 4 inference, 3 weights, smoke test (71 checks); alpha=0.096 and rho=0.337 exact | done |
+| 2026-09-07 | 6d. **§3.5 migrated**: 4 train, 3 inference, 3 weights, smoke test (87 checks); HSMM refit differs in no field | done |
+| 2026-09-07 | 6e. **§3.6 migrated**: 2 train, 2 inference, 2 re-keyed banks + 3 IRs, smoke test (60 checks); IR measurements exact | done |
+| 2026-09-07 | 6f. **§3.7 migrated**: 5 train, 4 inference, grammar + 3 checkpoints + anchor, smoke test (63 checks); parameter counts exact | done |
+| 2026-09-08 | 6g. **§3.9 migrated**: 4 train scripts, inference/ and weights/ empty-but-documented, 26 shards + 2 merged tables; all 11 tables, the longtrack JSON and the recency CSV reproduce the report | done |
+| 2026-09-08 | 7. **Licence and attribution split**: `LICENSE` (Apache 2.0, code only) and `ATTRIBUTION.md` written. Clean-clone install still to confirm | partly done |
+| 2026-09-08 | 8. **Packaging extras**: `code/verify.py` written and passing (smoke tests, identifier sweep, README command audit, checksums). Devcontainer / Dockerfile / CI job still to do | partly done |

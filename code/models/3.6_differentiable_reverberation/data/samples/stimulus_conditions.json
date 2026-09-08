@@ -21,7 +21,7 @@
       "category": "Nature",
       "tail_s": 0.294,
       "tone_hz": 2653.8,
-      "path": "/cs/student/project_msc/2025/dsml/myeung/COMP0158_SupplimentaryMaterial/code/models/3.6_differentiable_reverberation/weights/irs/Nature/FatMansMisery.wav",
+      "path": "irs/Nature/FatMansMisery.wav",
       "source": "measured IR (convolved)"
     },
     "brutalism": {
@@ -31,7 +31,7 @@
       "category": "Brutalism",
       "tail_s": 0.952,
       "tone_hz": 3036.9,
-      "path": "/cs/student/project_msc/2025/dsml/myeung/COMP0158_SupplimentaryMaterial/code/models/3.6_differentiable_reverberation/weights/irs/Brutalism/PepperCanyonHall.wav",
+      "path": "irs/Brutalism/PepperCanyonHall.wav",
       "source": "measured IR (convolved)"
     },
     "stairwell": {
@@ -41,7 +41,7 @@
       "category": "Stairwells",
       "tail_s": 2.388,
       "tone_hz": 2684.7,
-      "path": "/cs/student/project_msc/2025/dsml/myeung/COMP0158_SupplimentaryMaterial/code/models/3.6_differentiable_reverberation/weights/irs/Stairwells/CCRMAStairwell.wav",
+      "path": "irs/Stairwells/CCRMAStairwell.wav",
       "source": "measured IR (convolved)"
     },
     "long_bright": {

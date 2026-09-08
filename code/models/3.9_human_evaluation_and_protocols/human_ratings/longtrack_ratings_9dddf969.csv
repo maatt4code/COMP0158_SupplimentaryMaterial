@@ -2,10 +2,10 @@ timestamp,rater,session_id,block,order_index,track_id,trajectory,chain,condition
 2026-07-11T21:31:13,R03,5211e818,-1,-1,lt_practice,practice,,practice,probe1,15.0,46.7,0.0
 2026-07-11T21:31:20,R03,5211e818,-1,-1,lt_practice,practice,,practice,probe2,35.0,54.0,1.0
 2026-07-11T21:31:32,R03,5211e818,-1,-1,lt_practice,practice,,practice,overall,60.0,65.5,1.0
-2026-07-11T21:32:31,R03,5211e818,0,0,lt_down_c2_noarc,down,2.0,noarc,probe1,42.0,48.9,-1.0
-2026-07-11T21:33:00,R03,5211e818,0,0,lt_down_c2_noarc,down,2.0,noarc,probe2,70.0,77.8,1.0
-2026-07-11T21:33:39,R03,5211e818,0,0,lt_down_c2_noarc,down,2.0,noarc,probe3,112.0,116.0,-1.0
-2026-07-11T21:33:45,R03,5211e818,0,0,lt_down_c2_noarc,down,2.0,noarc,overall,120.0,122.3,-1.0
+2026-07-11T21:32:31,R03,5211e818,0,0,lt_down_c2_noarc,down,2,noarc,probe1,42.0,48.9,-1.0
+2026-07-11T21:33:00,R03,5211e818,0,0,lt_down_c2_noarc,down,2,noarc,probe2,70.0,77.8,1.0
+2026-07-11T21:33:39,R03,5211e818,0,0,lt_down_c2_noarc,down,2,noarc,probe3,112.0,116.0,-1.0
+2026-07-11T21:33:45,R03,5211e818,0,0,lt_down_c2_noarc,down,2,noarc,overall,120.0,122.3,-1.0
 2026-07-12T11:23:16,R03,fd15c4dc,-1,-1,lt_practice,practice,,practice,probe1,15.0,19.2,1.0
 2026-07-12T11:23:36,R03,fd15c4dc,-1,-1,lt_practice,practice,,practice,probe2,35.0,39.0,-1.0
 2026-07-12T11:23:59,R03,fd15c4dc,-1,-1,lt_practice,practice,,practice,overall,60.0,62.3,-1.0
