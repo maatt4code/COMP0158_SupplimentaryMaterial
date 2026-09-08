@@ -52,8 +52,15 @@ def check(name, ok, detail=""):
 
 
 def sections():
-    return sorted(p for p in (CODE / "models").iterdir()
-                  if p.is_dir() and (p / "smoke_test.py").exists())
+    """Every directory carrying a smoke test -- the model sections AND the
+    conductor. The conductor is not under `models/`, and leaving it out of
+    this sweep would mean the one component a grader actually runs is the one
+    nothing verifies."""
+    found = sorted(p for p in (CODE / "models").iterdir()
+                   if p.is_dir() and (p / "smoke_test.py").exists())
+    if (CODE / "conductor" / "smoke_test.py").exists():
+        found.append(CODE / "conductor")
+    return found
 
 
 def run_smoke_tests():
@@ -173,6 +180,59 @@ def check_checksums():
         check(f"{manifest.relative_to(ROOT)}", not bad, str(bad))
 
 
+def check_conductor_copies():
+    """The conductor's engine copies must still match their section originals.
+
+    Decision 12 makes `conductor/` self-contained: it carries its own copy of
+    every inference module rather than importing across the tree, so the
+    directory can be lifted out and run. The price is drift -- a fix made in a
+    section silently fails to reach the app, and the app keeps working, which
+    is why nobody notices. This is the check that makes the duplication safe,
+    and without it decision 12 is a liability rather than a design.
+
+    Three ways to fail, and they are different problems:
+      * a copy edited in place -- the fix will be lost on the next re-copy;
+      * a source edited without re-copying -- the app is running old code;
+      * a source that has moved or gone -- the manifest is now fiction.
+    """
+    print("\n5. conductor engine copies match their sections")
+    manifest = CODE / "conductor" / "engine" / "COPIED_FROM"
+    if not manifest.exists():
+        print("  (no conductor engine yet)")
+        return
+    stale, edited, missing = [], [], []
+    n = 0
+    for line in manifest.read_text().splitlines():
+        line = line.strip()
+        if not line or line.startswith("#"):
+            continue
+        digest, name, src = line.split()
+        n += 1
+        copy, source = manifest.parent / name, CODE / src
+        if not copy.exists():
+            missing.append(f"{name} (copy)")
+            continue
+        if not source.exists():
+            missing.append(f"{src} (source)")
+            continue
+        copy_d = hashlib.sha256(copy.read_bytes()).hexdigest()
+        src_d = hashlib.sha256(source.read_bytes()).hexdigest()
+        if copy_d != digest:
+            edited.append(name)
+        elif src_d != digest:
+            stale.append(name)
+    check(f"all {n} copies are byte-identical to their source",
+          not (stale or edited or missing))
+    for name in edited:
+        print(f"        EDITED IN PLACE: engine/{name} -- edit the section "
+              f"original and re-copy, or the fix is lost")
+    for name in stale:
+        print(f"        STALE: engine/{name} -- its section original changed "
+              f"and the app is running the old code")
+    for name in missing:
+        print(f"        MISSING: {name}")
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--quick", action="store_true",
@@ -187,6 +247,7 @@ def main():
     check_names()
     check_readme_commands()
     check_checksums()
+    check_conductor_copies()
 
     print()
     if FAILED:

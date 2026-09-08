@@ -196,7 +196,7 @@ $E code/models/3.3_drone_synthesis_and_nsynth_prior/smoke_test.py   # expect exi
 |---|---|---|
 | 1 | 08-28 | The Bradley-Terry preference GP **stays in the conductor**, even though Chapter 3 does not describe it. The shipped system may do more than the report writes up. Do not let a tidy-up delete it. |
 | 2 | 08-28 | The conductor ships **no rating data**. Four boot-time fits become pre-computed weights. |
-| 3 | 08-28, 09-06 | **Bed audio ships**, with attribution. `LICENSE` covers code only; `ATTRIBUTION.md` governs `conductor/assets/`. |
+| 3 | 08-28, 09-06, **superseded 09-08 by 13** | ~~Bed audio ships, with attribution.~~ `LICENSE` covers code only; `ATTRIBUTION.md` governs `conductor/assets/`. |
 | 4 | 09-06 | **Layout**: section-numbered model directories, four subdirectories each. `conductor/` keeps its internal split, because that is what enforces the inference boundary. |
 | 5 | 09-06 | **All checkpoints ship**, runtime and training. Melody: all three transformers plus the Markov tables, because the UI offers a choice. Training: `judge_proxy.pt`, `judge_proxy_e0.pt`, `closed_loop_mapper.pt`, `inverse_cvae.pt`, `attn_retrieval.pt`, about 2.6 MB, so §4.1 and §4.2 are reproducible. None of those five is referenced in any conductor tree, so they must **not** be wired into `conductor/weights/`. |
 | 6 | 09-06 | **Rating CSVs ship, scrubbed, in their section's `human_ratings/`.** Staged raw first, never edited in place. |
@@ -205,6 +205,7 @@ $E code/models/3.3_drone_synthesis_and_nsynth_prior/smoke_test.py   # expect exi
 | 9 | 09-06 | **The measured timbre prior ships**, unchanged. `3.3/weights/timbre_prior/frames.npz`, 29 MB, sha256-verified identical to the source. Shipped at full float32 rather than halved to float16, so the artefact is bit-identical to the one that produced the results. §3.3 then runs with no NSynth download. |
 | 10 | 09-07 | **`code/README.md` ships.** It is rewritten from a migration plan into a reproduction guide addressed to a human grader and to a future Claude session: what each section does, how to run it, what it needs, what it produces. Consequence: it must **pass** the leak gate, so `--exclude=README.md` comes off, the five references to the private source tree go, and the banned strings it currently quotes as rules are re-expressed without naming them. |
 | 12 | 09-07 | **`conductor/` is SELF-CONTAINED.** It carries its OWN copy of every weight, parameter file and asset it loads, rather than importing or symlinking from `models/<section>/`. The directory is meant to stand alone: someone should be able to take `conductor/` and run it. Consequence: artefacts are duplicated on purpose (reverb banks and IRs, `preference_gp.npz`, `boundary_guard.json`, `hsmm_transitions.json`, `arc_types.json`, the melody checkpoints), and duplication can drift — so packaging must VERIFY the copies are byte-identical to the section originals, by checksum, and fail if they are not. |
+| 13 | 09-08 | **Bed audio: a demo subset ships, the full bank is fetched.** The beds are not original recordings -- they come from **ESC-50** (CC BY-NC) and **Emo-Soundscapes**, which the curation log records as the `esc50` and `emo` datasets. Redistributing a CC BY-NC corpus inside the submission is the wrong default when every other dataset here (NSynth, Essen) is documented and fetched rather than copied. So: one bed per `bed_type` ships with full per-file attribution, so the app demonstrates the layer out of the box and is never silent; the rest is fetched. `bed_bank.json` keys by the original filenames either way. |
 | 11 | 09-07 | **The melody-model discrepancy is not an error to fix.** All three transformers are offered in a UI drop-down, so deploying `L6_d128` does not contradict the parsimony argument for `L3_d128`. §10's live finding is closed; no report change. |
 
 ## 6. Verified — do not re-derive
@@ -322,6 +323,85 @@ the username. That is decision 8's stated exemption. Everything else must be
 clean.
 
 Then work `code/README.md` §2.3 for §3.4.1, following §1a's conventions.
+
+## 18. Conductor: the engine and weights layer is done
+
+The APP is not migrated yet. What is done is everything beneath it, and it is
+verified: `conductor/smoke_test.py`, 22 checks, all passing.
+
+**17 modules in `engine/`, and the self-containment claim is TESTED.** The
+smoke test strips the repo out of `sys.path` entirely before importing, so a
+module that reaches back into `code/` fails there rather than in a grader's
+clone. 15 are verbatim copies (12 inference modules + `ddsp_synth`, `device`,
+`loudness`); 2 are the conductor's own (`arranger.py`, `render_params.py`).
+Nothing imports `paths`.
+
+**Drift is now enforced, not hoped for.** `engine/COPIED_FROM` pins each copy
+to its source, and `verify.py` grew a check that separates the two failure
+modes: a copy edited in place (the fix is lost on the next re-copy) from a
+source edited without re-copying (the app is running old code). Both were
+deliberately induced and both were caught, then reverted -- a drift check that
+has never failed is not known to work.
+
+**`weights/` is 50 MB and self-contained**, including both labelled retrieval
+banks (20,000 anchors; verified free of identifiers and absolute paths) which
+no prior plan item had accounted for. Every weight loads and returns its
+documented number: guard tau 0.5898 / 0.5505, 230 arcs, anchor 4174.
+
+**`render_params.py`** extracts `apply_chord`, `HOLD_S`, `RAMP_CHOICES`,
+`RENDER_KW`, `PEAK_GUARD` from the training-side arc-pool builder. Completes
+§2.8c item 4; `aw_rms`/`AW_TARGET` were already in `common/loudness.py`.
+
+**`arranger.py`** migrated from `step02_arranger.py`: unused `import paths`
+and `import os` dropped, three identifiers removed, sys.path bootstrap made
+section-local. **It renders BIT-IDENTICALLY to the original** -- same 96,000
+samples, `np.array_equal` true -- so the conductor's voice is unchanged.
+
+### Three defects, all on paths the module-scope import check cannot see
+
+The §3.7 smoke test parses module-scope imports with `ast`. All three of these
+hid in DEFERRED imports inside functions, or in a module-scope call, so a
+clean smoke test proved nothing about them.
+
+1. **`melody_markov.render_via_arranger` bootstrapped the ORIGINAL tree** --
+   `Phase2/01_MIDI_DDSP`, `Phase2/the reference implementation`,
+   `soundscape_synth`, `s07_arc_pool`, `step02_arranger`. In a packaged clone
+   that raises `ImportError` the first time melody audio is rendered. Now
+   imports `arranger` / `render_params` / `device` with a message naming what
+   is missing, the same pattern `melody_transformer` already used.
+
+2. **The conductor was silently voicing the WRONG melody anchor.**
+   `DEFAULT_MELODY_ANCHOR = pick_melody_anchor()` ran at MODULE SCOPE and read
+   Section 3.4.2's `valence_ratings.csv`. The conductor ships no rating data,
+   so it did not fail -- it fell back to 13161 while the section, the frozen
+   weight and the report all say **4174**. 13161 is the FOURTH-ranked
+   candidate with `swell_depth` 0.567 against 4174's 0.011, so the deployed
+   melody wobbled in exactly the way the gentleness filter exists to prevent,
+   and nothing reported a problem. `pick_melody_anchor` now reads
+   `weights/melody_anchor.json` FIRST and refits only if it is absent. Both
+   trees now resolve 4174, asserted in the smoke test.
+
+3. **`DecoupledEngine()` was still being called with no arguments** in
+   `melody_markov` and `melody_transformer`. The original resolved its banks
+   through `paths.repo_data(...)`; the migration correctly made
+   `bank_indexes` explicit, and these two call sites were not updated. Same
+   audio path, same invisibility. **Still to fix -- the app must pass the
+   banks in.**
+
+Also fixed: `arc_policy.load_pool()` looked only in `human_ratings/`, which
+the conductor must never have. It now checks `weights/` first, so ONE copy of
+the module serves both trees -- which is the precondition for the copies
+staying byte-identical. And `build_essen_dataset.py` documented a build command
+in the original tree that does not ship.
+
+### Next, in order
+
+1. `engine/bed_bank.py` + the bed-bank pre-fit (§2.8d).
+2. Fix the two `DecoupledEngine()` call sites once the app can supply banks.
+3. `app.py`, `UI/`, `runtime/` -- about 10,500 lines.
+4. Guard selection by label space; `HybridBoundaryGuard` is now `BoundaryGuard`.
+5. Bed assets: a per-`bed_type` demo subset ships with attribution, the full
+   bank is fetched (decision 13).
 
 ## 17. §3.9 migrated, and a CSV reader that was destroying data
 

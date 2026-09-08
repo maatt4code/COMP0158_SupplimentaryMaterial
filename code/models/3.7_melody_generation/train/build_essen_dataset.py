@@ -5,12 +5,13 @@ two ways to supply them: the phrase shapes already fitted by
 build_markov_grammar.py, or a directory of MIDI stems.
 
 Supports TWO data generation pipelines:
-1. Essen Folksong Corpus (built via `python SideProjects/melodic_drone/essen_model.py --build`).
-2. Custom MIDI Stems (parses a directory of .mid / .midi files from ambient compositions).
+1. Essen Folksong Corpus, via the grammar `build_markov_grammar.py` already
+   fitted -- so run that first, or pass `--essen-root`.
+2. Custom MIDI stems: a directory of .mid / .midi files.
 
 Usage:
-  python dataset_builder.py --essen                     # Parses pre-bundled Essen corpus
-  python dataset_builder.py --midi_dir ./my_midi_files   # Parses custom ambient MIDI directory
+  python build_essen_dataset.py --essen                  # uses the fitted grammar
+  python build_essen_dataset.py --midi_dir ./my_midi     # custom MIDI directory
 """
 
 import os

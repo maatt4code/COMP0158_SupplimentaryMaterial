@@ -1,0 +1,9 @@
+{
+  "n_layers": 6,
+  "d_model": 256,
+  "n_heads": 8,
+  "d_ffn": 1024,
+  "vocab_size": 35,
+  "param_count": 4773667,
+  "best_val_loss": 1.5390921331848426
+}

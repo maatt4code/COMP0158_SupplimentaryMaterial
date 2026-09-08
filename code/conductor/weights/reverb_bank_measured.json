@@ -1,0 +1,797 @@
+{
+  "generated": "2026-07-25T01:38:51",
+  "sr": 16000,
+  "n_tracks": 76,
+  "method": "joint DDSP extraction (HarmonicSynth + ExpDecayReverb, MSS loss)",
+  "category_summary": {
+    "short_mid": {
+      "n": 5,
+      "decay_median": 0.909,
+      "damping_median": 1542.1
+    },
+    "long_air": {
+      "n": 2,
+      "decay_median": 5.674,
+      "damping_median": 5079.1
+    },
+    "long_mid": {
+      "n": 16,
+      "decay_median": 4.879,
+      "damping_median": 2132.0
+    },
+    "long_bright": {
+      "n": 46,
+      "decay_median": 5.053,
+      "damping_median": 2434.3
+    },
+    "long_dark": {
+      "n": 7,
+      "decay_median": 5.163,
+      "damping_median": 438.4
+    }
+  },
+  "tracks": [
+    {
+      "id": "m000",
+      "category": "long_bright",
+      "fit_decay_s": 4.765,
+      "fit_damping_hz": 535.8,
+      "fit_wet_mix": 0.887,
+      "fit_f0_hz": 211.0,
+      "loss0": 11.244,
+      "final_loss": 10.741
+    },
+    {
+      "id": "m001",
+      "category": "long_bright",
+      "fit_decay_s": 5.636,
+      "fit_damping_hz": 5659.5,
+      "fit_wet_mix": 0.66,
+      "fit_f0_hz": 37.5,
+      "loss0": 11.265,
+      "final_loss": 8.365
+    },
+    {
+      "id": "m002",
+      "category": "long_bright",
+      "fit_decay_s": 5.612,
+      "fit_damping_hz": 5000.5,
+      "fit_wet_mix": 0.894,
+      "fit_f0_hz": 318.7,
+      "loss0": 9.167,
+      "final_loss": 6.849
+    },
+    {
+      "id": "m003",
+      "category": "long_bright",
+      "fit_decay_s": 5.615,
+      "fit_damping_hz": 7113.4,
+      "fit_wet_mix": 0.948,
+      "fit_f0_hz": 59.2,
+      "loss0": 14.329,
+      "final_loss": 10.093
+    },
+    {
+      "id": "m004",
+      "category": "long_bright",
+      "fit_decay_s": 5.07,
+      "fit_damping_hz": 1409.6,
+      "fit_wet_mix": 0.555,
+      "fit_f0_hz": 180.6,
+      "loss0": 12.494,
+      "final_loss": 10.066
+    },
+    {
+      "id": "m005",
+      "category": "long_bright",
+      "fit_decay_s": 4.366,
+      "fit_damping_hz": 6156.6,
+      "fit_wet_mix": 0.871,
+      "fit_f0_hz": 57.2,
+      "loss0": 11.722,
+      "final_loss": 6.773
+    },
+    {
+      "id": "m006",
+      "category": "long_bright",
+      "fit_decay_s": 4.978,
+      "fit_damping_hz": 5626.7,
+      "fit_wet_mix": 0.703,
+      "fit_f0_hz": 33.2,
+      "loss0": 10.187,
+      "final_loss": 7.246
+    },
+    {
+      "id": "m007",
+      "category": "long_bright",
+      "fit_decay_s": 4.79,
+      "fit_damping_hz": 7193.5,
+      "fit_wet_mix": 0.416,
+      "fit_f0_hz": 64.4,
+      "loss0": 11.172,
+      "final_loss": 6.867
+    },
+    {
+      "id": "m008",
+      "category": "long_bright",
+      "fit_decay_s": 4.096,
+      "fit_damping_hz": 422.7,
+      "fit_wet_mix": 0.761,
+      "fit_f0_hz": 85.4,
+      "loss0": 10.273,
+      "final_loss": 7.788
+    },
+    {
+      "id": "m009",
+      "category": "long_bright",
+      "fit_decay_s": 5.092,
+      "fit_damping_hz": 5752.1,
+      "fit_wet_mix": 0.637,
+      "fit_f0_hz": 44.4,
+      "loss0": 10.553,
+      "final_loss": 6.943
+    },
+    {
+      "id": "m010",
+      "category": "long_bright",
+      "fit_decay_s": 5.225,
+      "fit_damping_hz": 5583.0,
+      "fit_wet_mix": 0.517,
+      "fit_f0_hz": 61.0,
+      "loss0": 9.566,
+      "final_loss": 6.384
+    },
+    {
+      "id": "m011",
+      "category": "long_bright",
+      "fit_decay_s": 5.223,
+      "fit_damping_hz": 5627.8,
+      "fit_wet_mix": 0.582,
+      "fit_f0_hz": 71.6,
+      "loss0": 10.636,
+      "final_loss": 5.884
+    },
+    {
+      "id": "m012",
+      "category": "long_bright",
+      "fit_decay_s": 4.46,
+      "fit_damping_hz": 3844.9,
+      "fit_wet_mix": 0.481,
+      "fit_f0_hz": 160.3,
+      "loss0": 9.94,
+      "final_loss": 5.738
+    },
+    {
+      "id": "m013",
+      "category": "long_bright",
+      "fit_decay_s": 5.554,
+      "fit_damping_hz": 7117.7,
+      "fit_wet_mix": 0.881,
+      "fit_f0_hz": 94.2,
+      "loss0": 16.121,
+      "final_loss": 10.623
+    },
+    {
+      "id": "m014",
+      "category": "long_bright",
+      "fit_decay_s": 5.329,
+      "fit_damping_hz": 372.5,
+      "fit_wet_mix": 0.454,
+      "fit_f0_hz": 82.8,
+      "loss0": 9.068,
+      "final_loss": 6.699
+    },
+    {
+      "id": "m015",
+      "category": "long_bright",
+      "fit_decay_s": 4.618,
+      "fit_damping_hz": 2903.7,
+      "fit_wet_mix": 0.686,
+      "fit_f0_hz": 137.9,
+      "loss0": 9.741,
+      "final_loss": 7.27
+    },
+    {
+      "id": "m016",
+      "category": "long_bright",
+      "fit_decay_s": 5.341,
+      "fit_damping_hz": 4360.6,
+      "fit_wet_mix": 0.809,
+      "fit_f0_hz": 183.6,
+      "loss0": 8.784,
+      "final_loss": 6.737
+    },
+    {
+      "id": "m017",
+      "category": "long_bright",
+      "fit_decay_s": 4.988,
+      "fit_damping_hz": 5066.1,
+      "fit_wet_mix": 0.467,
+      "fit_f0_hz": 133.2,
+      "loss0": 9.181,
+      "final_loss": 6.517
+    },
+    {
+      "id": "m018",
+      "category": "long_bright",
+      "fit_decay_s": 4.664,
+      "fit_damping_hz": 725.0,
+      "fit_wet_mix": 0.622,
+      "fit_f0_hz": 97.5,
+      "loss0": 8.158,
+      "final_loss": 6.447
+    },
+    {
+      "id": "m019",
+      "category": "long_bright",
+      "fit_decay_s": 4.707,
+      "fit_damping_hz": 814.7,
+      "fit_wet_mix": 0.884,
+      "fit_f0_hz": 179.2,
+      "loss0": 11.769,
+      "final_loss": 9.54
+    },
+    {
+      "id": "m020",
+      "category": "long_bright",
+      "fit_decay_s": 5.012,
+      "fit_damping_hz": 2917.9,
+      "fit_wet_mix": 0.747,
+      "fit_f0_hz": 159.1,
+      "loss0": 9.187,
+      "final_loss": 7.847
+    },
+    {
+      "id": "m021",
+      "category": "long_bright",
+      "fit_decay_s": 5.025,
+      "fit_damping_hz": 3950.5,
+      "fit_wet_mix": 0.457,
+      "fit_f0_hz": 115.8,
+      "loss0": 8.826,
+      "final_loss": 7.627
+    },
+    {
+      "id": "m022",
+      "category": "long_bright",
+      "fit_decay_s": 6.019,
+      "fit_damping_hz": 531.3,
+      "fit_wet_mix": 0.757,
+      "fit_f0_hz": 121.4,
+      "loss0": 14.324,
+      "final_loss": 10.924
+    },
+    {
+      "id": "m023",
+      "category": "long_bright",
+      "fit_decay_s": 5.138,
+      "fit_damping_hz": 751.2,
+      "fit_wet_mix": 0.578,
+      "fit_f0_hz": 94.8,
+      "loss0": 13.849,
+      "final_loss": 11.027
+    },
+    {
+      "id": "m024",
+      "category": "long_bright",
+      "fit_decay_s": 5.018,
+      "fit_damping_hz": 3545.8,
+      "fit_wet_mix": 0.451,
+      "fit_f0_hz": 79.3,
+      "loss0": 9.369,
+      "final_loss": 7.406
+    },
+    {
+      "id": "m025",
+      "category": "long_bright",
+      "fit_decay_s": 5.124,
+      "fit_damping_hz": 3874.6,
+      "fit_wet_mix": 0.571,
+      "fit_f0_hz": 48.2,
+      "loss0": 10.281,
+      "final_loss": 7.659
+    },
+    {
+      "id": "m026",
+      "category": "long_bright",
+      "fit_decay_s": 4.74,
+      "fit_damping_hz": 544.0,
+      "fit_wet_mix": 0.948,
+      "fit_f0_hz": 322.0,
+      "loss0": 14.655,
+      "final_loss": 11.658
+    },
+    {
+      "id": "m027",
+      "category": "long_bright",
+      "fit_decay_s": 4.316,
+      "fit_damping_hz": 641.1,
+      "fit_wet_mix": 0.526,
+      "fit_f0_hz": 89.2,
+      "loss0": 12.322,
+      "final_loss": 8.746
+    },
+    {
+      "id": "m028",
+      "category": "long_bright",
+      "fit_decay_s": 4.593,
+      "fit_damping_hz": 665.1,
+      "fit_wet_mix": 0.703,
+      "fit_f0_hz": 79.9,
+      "loss0": 11.456,
+      "final_loss": 8.371
+    },
+    {
+      "id": "m029",
+      "category": "long_bright",
+      "fit_decay_s": 5.062,
+      "fit_damping_hz": 558.3,
+      "fit_wet_mix": 0.803,
+      "fit_f0_hz": 158.9,
+      "loss0": 13.373,
+      "final_loss": 9.717
+    },
+    {
+      "id": "m030",
+      "category": "long_bright",
+      "fit_decay_s": 4.939,
+      "fit_damping_hz": 892.8,
+      "fit_wet_mix": 0.734,
+      "fit_f0_hz": 99.1,
+      "loss0": 11.47,
+      "final_loss": 8.571
+    },
+    {
+      "id": "m031",
+      "category": "long_bright",
+      "fit_decay_s": 5.471,
+      "fit_damping_hz": 360.5,
+      "fit_wet_mix": 0.888,
+      "fit_f0_hz": 192.5,
+      "loss0": 7.839,
+      "final_loss": 7.143
+    },
+    {
+      "id": "m032",
+      "category": "long_bright",
+      "fit_decay_s": 4.772,
+      "fit_damping_hz": 5577.5,
+      "fit_wet_mix": 0.871,
+      "fit_f0_hz": 65.5,
+      "loss0": 12.295,
+      "final_loss": 8.93
+    },
+    {
+      "id": "m033",
+      "category": "long_bright",
+      "fit_decay_s": 4.889,
+      "fit_damping_hz": 169.6,
+      "fit_wet_mix": 0.829,
+      "fit_f0_hz": 393.9,
+      "loss0": 13.444,
+      "final_loss": 10.149
+    },
+    {
+      "id": "m034",
+      "category": "long_bright",
+      "fit_decay_s": 5.213,
+      "fit_damping_hz": 6079.0,
+      "fit_wet_mix": 0.826,
+      "fit_f0_hz": 115.2,
+      "loss0": 14.785,
+      "final_loss": 10.405
+    },
+    {
+      "id": "m035",
+      "category": "long_bright",
+      "fit_decay_s": 4.971,
+      "fit_damping_hz": 6579.0,
+      "fit_wet_mix": 0.61,
+      "fit_f0_hz": 49.3,
+      "loss0": 11.738,
+      "final_loss": 7.472
+    },
+    {
+      "id": "m036",
+      "category": "long_bright",
+      "fit_decay_s": 5.481,
+      "fit_damping_hz": 572.3,
+      "fit_wet_mix": 0.753,
+      "fit_f0_hz": 200.5,
+      "loss0": 15.084,
+      "final_loss": 12.168
+    },
+    {
+      "id": "m037",
+      "category": "long_bright",
+      "fit_decay_s": 4.525,
+      "fit_damping_hz": 532.9,
+      "fit_wet_mix": 0.531,
+      "fit_f0_hz": 80.1,
+      "loss0": 10.729,
+      "final_loss": 7.4
+    },
+    {
+      "id": "m038",
+      "category": "long_bright",
+      "fit_decay_s": 5.815,
+      "fit_damping_hz": 7149.3,
+      "fit_wet_mix": 0.969,
+      "fit_f0_hz": 73.7,
+      "loss0": 15.596,
+      "final_loss": 10.468
+    },
+    {
+      "id": "m039",
+      "category": "long_bright",
+      "fit_decay_s": 5.511,
+      "fit_damping_hz": 469.8,
+      "fit_wet_mix": 0.582,
+      "fit_f0_hz": 80.4,
+      "loss0": 10.854,
+      "final_loss": 9.359
+    },
+    {
+      "id": "m040",
+      "category": "long_bright",
+      "fit_decay_s": 4.912,
+      "fit_damping_hz": 778.8,
+      "fit_wet_mix": 0.914,
+      "fit_f0_hz": 257.6,
+      "loss0": 15.783,
+      "final_loss": 13.383
+    },
+    {
+      "id": "m041",
+      "category": "long_bright",
+      "fit_decay_s": 5.129,
+      "fit_damping_hz": 5250.3,
+      "fit_wet_mix": 0.624,
+      "fit_f0_hz": 67.2,
+      "loss0": 10.25,
+      "final_loss": 6.228
+    },
+    {
+      "id": "m042",
+      "category": "long_bright",
+      "fit_decay_s": 5.181,
+      "fit_damping_hz": 470.7,
+      "fit_wet_mix": 0.861,
+      "fit_f0_hz": 228.8,
+      "loss0": 18.535,
+      "final_loss": 11.914
+    },
+    {
+      "id": "m043",
+      "category": "long_bright",
+      "fit_decay_s": 5.045,
+      "fit_damping_hz": 570.6,
+      "fit_wet_mix": 0.907,
+      "fit_f0_hz": 248.6,
+      "loss0": 15.991,
+      "final_loss": 11.949
+    },
+    {
+      "id": "m044",
+      "category": "long_bright",
+      "fit_decay_s": 5.159,
+      "fit_damping_hz": 1965.0,
+      "fit_wet_mix": 0.734,
+      "fit_f0_hz": 220.1,
+      "loss0": 13.536,
+      "final_loss": 6.441
+    },
+    {
+      "id": "m045",
+      "category": "long_bright",
+      "fit_decay_s": 5.267,
+      "fit_damping_hz": 881.4,
+      "fit_wet_mix": 0.842,
+      "fit_f0_hz": 103.8,
+      "loss0": 16.508,
+      "final_loss": 10.801
+    },
+    {
+      "id": "m046",
+      "category": "long_dark",
+      "fit_decay_s": 5.183,
+      "fit_damping_hz": 5098.1,
+      "fit_wet_mix": 0.603,
+      "fit_f0_hz": 98.3,
+      "loss0": 11.23,
+      "final_loss": 8.565
+    },
+    {
+      "id": "m047",
+      "category": "long_dark",
+      "fit_decay_s": 4.174,
+      "fit_damping_hz": 438.4,
+      "fit_wet_mix": 0.963,
+      "fit_f0_hz": 99.2,
+      "loss0": 10.735,
+      "final_loss": 9.26
+    },
+    {
+      "id": "m048",
+      "category": "long_dark",
+      "fit_decay_s": 5.163,
+      "fit_damping_hz": 1756.9,
+      "fit_wet_mix": 0.874,
+      "fit_f0_hz": 63.9,
+      "loss0": 14.013,
+      "final_loss": 7.201
+    },
+    {
+      "id": "m049",
+      "category": "long_dark",
+      "fit_decay_s": 4.059,
+      "fit_damping_hz": 210.4,
+      "fit_wet_mix": 0.809,
+      "fit_f0_hz": 173.8,
+      "loss0": 11.564,
+      "final_loss": 8.502
+    },
+    {
+      "id": "m050",
+      "category": "long_dark",
+      "fit_decay_s": 4.892,
+      "fit_damping_hz": 320.7,
+      "fit_wet_mix": 0.807,
+      "fit_f0_hz": 164.9,
+      "loss0": 13.493,
+      "final_loss": 8.738
+    },
+    {
+      "id": "m051",
+      "category": "long_dark",
+      "fit_decay_s": 5.416,
+      "fit_damping_hz": 6956.0,
+      "fit_wet_mix": 0.805,
+      "fit_f0_hz": 54.3,
+      "loss0": 13.155,
+      "final_loss": 8.53
+    },
+    {
+      "id": "m052",
+      "category": "long_dark",
+      "fit_decay_s": 5.452,
+      "fit_damping_hz": 311.8,
+      "fit_wet_mix": 0.959,
+      "fit_f0_hz": 282.1,
+      "loss0": 14.042,
+      "final_loss": 10.332
+    },
+    {
+      "id": "m053",
+      "category": "long_mid",
+      "fit_decay_s": 5.118,
+      "fit_damping_hz": 403.1,
+      "fit_wet_mix": 0.712,
+      "fit_f0_hz": 125.7,
+      "loss0": 14.04,
+      "final_loss": 9.786
+    },
+    {
+      "id": "m054",
+      "category": "long_mid",
+      "fit_decay_s": 5.218,
+      "fit_damping_hz": 5127.5,
+      "fit_wet_mix": 0.644,
+      "fit_f0_hz": 92.3,
+      "loss0": 12.005,
+      "final_loss": 8.528
+    },
+    {
+      "id": "m055",
+      "category": "long_mid",
+      "fit_decay_s": 4.818,
+      "fit_damping_hz": 383.8,
+      "fit_wet_mix": 0.841,
+      "fit_f0_hz": 117.8,
+      "loss0": 11.924,
+      "final_loss": 8.009
+    },
+    {
+      "id": "m056",
+      "category": "long_mid",
+      "fit_decay_s": 4.963,
+      "fit_damping_hz": 907.3,
+      "fit_wet_mix": 0.957,
+      "fit_f0_hz": 528.1,
+      "loss0": 16.897,
+      "final_loss": 14.47
+    },
+    {
+      "id": "m057",
+      "category": "long_mid",
+      "fit_decay_s": 5.397,
+      "fit_damping_hz": 4935.3,
+      "fit_wet_mix": 0.867,
+      "fit_f0_hz": 305.4,
+      "loss0": 11.048,
+      "final_loss": 7.968
+    },
+    {
+      "id": "m058",
+      "category": "long_mid",
+      "fit_decay_s": 4.842,
+      "fit_damping_hz": 841.1,
+      "fit_wet_mix": 0.757,
+      "fit_f0_hz": 127.3,
+      "loss0": 10.475,
+      "final_loss": 8.767
+    },
+    {
+      "id": "m059",
+      "category": "long_mid",
+      "fit_decay_s": 4.121,
+      "fit_damping_hz": 359.9,
+      "fit_wet_mix": 0.763,
+      "fit_f0_hz": 148.9,
+      "loss0": 10.655,
+      "final_loss": 8.317
+    },
+    {
+      "id": "m060",
+      "category": "long_mid",
+      "fit_decay_s": 4.663,
+      "fit_damping_hz": 283.5,
+      "fit_wet_mix": 0.812,
+      "fit_f0_hz": 117.4,
+      "loss0": 10.615,
+      "final_loss": 8.06
+    },
+    {
+      "id": "m061",
+      "category": "long_mid",
+      "fit_decay_s": 5.007,
+      "fit_damping_hz": 4930.2,
+      "fit_wet_mix": 0.538,
+      "fit_f0_hz": 52.8,
+      "loss0": 10.551,
+      "final_loss": 6.772
+    },
+    {
+      "id": "m062",
+      "category": "long_mid",
+      "fit_decay_s": 4.873,
+      "fit_damping_hz": 4691.4,
+      "fit_wet_mix": 0.674,
+      "fit_f0_hz": 144.1,
+      "loss0": 14.677,
+      "final_loss": 9.914
+    },
+    {
+      "id": "m063",
+      "category": "long_mid",
+      "fit_decay_s": 4.884,
+      "fit_damping_hz": 6046.6,
+      "fit_wet_mix": 0.699,
+      "fit_f0_hz": 63.5,
+      "loss0": 11.387,
+      "final_loss": 8.111
+    },
+    {
+      "id": "m064",
+      "category": "long_mid",
+      "fit_decay_s": 4.541,
+      "fit_damping_hz": 119.4,
+      "fit_wet_mix": 0.894,
+      "fit_f0_hz": 243.2,
+      "loss0": 9.924,
+      "final_loss": 8.959
+    },
+    {
+      "id": "m065",
+      "category": "long_mid",
+      "fit_decay_s": 4.916,
+      "fit_damping_hz": 490.1,
+      "fit_wet_mix": 0.797,
+      "fit_f0_hz": 97.4,
+      "loss0": 9.864,
+      "final_loss": 8.068
+    },
+    {
+      "id": "m066",
+      "category": "long_mid",
+      "fit_decay_s": 4.798,
+      "fit_damping_hz": 3356.7,
+      "fit_wet_mix": 0.69,
+      "fit_f0_hz": 103.2,
+      "loss0": 10.625,
+      "final_loss": 7.003
+    },
+    {
+      "id": "m067",
+      "category": "long_mid",
+      "fit_decay_s": 5.485,
+      "fit_damping_hz": 5821.9,
+      "fit_wet_mix": 0.848,
+      "fit_f0_hz": 279.5,
+      "loss0": 16.63,
+      "final_loss": 12.446
+    },
+    {
+      "id": "m068",
+      "category": "long_mid",
+      "fit_decay_s": 4.494,
+      "fit_damping_hz": 5676.8,
+      "fit_wet_mix": 0.498,
+      "fit_f0_hz": 62.6,
+      "loss0": 10.113,
+      "final_loss": 6.835
+    },
+    {
+      "id": "m069",
+      "category": "short_mid",
+      "fit_decay_s": 4.779,
+      "fit_damping_hz": 1103.3,
+      "fit_wet_mix": 0.88,
+      "fit_f0_hz": 336.1,
+      "loss0": 14.089,
+      "final_loss": 11.315
+    },
+    {
+      "id": "m070",
+      "category": "short_mid",
+      "fit_decay_s": 0.909,
+      "fit_damping_hz": 423.1,
+      "fit_wet_mix": 0.561,
+      "fit_f0_hz": 89.2,
+      "loss0": 13.728,
+      "final_loss": 11.689
+    },
+    {
+      "id": "m071",
+      "category": "short_mid",
+      "fit_decay_s": 2.066,
+      "fit_damping_hz": 6844.8,
+      "fit_wet_mix": 0.648,
+      "fit_f0_hz": 33.3,
+      "loss0": 13.756,
+      "final_loss": 10.754
+    },
+    {
+      "id": "m072",
+      "category": "short_mid",
+      "fit_decay_s": 0.79,
+      "fit_damping_hz": 1696.6,
+      "fit_wet_mix": 0.163,
+      "fit_f0_hz": 67.0,
+      "loss0": 14.825,
+      "final_loss": 6.421
+    },
+    {
+      "id": "m073",
+      "category": "short_mid",
+      "fit_decay_s": 0.806,
+      "fit_damping_hz": 1542.1,
+      "fit_wet_mix": 0.162,
+      "fit_f0_hz": 79.7,
+      "loss0": 14.658,
+      "final_loss": 6.499
+    },
+    {
+      "id": "m074",
+      "category": "long_air",
+      "fit_decay_s": 5.776,
+      "fit_damping_hz": 7052.7,
+      "fit_wet_mix": 0.846,
+      "fit_f0_hz": 65.8,
+      "loss0": 16.284,
+      "final_loss": 12.432
+    },
+    {
+      "id": "m075",
+      "category": "long_air",
+      "fit_decay_s": 5.572,
+      "fit_damping_hz": 3105.5,
+      "fit_wet_mix": 0.436,
+      "fit_f0_hz": 58.5,
+      "loss0": 9.22,
+      "final_loss": 6.006
+    }
+  ],
+  "note": "fit_decay_s is the reliable number; wet_mix/damping are DEGENERATE with the synth's own gain/tone in blind joint separation (verified in --selftest). Segment = loudest 4s window per track, mono 16000Hz.",
+  "category_rekey_rule": "categories are named from their own measured medians: tail bucket (short <1.5s, mid <3.5s, long) and tone bucket (dark <1000Hz, warm <2000Hz, bright <3000Hz, air) of the fitted decay and damping. Source recording identity is not part of the measurement and is not retained."
+}
