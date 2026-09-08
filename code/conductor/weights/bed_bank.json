@@ -1,0 +1,256 @@
+{
+ "beds": [
+  {
+   "bed_file": "r_1indicator103136_7037-hq.wav",
+   "dataset": "emo",
+   "bed_type": "rain",
+   "path": "r_1indicator103136_7037-hq.wav",
+   "va": [
+    -0.164056059,
+    -0.065127782
+   ],
+   "gain_db": -4.0,
+   "mode": "constant",
+   "approved_drones": [],
+   "resolved": true
+  },
+  {
+   "bed_file": "2-39945-A-19.wav",
+   "dataset": "esc50",
+   "bed_type": "thunderstorm",
+   "path": "2-39945-A-19.wav",
+   "va": null,
+   "gain_db": -12.0,
+   "mode": "duck",
+   "approved_drones": [
+    "vwander_061"
+   ],
+   "resolved": true
+  },
+  {
+   "bed_file": "1-51037-A-16.wav",
+   "dataset": "esc50",
+   "bed_type": "wind",
+   "path": "1-51037-A-16.wav",
+   "va": null,
+   "gain_db": -12.0,
+   "mode": "constant",
+   "approved_drones": [
+    "vwander_053"
+   ],
+   "resolved": true
+  },
+  {
+   "bed_file": "4-161519-A-19.wav",
+   "dataset": "esc50",
+   "bed_type": "thunderstorm",
+   "path": "4-161519-A-19.wav",
+   "va": null,
+   "gain_db": -12.0,
+   "mode": "constant",
+   "approved_drones": [],
+   "resolved": true
+  },
+  {
+   "bed_file": "5-156999-B-19.wav",
+   "dataset": "esc50",
+   "bed_type": "thunderstorm",
+   "path": "5-156999-B-19.wav",
+   "va": null,
+   "gain_db": -12.0,
+   "mode": "constant",
+   "approved_drones": [],
+   "resolved": true
+  },
+  {
+   "bed_file": "r_0society25823_21830-hq.wav",
+   "dataset": "emo",
+   "bed_type": "rain",
+   "path": "r_0society25823_21830-hq.wav",
+   "va": [
+    0.780708986,
+    -0.694971146
+   ],
+   "gain_db": -12.0,
+   "mode": "constant",
+   "approved_drones": [],
+   "resolved": true
+  },
+  {
+   "bed_file": "5-208810-A-11.wav",
+   "dataset": "esc50",
+   "bed_type": "sea_waves",
+   "path": "5-208810-A-11.wav",
+   "va": null,
+   "gain_db": -12.0,
+   "mode": "duck",
+   "approved_drones": [],
+   "resolved": true
+  },
+  {
+   "bed_file": "4-182613-B-11.wav",
+   "dataset": "esc50",
+   "bed_type": "sea_waves",
+   "path": "4-182613-B-11.wav",
+   "va": null,
+   "gain_db": -12.0,
+   "mode": "duck",
+   "approved_drones": [],
+   "resolved": true
+  },
+  {
+   "bed_file": "3-144827-B-11.wav",
+   "dataset": "esc50",
+   "bed_type": "sea_waves",
+   "path": "3-144827-B-11.wav",
+   "va": null,
+   "gain_db": -12.0,
+   "mode": "duck",
+   "approved_drones": [],
+   "resolved": true
+  },
+  {
+   "bed_file": "r_0society49599_571325-hq.wav",
+   "dataset": "emo",
+   "bed_type": "street-crowd",
+   "path": "r_0society49599_571325-hq.wav",
+   "va": [
+    -0.155812036,
+    0.467436109
+   ],
+   "gain_db": -12.0,
+   "mode": "constant",
+   "approved_drones": [],
+   "resolved": true
+  },
+  {
+   "bed_file": "2-95567-A-23.wav",
+   "dataset": "esc50",
+   "bed_type": "breathing",
+   "path": "2-95567-A-23.wav",
+   "va": null,
+   "gain_db": -12.0,
+   "mode": "bursts",
+   "approved_drones": [],
+   "resolved": true
+  },
+  {
+   "bed_file": "3-166125-B-23.wav",
+   "dataset": "esc50",
+   "bed_type": "breathing",
+   "path": "3-166125-B-23.wav",
+   "va": null,
+   "gain_db": -12.0,
+   "mode": "constant",
+   "approved_drones": [],
+   "resolved": true
+  },
+  {
+   "bed_file": "2-84965-A-23.wav",
+   "dataset": "esc50",
+   "bed_type": "breathing",
+   "path": "2-84965-A-23.wav",
+   "va": null,
+   "gain_db": -12.0,
+   "mode": "constant",
+   "approved_drones": [],
+   "resolved": true
+  },
+  {
+   "bed_file": "5-233260-A-23.wav",
+   "dataset": "esc50",
+   "bed_type": "breathing",
+   "path": "5-233260-A-23.wav",
+   "va": null,
+   "gain_db": -12.0,
+   "mode": "constant",
+   "approved_drones": [],
+   "resolved": true
+  },
+  {
+   "bed_file": "4-167063-B-11.wav",
+   "dataset": "esc50",
+   "bed_type": "sea_waves",
+   "path": "4-167063-B-11.wav",
+   "va": null,
+   "gain_db": -12.0,
+   "mode": "duck",
+   "approved_drones": [],
+   "resolved": true
+  },
+  {
+   "bed_file": "r_0mechanical237743_691206-hq.wav",
+   "dataset": "emo",
+   "bed_type": "rain",
+   "path": "r_0mechanical237743_691206-hq.wav",
+   "va": [
+    -0.755976917,
+    0.704863974
+   ],
+   "gain_db": -12.0,
+   "mode": "constant",
+   "approved_drones": [],
+   "resolved": true
+  },
+  {
+   "bed_file": "r_0nature120695_2085904-hq.wav",
+   "dataset": "emo",
+   "bed_type": "rain",
+   "path": "r_0nature120695_2085904-hq.wav",
+   "va": [
+    -0.647155812,
+    0.167353669
+   ],
+   "gain_db": -12.0,
+   "mode": "constant",
+   "approved_drones": [],
+   "resolved": true
+  },
+  {
+   "bed_file": "r_0nature54595_18799-hq.wav",
+   "dataset": "emo",
+   "bed_type": "rain",
+   "path": "r_0nature54595_18799-hq.wav",
+   "va": [
+    0.752679308,
+    0.231657049
+   ],
+   "gain_db": -4.0,
+   "mode": "constant",
+   "approved_drones": [],
+   "resolved": true
+  },
+  {
+   "bed_file": "r_0indicator68634_40561-hq.wav",
+   "dataset": "emo",
+   "bed_type": "rain",
+   "path": "r_0indicator68634_40561-hq.wav",
+   "va": [
+    -0.238252267,
+    0.116240725
+   ],
+   "gain_db": -4.0,
+   "mode": "constant",
+   "approved_drones": [],
+   "resolved": true
+  },
+  {
+   "bed_file": "r_0quiet127242_116752-hq.wav",
+   "dataset": "emo",
+   "bed_type": "thunder-storm",
+   "path": "r_0quiet127242_116752-hq.wav",
+   "va": [
+    0.089859852,
+    -0.548227535
+   ],
+   "gain_db": -4.0,
+   "mode": "constant",
+   "approved_drones": [],
+   "resolved": true
+  }
+ ],
+ "note": "Bed audio is NOT redistributed: entries key the original ESC-50 / Emo-Soundscapes filenames. See the module docstring for the corpora and their licences.",
+ "n_beds": 20,
+ "n_resolved": 20,
+ "n_with_va": 8
+}

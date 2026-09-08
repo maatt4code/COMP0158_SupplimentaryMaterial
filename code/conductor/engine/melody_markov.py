@@ -47,8 +47,8 @@ A4 = 440.0
 SCALES = {
     "major": (0, 2, 4, 5, 7, 9, 11),
     "minor": (0, 2, 3, 5, 7, 8, 10),
-    # PENTATONIC (added 2026-07-25 for the Boards of Canada / Kyle Bobby Dunn
-    # target). Dropping the 4th and 7th removes the semitone tensions that make
+    # PENTATONIC (added 2026-07-25, for the two pentatonic registers).
+    # Dropping the 4th and 7th removes the semitone tensions that make
     # a diatonic line sound "tuney" and goal-directed -- every note sits happily
     # over every chord below, which is exactly why this is the ambient default.
     "major_pent": (0, 2, 4, 7, 9),
@@ -68,12 +68,13 @@ SCALES = {
 # status as the VA->behaviour table.
 #
 #   folk  -- the corpus-driven line: diatonic, developing, phrase-per-idea.
-#            Musically the richest and, by his ear, the least suitable.
-#   boc   -- Boards of Canada: a SHORT cell repeated almost unchanged, over
-#            slow 7th-chord movement, with tape wobble and detuned doubling.
-#            The interest lives in timbre and harmony, not in the notes.
-#   kbd   -- Kyle Bobby Dunn: barely a melody at all. Very long tones, tiny
-#            range, enormous space between them.
+#            Musically the richest and, on audition, the least suitable.
+#   pentatonic_fast -- a SHORT cell repeated almost unchanged, over slow
+#            7th-chord movement, with tape wobble and detuned doubling. The
+#            interest lives in timbre and harmony, not in the notes.
+#   pentatonic_slow -- barely a melody at all. Very long tones, a tiny range,
+#            enormous space between them. About 5x slower than the above,
+#            which is the knob the two names now record.
 #   chant -- Gregorian chant. `cell_notes=None`, the same code path as `folk`
 #            (§ generate_melody), so the corpus grammar/PhraseBank actually
 #            drives the line instead of looping a short authored riff -- the
@@ -107,14 +108,14 @@ STEP_WEIGHTS = {-3: 0.04, -2: 0.11, -1: 0.28, 0: 0.14, 1: 0.28, 2: 0.11, 3: 0.04
 # It exists because the complaint it answers -- "attack is not quite finished
 # but goes into loud sustain" -- was NOT an envelope-shape problem on its own.
 # Measured on the shipped clips, styles were producing 1-14 held spans per 60 s
-# (kbd: ONE tone for the whole minute at a=+0.3; chant: four at 15 s each),
+# (pent_slow: ONE tone for the whole minute at a=+0.3; chant: four at 15 s each),
 # and `articulate`'s attack is ABSOLUTE (0.02 s), so on a 15 s span it is 0.13%
 # of the note: a 20 ms ramp onto a dead-flat full-level plateau lasting ~12 s.
 # You cannot shape your way out of that, so this macro sets note LENGTH and
 # repeat-merging as well as envelope shape. Those three are one control.
 LEGATO, STACCATO = 0.0, 1.0
 
-# A clip has to contain a MELODY, not a held tone. Measured 2026-08-01, kbd
+# A clip has to contain a MELODY, not a held tone. Measured 2026-08-01, pent_slow
 # produced ONE span per 60 s at a=+0.3 and chant four; the professor's "loud
 # sustain" complaint is downstream of that, since no envelope reads as a note
 # when the note is 24 s long.
@@ -123,7 +124,7 @@ LEGATO, STACCATO = 0.0, 1.0
 # ceiling collapses the styles into each other -- folk, chant and the slow pentatonic style all sit
 # above it, so all three would clamp to the same pace and the authored
 # distinction between them would vanish. The soft knee is monotone, so the
-# ordering boc < folk < chant < kbd survives while every style stays bounded.
+# ordering pent_fast < folk < chant < pent_slow survives while every style stays bounded.
 MIN_NOTES_PER_CLIP = 6
 
 # Ceiling on any ONE note relative to the style's pace. The grammar supplies
@@ -132,7 +133,7 @@ MIN_NOTES_PER_CLIP = 6
 NOTE_STRETCH_MAX = 2.2
 
 # Ceiling, in NOTE seconds, on how long legato may hold a repeated pitch.
-# Merging consecutive identical pitches is what legato means, but kbd repeats
+# Merging consecutive identical pitches is what legato means, but pent_slow repeats
 # its cell with vary_p=0.15, so unbounded merging turned a whole clip into one
 # 28 s tone. Re-attack past this: a held note that outlasts the ear's sense of
 # it is no longer legato, it is a drone.
@@ -176,7 +177,7 @@ def articulation_knobs(articulation=0.5):
         # at 1.0. A plateau is what made a long note read as a wall.
         sustain=float(np.interp(q, [0, 1], [0.72, 0.22])),
         # Legato joins repeated pitches into one held note; staccato re-attacks
-        # them, which is both musically right and the only way kbd's repeated
+        # them, which is both musically right and the only way pent_slow's repeated
         # cells stop collapsing into a single span.
         merge_repeats=bool(q < 0.5),
     )
@@ -599,7 +600,7 @@ def generate_melody(valence, arousal, root_hz=110.0, duration_s=60.0, seed=0,
 
     while t < duration_s:
         if p["cell_notes"]:
-            # RIFF MODE (boc/kbd). One short cell, repeated many times almost
+            # RIFF MODE (pent_fast/pent_slow). One short cell, repeated many times almost
             # unchanged, at a FIXED transposition. That repetition is the point:
             # the reference records earn their character from timbre, detuning
             # and the chords underneath, not from the line developing. Varying
@@ -950,7 +951,7 @@ def shape(line, notes, sr=SR, tick_s=1.0, articulation=0.5, timbre=None,
             seg[na:na + nd] = np.linspace(1.0, s, nd)          # decay off the peak
         if ns:
             # NOT a flat plateau. The attack and decay are clamped in absolute
-            # seconds, so on a long note (kbd still reaches ~19 s by design)
+            # seconds, so on a long note (pent_slow still reaches ~19 s by design)
             # they finish early and everything after them would otherwise sit
             # dead level -- which is the "loud sustain" the complaint named,
             # just 3 dB quieter. A slow tilt across the body means no part of
@@ -1313,29 +1314,29 @@ def _selftest():
     except ImportError:
         gratio = nshapes = None
 
-    # STYLES. boc/kbd are the reference targets (audition: "slower and more spacious than
+    # STYLES. pent_fast/pent_slow are the reference targets (audition: "slower and more spacious than
     # dunn or board of canada"). What must hold: pentatonic, a SHORT cell that
     # repeats nearly unchanged, and character parameters that are actually set.
-    boc, pb = generate_melody(0.3, 0.2, duration_s=240.0, seed=11, style="pentatonic_fast")
-    kbd, pk = generate_melody(-0.3, -0.6, duration_s=240.0, seed=11, style="pentatonic_slow")
+    pent_fast, pb = generate_melody(0.3, 0.2, duration_s=240.0, seed=11, style="pentatonic_fast")
+    pent_slow, pk = generate_melody(-0.3, -0.6, duration_s=240.0, seed=11, style="pentatonic_slow")
     assert pb["scale"].endswith("_pent") and pk["scale"].endswith("_pent"), \
         "reference styles must be pentatonic -- the 4th/7th are what sound tuney"
     assert pb["wobble_cents"] > 0 and pb["detune_cents"] > 0 and pb["chords"], \
-        "boc character parameters are not set"
+        "pent_fast character parameters are not set"
     assert pk["note_s"] > 3 * pb["note_s"], \
-        f"kbd must be far slower than boc ({pk['note_s']:.1f} vs {pb['note_s']:.1f})"
+        f"pent_slow must be far slower than pent_fast ({pk['note_s']:.1f} vs {pb['note_s']:.1f})"
     # REPETITION is the point: the same short pitch figure must recur many times
-    bseq = [f for f, _ in _pitched(boc)]
+    bseq = [f for f, _ in _pitched(pent_fast)]
     btri = [tuple(bseq[k:k + 3]) for k in range(len(bseq) - 2)]
     rep = len(btri) - len(set(btri))
     # A quarter, not a half: the riff now TRANSPOSES between repeat groups
     # (audition: "the clips are not doing anything"), so the same figure recurs
     # at several pitches and exact triple matches are correspondingly rarer.
     assert rep > 0.2 * len(btri), \
-        f"boc cell is not repeating enough ({rep}/{len(btri)} figures recur)"
+        f"pent_fast cell is not repeating enough ({rep}/{len(btri)} figures recur)"
     # ...but it must not get STUCK either: no long run on one pitch
     stuck = max((sum(1 for _ in grp) for _, grp in itertools.groupby(bseq)), default=0)
-    assert stuck <= 3, f"boc line sits on one pitch for {stuck} notes"
+    assert stuck <= 3, f"pent_fast line sits on one pitch for {stuck} notes"
     # and it must be pentatonic in FACT, not just in the label
     pband = set(scale_pitches(110.0, pb["scale"], pb["span"], pb["register"]))
     assert all(min(abs(1200 * math.log2(f / c)) for c in pband) < 1e-6 for f in bseq)
@@ -1485,7 +1486,7 @@ _RVA_ENGINE = None    # module-level bank/engine singleton, see inside
 
 def render_via_arranger(notes, anchor=0, chord=None, tick_s=1.0, seed=0,
                         harmonic_damping=True, iso_loudness=True, smooth=False,
-                        device=None, timbre=None):
+                        device=None, timbre=None, banks=None):
     """Render the melody through the PROJECT'S OWN renderer.
 
     `render_standalone` is four sine harmonics -- an audition crutch so the notes
@@ -1538,9 +1539,20 @@ def render_via_arranger(notes, anchor=0, chord=None, tick_s=1.0, seed=0,
     # life of the process, so one instance is correct and identical in output.
     # (2026-08-01: the repeated "Decoupled Engine initialized" lines in a live
     # session were this.)
+    # `banks` are the labelled retrieval indexes. They used to be resolved
+    # inside DecoupledEngine through a dataset-root helper; the migrated
+    # engine takes them explicitly, which is what keeps a dataset root out of
+    # the runtime. The conductor sets `_RVA_ENGINE` once at startup, so this
+    # construction is the fallback path for a caller that has not.
     global _RVA_ENGINE
     if _RVA_ENGINE is None:
-        _RVA_ENGINE = DecoupledEngine()
+        if not banks:
+            raise ValueError(
+                "render_via_arranger needs the labelled retrieval banks: pass "
+                "banks=[.../labeled_index.csv, ...], or set "
+                "melody_markov._RVA_ENGINE to a DecoupledEngine built with "
+                "them. It resolves no dataset root of its own.")
+        _RVA_ENGINE = DecoupledEngine(banks)
     engine = _RVA_ENGINE
     theta = engine.theta_from_index(anchor)
     if chord is not None:

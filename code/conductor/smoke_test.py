@@ -1,9 +1,9 @@
-"""Smoke test for the conductor's engine and weights.
+"""Smoke test for the conductor: engine, weights and app.
 
-The APP is not covered yet -- this asserts the layer beneath it: that the
-engine is genuinely self-contained, that every copied module still matches its
-section original, and that every weight loads and produces the documented
-numbers.
+Asserts that the engine is genuinely self-contained, that every copied module
+still matches its section original, that every weight loads and produces the
+documented numbers, and that the app's own control-flow selftest passes with
+no server, no audio device and no dataset.
 
 Run:
   python smoke_test.py
@@ -19,6 +19,7 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 ENGINE = HERE / "engine"
 WEIGHTS = HERE / "weights"
+ASSETS = HERE / "assets"
 CODE = HERE.parent
 FAILED = []
 
@@ -161,6 +162,49 @@ def main():
     check("the arranger renders audio", len(audio) > 0, f"{len(audio)} samples")
     check("...and it is not silent", float(abs(audio).max()) > 1e-4,
           f"peak {float(abs(audio).max()):.4f}")
+
+    print("\n5. the VA pad matches the label space it describes")
+    # The pad is a MEASUREMENT of the bank's reachable region, so there is one
+    # per label space and the app must open on the one matching its default.
+    # Showing the judge map while retrieving on human labels draws the grey
+    # region in the wrong place, inviting the listener to aim at targets the
+    # engine cannot hit.
+    pads = {s: ASSETS / f"pad_{s}.png" for s in ("judge", "human")}
+    check("both VA pads ship", all(p.exists() for p in pads.values()))
+    check("the two pads differ, because the manifolds do",
+          pads["judge"].exists() and pads["human"].exists()
+          and pads["judge"].read_bytes() != pads["human"].read_bytes())
+    txt = (HERE / "app.py").read_text()
+    import re as _re
+    m = _re.search(r'DEFAULT_LABEL_SPACE = "(\w+)', txt)
+    want = "human" if m and m.group(1).startswith("human") else "judge"
+    check(f"the app opens on the {want} pad, matching its default label space",
+          f'PAD_HUMAN if str(DEFAULT_LABEL_SPACE).startswith("human")' in txt)
+    check("bed attribution ships beside the audio",
+          (ASSETS / "beds" / "ATTRIBUTION.md").exists()
+          and any((ASSETS / "beds").glob("*.wav")))
+
+    print("\n6. the app")
+    import subprocess
+    check("app.py imports with no dataset root",
+          subprocess.run([sys.executable, "-c",
+                          "import sys; sys.path.insert(0, %r); import app"
+                          % str(HERE)],
+                         capture_output=True, text=True).returncode == 0)
+    # The app's own selftest: fake engine and renderer, no server, no audio.
+    # It exercises the trigger logic, both policy methods, the coherence
+    # re-ranker, the bed layer, the loudness stage and the melody layer.
+    r = subprocess.run([sys.executable, str(HERE / "app.py"), "--selftest"],
+                       capture_output=True, text=True, cwd=str(HERE))
+    ok = r.returncode == 0 and "SELFTEST OK" in r.stdout
+    check("the app's control-flow selftest passes", ok,
+          "" if ok else (r.stderr.strip().splitlines() or ["no output"])[-1])
+    # The deck is the only surface, and its component contract is enforced.
+    txt = (HERE / "app.py").read_text()
+    check("only the deck skin is built",
+          'skins.build_deck' in txt and 'SKIN ==' not in txt)
+    check("...and the deck is validated against the contract",
+          'skins.validate(C, "deck")' in txt)
 
     print()
     if FAILED:

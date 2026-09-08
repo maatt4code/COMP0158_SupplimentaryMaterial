@@ -150,7 +150,8 @@ def apply_harmonic_damping(theta, max_harmonics=3, decay_exponent=2.5):
 
 class LiveMelodicDroneRuntime:
     """CPU-Native Runtime Engine for Live Conductor Integration using MicroMelodicTransformer."""
-    def __init__(self, ckpt_path=None, ckpt_name=None, force_cpu=True):
+    def __init__(self, ckpt_path=None, ckpt_name=None, force_cpu=True,
+                 banks=None):
         self.device = torch.device("cpu")
         self.render_device = torch.device("cpu") if force_cpu else get_device()
         self.engine = None
@@ -194,12 +195,27 @@ class LiveMelodicDroneRuntime:
         except Exception as e:
             print(f"[LiveMelodicDroneRuntime] Could not load PyTorch checkpoint: {e}")
 
-        try:
-            self.engine = DecoupledEngine()
-            self.renderer = ArrangedRenderer(device=self.render_device)
-            print(f"[LiveMelodicDroneRuntime] Initialized DDSP ArrangedRenderer on {self.render_device}")
-        except Exception:
-            pass
+        # The audio half. Symbolic generation works without it, so a failure
+        # here degrades this runtime to notes-only rather than taking the
+        # caller down -- but it is REPORTED. Swallowing it silently is how a
+        # melody layer ends up shipping dead: everything imports, nothing
+        # errors, and no sound is ever produced.
+        if banks:
+            try:
+                self.engine = DecoupledEngine(banks)
+                self.renderer = ArrangedRenderer(device=self.render_device)
+                print("[LiveMelodicDroneRuntime] renderer ready on "
+                      f"{self.render_device}")
+            except Exception as e:                        # noqa: BLE001
+                print("[LiveMelodicDroneRuntime] AUDIO DISABLED -- renderer "
+                      f"failed to build: {type(e).__name__}: {e}")
+        else:
+            # No banks: the caller wants NOTES only. That is the normal case
+            # for the conductor, which renders them through its own chain
+            # rather than paying for a second 20k-anchor engine -- so this is
+            # a statement of what was built, not a warning.
+            print("[LiveMelodicDroneRuntime] notes only "
+                  "(no retrieval banks passed, so no standalone audio path)")
 
     def generate_notes(self, valence, arousal, root_hz=220.0, duration_s=4.0, snap_to_scale=True):
         """Generates melodic notes via PyTorch Causal Micro-Transformer CPU inference (or scale fallback)."""
