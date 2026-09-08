@@ -115,10 +115,10 @@ pick is not simply the only one left. Four presets qualify and the choice is
 deterministic. The BED anchor is not frozen: it depends on live valence and
 arousal.
 
-**Placement note:** §2.4 of the migration plan listed `melody_anchor.json` under
-Section 3.4.2. It lives here instead, because the selection logic and the
-centroid band are melody concerns; the rated pool it reads still belongs to
-3.4.2 and is referenced, not copied.
+**Why the anchor lives here and not in 3.4.2**, whose rated pool it reads: the
+selection logic and the centroid band are melody concerns, so they belong
+beside the melody. The pool itself stays in 3.4.2 and is referenced rather
+than copied.
 
 ## Reference numbers
 

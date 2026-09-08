@@ -102,7 +102,7 @@ WEIGHTS, ASSETS = HERE / "weights", HERE / "assets"
 (HERE / "gradio_tmp").mkdir(parents=True, exist_ok=True)
 os.environ.setdefault("GRADIO_TEMP_DIR", str(HERE / "gradio_tmp"))
 
-# The conductor is self-contained (decision 12): everything it imports lives
+# The conductor is SELF-CONTAINED: everything it imports lives
 # in one of its own three subdirectories, so this directory can be lifted out
 # and run. It resolves NO dataset root and imports no `paths` module -- that
 # is the train/inference boundary, and `smoke_test.py` asserts it by importing
@@ -126,7 +126,7 @@ PAD_HUMAN = ASSETS / "pad_human.png"
 # the last dataset dependency from the runtime.
 BANKS = sorted((WEIGHTS / "banks").glob("*/labeled_index.csv"))
 
-# ---- the engine: copies of the migrated inference modules -----------------
+# ---- the engine: copies of the sections' inference modules ---------------
 import arc_policy as policy                    # noqa: E402  arcs + preference GP
 import scheduler as sched                      # noqa: E402  LiveBedScheduler
 import coherence_reranker as reranker          # noqa: E402  sequential coherence
@@ -240,7 +240,7 @@ LOG_FIELDS = ["timestamp", "session_id", "step", "trigger", "context_v", "contex
              "chosen_texture", "liveliness",
              "prev_type", "cand_type", "coherence", "rerank_reason", "rerank_arc_id"]
 # CSV SCHEMA NOTE (2026-07-23, 5th cutover): the five coherence-re-ranker
-# columns (board 11b). `prev_type` = the last rendered pool arc's corpus type
+# columns. `prev_type` = the last rendered pool arc's corpus type
 # (s16); `cand_type` = the type of the arc actually rendered; `coherence` =
 # P(cand_type | prev_type) from s13's 5x5 corpus type-transition matrix;
 # `rerank_reason` = s17's decision reason ("coherence_tiebreak"/"best_utility"/
@@ -252,7 +252,7 @@ LOG_FIELDS = ["timestamp", "session_id", "step", "trigger", "context_v", "contex
 # CSV SCHEMA NOTE (2026-07-13, 4th cutover): `gp_texture` and `chosen_texture`
 # are the signed texture level the policy scored (gp_texture) and rendered
 # (chosen_texture), added when the texture axis was un-pinned in s01_arc_policy
-# (board 9d stage 2). Absent on every pre-2026-07-13 row (csv.DictReader returns
+# Absent on every pre-2026-07-13 row (csv.DictReader returns
 # None); those rows were rendered with texture pinned neutral, so read a missing
 # value as 0.0 (none). DOMAIN WIDENED 2026-07-14: the level is now one of the
 # 5-rung ladder {-1,-0.5,0,+0.5,+1} (policy.TEXTURE_CHOICES), not just {-1,0,+1}
@@ -529,7 +529,7 @@ def _resolve_bed(p):
     """Where a bed's audio actually is, given the bank stores a BASENAME.
 
     The bank keys beds by their original ESC-50 / Emo-Soundscapes filename,
-    because the corpora are fetched rather than redistributed (decision 13):
+    because the corpora are fetched rather than redistributed:
     an absolute path would encode the build machine's layout and resolve
     nowhere else. Looked for first in the conductor's own `assets/beds/`,
     which is where the shipped demo subset lives, then under `$DRONE_BEDS` if
@@ -577,7 +577,7 @@ def load_bed_bank():
 
     The bank's own `resolved` flag records whether the corpus was present when
     the bank was BUILT, which is a different question from whether the audio
-    is present now. Only a subset of the beds is redistributed (decision 13),
+    is present now. Only a subset of the beds is redistributed,
     so shipping the full bank unfiltered offered beds that could not be
     loaded: selection would pick one, `_bed_audio` would fail, and the bed
     layer would report itself broken for a bed the listener never had.
@@ -739,7 +739,7 @@ def _stable_drone_env(audio, sess, sr):
     shaping, normalized by a RUNNING reference (EMA of the segment 95th-pct
     RMS) instead of s10.loud_env's per-window min-max -- so ducking depth stays
     consistent across segment joins rather than jumping (the normalization gap
-    flagged for this wiring in board 11a)."""
+    flagged for this wiring)."""
     n = len(audio)
     hop, win = int(0.05 * sr), int(0.25 * sr)
     pad = np.concatenate([audio, np.zeros(win)])
@@ -984,7 +984,7 @@ def melody_checkpoint_choices():
     currently preferred. It read as a fourth model in the dropdown, so the
     label had to be recovered by loading the checkpoint and counting layers,
     and then de-duplicated against the original by comparing tensors -- all to
-    undo the confusion the copy created. The alias does not ship (§2.7): the
+    undo the confusion the copy created. The alias does not ship: the
     three real names do, `weights/` is the only place they live, and the
     section's smoke test asserts the copy is absent. Reading the names off
     disk is then the whole job.
@@ -1812,7 +1812,7 @@ def decide_and_render(sess, engine, renderer, fit, pool, contexts, trigger):
     rerank_info = dict(prev_type="", cand_type="", coherence="",
                        rerank_reason="", rerank_arc_id="")
     if policy_mode == "lookup" and base is not None:
-        # sequential-coherence re-ranker (board 11b): among the pool arcs at
+        # sequential-coherence re-ranker: among the pool arcs at
         # this context the preference GP likes about equally (utility within
         # `coherence_tie_margin` of the best), prefer the corpus type that most
         # coherently FOLLOWS the last rendered arc's type via s13's 5x5 matrix.
@@ -1862,7 +1862,7 @@ def decide_and_render(sess, engine, renderer, fit, pool, contexts, trigger):
 
     theta_start = apply_chord(sess["prev_theta"], chosen["chord_start"])
     theta_end = apply_chord(next_theta, chosen["chord_end"])
-    # texture (board 9d): thin/thicken the END pad's voice stack -- applied
+    # texture: thin/thicken the END pad's voice stack -- applied
     # AFTER apply_chord so a "thin" choice zeroes the chord voices too, exactly
     # like s07e's rated texture arcs (canonical sess theta is never mutated:
     # theta_end is already a fresh apply_chord copy).
@@ -1950,7 +1950,7 @@ def _selftest():
     assert info["trigger"] in ("val_shift", "force")
     assert "gp_ramp_s" in info and 3.0 <= info["gp_ramp_s"] <= 16.0
     assert info["chosen_method"] == "gp_predict"
-    # texture axis (board 9d): policy scores + logs a texture level, rendered
+    # texture axis: the policy scores and logs a texture level, rendered
     # value is one of the 5-level ladder policy.TEXTURE_CHOICES (was {-1,0,+1}
     # before the 2026-07-14 magnitude batch made the feature continuous).
     assert "gp_texture" in info and info["gp_texture"] in policy.TEXTURE_CHOICES
@@ -2014,7 +2014,7 @@ def _selftest():
     log_decision(dict(timestamp="t", session_id="selftest", step=sess["step"], **info))
     sess["force"] = False
 
-    # 4b. Sequential-coherence re-ranker (board 11b): with the corpus typology
+    # 4b. Sequential-coherence re-ranker: with the corpus typology
     # present, lookup mode routes ORDER through s17.rerank. The re-rank LOGIC is
     # proven in s17's own selftest; here we verify the WIRING -- prev_type is
     # threaded in and out, the re-ranked winner drives what renders, the log
@@ -2064,7 +2064,7 @@ def _selftest():
     assert len(arows) == 1, f"expected 1 logged annotation, got {len(arows)}"
     assert arows[0]["note"] == "too static"
 
-    # 6. Soundscape bed (layer 5, board 11a): apply_bed mixes a bed under the
+    # 6. Soundscape bed (layer 5): apply_bed mixes a bed under the
     # drone via the LiveBedScheduler, advances the absolute clock, and is a
     # strict no-op (clock aside) when disabled.
     sr = 16000
@@ -2268,7 +2268,7 @@ def _selftest():
 
     print(f"SELFTEST OK: normal segment produced no log row; upward- and "
           f"downward-val_shift, force-triggered, lookup-policy-mode, and "
-          f"coherence-re-ranked (board 11b) transitions all logged both policy "
+          f"coherence-re-ranked transitions all logged both policy "
           f"methods correctly, the re-ranker threading prev_type through and "
           f"never leaving the near-tie band "
           f"({len(rows)} rows in {CONDUCTOR_LOG.name}); reaction annotation "
@@ -2298,25 +2298,27 @@ def build_id():
     """Which build is this? Shown in the UI so the question is answerable at a
     glance rather than by comparing files.
 
-    Read from the package's MANIFEST.json, which the packer stamps with a
-    timestamp plus a digest over every shipped file's sha256 -- so it cannot
-    drift from what is actually running, the way a hand-bumped constant does.
-    Running straight from the repo there is no manifest, so fall back to a
-    digest of the UI sources themselves and SAY it is a dev tree: a stamp that
-    silently looked like a release would be worse than none.
+    A digest over the sources that actually define the surface, so it cannot
+    drift from what is running the way a hand-bumped constant does.
+
+    The digest must cover files that EXIST. This previously globbed the
+    development tree's `s01*`/`s02*`/`s2*` filenames, which nothing here is
+    called any more, so it hashed an empty file set and every build reported
+    `e3b0c44` -- the sha256 of zero bytes. A stamp that answers "which build
+    is this?" with the same constant forever is worse than none, because it
+    looks like an answer. Globbing by SHAPE rather than by name is what stops
+    a rename silently emptying it.
     """
-    mf = HERE.parent.parent / "MANIFEST.json"
     try:
-        return "build " + json.loads(mf.read_text())["build_id"]
-    except Exception:
-        pass
-    try:
+        files = sorted(HERE.glob("app.py")) + sorted((HERE / "UI").glob("*.py"))
+        if not files:
+            return "unstamped"
         h = hashlib.sha256()
-        for f in sorted(HERE.glob("s0[12]*.py")) + sorted(HERE.glob("s2*.py")):
+        for f in files:
             h.update(f.read_bytes())
-        return f"dev tree - {h.hexdigest()[:7]}"
+        return f"{len(files)} src - {h.hexdigest()[:7]}"
     except Exception:
-        return "dev tree"
+        return "unstamped"
 
 
 def build_chip():
@@ -2387,7 +2389,7 @@ class GuardBySpace:
     changed which anchors were searched while still forbidding the half of
     the plane they live in.
 
-    **Both are frozen weights** (decision 2). Fitting either one needs the
+    **Both are frozen weights.** Fitting either one needs the
     rating data, and the conductor ships none; it also cost about 2.3 s of
     startup. Loading a JSON costs nothing, so both spaces are available
     immediately and neither can silently differ from the one the report
@@ -2452,7 +2454,7 @@ def build_demo(engine, renderer, guards, fit, pool, contexts):
                    target_va=np.array(START_VA, dtype=float),
                    prev_theta=None, force=False, session_id=uuid.uuid4().hex[:8],
                    step=0, policy_mode="gp_predict",
-                   # sequential-coherence re-ranker (board 11b): prev_type is
+                   # sequential-coherence re-ranker: prev_type is
                    # the last rendered arc's corpus type (None until the first
                    # lookup-mode transition). tie_margin = the utility near-tie
                    # band the coherence chain is allowed to reorder within.
@@ -2472,7 +2474,7 @@ def build_demo(engine, renderer, guards, fit, pool, contexts):
                    tex_breath_depth=0.0, tex_breath_period=30.0, tex_breath=0.0,
                    cents_breath_depth=0.0, cents_breath=0.0,
                    reverb_breath_depth=0.0, reverb_breath=0.0,
-                   # soundscape bed (layer 5, board 11a): default OFF so a fresh
+                   # soundscape bed (layer 5): default OFF so a fresh
                    # session is unchanged. Scheduler + bank built once here.
                    # near/far placement: OFF, so a fresh session is mono and
                    # unchanged. `distance` is only read when enabled.
@@ -3096,12 +3098,11 @@ def build_demo(engine, renderer, guards, fit, pool, contexts):
         # forgets a control fails at construction rather than building a UI
         # whose buttons quietly do nothing.
         #
-        # Only the DECK ships. A second "classic" surface existed and was
-        # dropped on migration: it was 272 lines of duplicate component
-        # construction that had to be kept in step with this one by hand, and
-        # every drift between them was a bug that only appeared under one
-        # skin. The contract stays because it is what keeps the app free of
-        # layout assumptions, not because there is a choice to make.
+        # ONE skin ships. An earlier second surface duplicated every
+        # component inline and had to be kept in step with this one by hand;
+        # each drift between them was a bug that showed under one skin only.
+        # The contract stays because it is what keeps the app free of layout
+        # assumptions, not because there is a choice of skin to make.
         C = skins.build_deck(gr, dict(
             pad=(str(default_pad()) if default_pad().exists() else None),
             reverb_choices=reverb_choices(),
@@ -3133,7 +3134,7 @@ def build_demo(engine, renderer, guards, fit, pool, contexts):
             and 38.5% vs 27.4% of the square is unreachable. Showing the judge
             map while retrieving on human labels would misreport where the
             instrument can actually go -- the very thing the pad exists to
-            prevent (README §22.2)."""
+            prevent."""
             want = PAD_HUMAN if str(label_space).startswith("human") else PAD_IMG
             if not want.exists():
                 return gr.update()
@@ -3654,7 +3655,7 @@ def make_app(webaudio_on=True, label_space="judge",
 
     pool = policy.load_pool()
 
-    # THE PREFERENCE GP IS LOADED, NOT FITTED (decision 2). This used to refit
+    # THE PREFERENCE GP IS LOADED, NOT FITTED. This used to refit
     # a Laplace-approximated Bradley-Terry GP from the raw pairwise
     # comparisons at every boot -- which meant the conductor carried the
     # rating data, and that the policy a listener heard depended on a fit that

@@ -33,14 +33,45 @@ PY = sys.executable
 
 # The documents that STATE the naming rules necessarily quote the names they
 # forbid, and a test that searches for a string must contain it.
-NAME_EXEMPT = {"STATUS.md", "README.md", "smoke_test.py", "verify.py",
+# Exemptions are BY NAME for files whose job is to state the rules (a test
+# that searches for a string must contain it), and BY PATH for the two that
+# must name a retired identifier to explain what it was renamed to. Exempting
+# every README.md by name was too broad: it let the one document most likely
+# to accumulate build-host paths and tool names skip the sweep entirely.
+NAME_EXEMPT = {"STATUS.md", "smoke_test.py", "verify.py",
                # paths.py's DEFAULTS record the build host on purpose, so the
                # pipeline is reproducible there without arguments. That is a
                # stated exemption, not an oversight.
                "paths.py"}
-BANNED = ["JAMAI", "jamai", "Matthew", "matthew", "maatt", "MaaTt", "drmaatt",
-          "Gemini", "GEMINI", "SOTL", "Basinski", "KyleBobbyDunn", "Celer",
-          "Loscil", "/cs/student"]
+
+# Explaining a rename requires naming what was renamed: both of these give the
+# forward mapping a reader needs to reconcile a report table with the shipped
+# data. Nothing else may name a retired identifier.
+PATH_EXEMPT = {
+    "code/models/3.6_differentiable_reverberation/README.md",
+    "code/models/3.9_human_evaluation_and_protocols/human_ratings/README.md",
+}
+# Both spellings of every artist name. The concatenated forms are the DIRECTORY
+# names the corpus used; the spaced forms are how the same artists appear in
+# prose. Listing only the concatenated ones let "Kyle Bobby Dunn" and "Boards
+# of Canada" survive in a shipped module's comments while this sweep reported
+# PASS and the names were right there. Matching is case-insensitive for the
+# same reason.
+BANNED = ["JAMAI", "Matthew", "maatt", "drmaatt", "Gemini", "/cs/student",
+          "SOTL", "Stars of the Lid",
+          "Basinski", "William Basinski",
+          "KyleBobbyDunn", "Kyle Bobby Dunn",
+          "BoardsOfCanada", "Boards of Canada",
+          "Celer", "Loscil"]
+
+# Match on NON-ALPHANUMERIC boundaries, not \b, and treat "_" as a separator.
+# \b would miss `_gemini_dir` (underscore is a word character, so there is no
+# boundary there) while a plain substring test flags "Celer" inside
+# "accelerates". This is the same boundary rule the album-condition re-key
+# uses, and for the same reason: these names appear as identifier PARTS.
+_NAME_RE = {b: re.compile(rf"(?<![A-Za-z0-9]){re.escape(b)}(?![A-Za-z0-9])",
+                          re.IGNORECASE)
+            for b in BANNED}
 
 FAILED: list[str] = []
 
@@ -110,13 +141,15 @@ def check_names():
             continue
         if p.resolve() in ignored:
             continue
-        if p.name in NAME_EXEMPT or p.suffix in (".pt", ".npz", ".wav", ".pyc"):
+        if (p.name in NAME_EXEMPT
+                or p.relative_to(ROOT).as_posix() in PATH_EXEMPT
+                or p.suffix in (".pt", ".npz", ".wav", ".pyc")):
             continue
         try:
             text = p.read_text(errors="strict")
         except (UnicodeDecodeError, OSError):
             continue          # binary payloads are checked by their own tests
-        found = [b for b in BANNED if b in text]
+        found = [b for b in BANNED if _NAME_RE[b].search(text)]
         if found:
             hits.append((p.relative_to(ROOT), sorted(set(found))))
     check("no shipped text file carries a retired identifier", not hits,
@@ -183,12 +216,12 @@ def check_checksums():
 def check_conductor_copies():
     """The conductor's engine copies must still match their section originals.
 
-    Decision 12 makes `conductor/` self-contained: it carries its own copy of
+    `conductor/` is self-contained: it carries its own copy of
     every inference module rather than importing across the tree, so the
     directory can be lifted out and run. The price is drift -- a fix made in a
     section silently fails to reach the app, and the app keeps working, which
     is why nobody notices. This is the check that makes the duplication safe,
-    and without it decision 12 is a liability rather than a design.
+    and without it the duplication is a liability rather than a design.
 
     Three ways to fail, and they are different problems:
       * a copy edited in place -- the fix will be lost on the next re-copy;

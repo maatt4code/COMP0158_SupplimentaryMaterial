@@ -55,7 +55,8 @@ def main():
     print("1. the engine is self-contained")
     # Import with the repo removed from sys.path entirely. If anything here
     # reaches back into code/, this is where it shows up -- and it is the
-    # whole claim of decision 12, so it is tested rather than asserted.
+    # whole claim of a self-contained conductor, so it is tested rather
+    # than asserted.
     sys.path = [p for p in sys.path if "COMP0158_SupplimentaryMaterial/code" not in p]
     sys.path.insert(0, str(ENGINE))
     mods = {}

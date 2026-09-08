@@ -8,7 +8,7 @@ runs in report order, and every stage can be run on its own.
 
 | | |
 |---|---|
-| Migration plan and file-by-file mapping | [`code/README.md`](code/README.md) |
+| How the code is organised, and the rules it obeys | [`code/README.md`](code/README.md) |
 | Environments | [`env/`](env/) |
 | Rendered audio referenced by the report | [`audio/`](audio/) |
 | Interactive figures | [`figures_3d/`](figures_3d/) |
@@ -131,8 +131,8 @@ automated loop reached the running system, which is the finding of §4.1.
 | [`models/3.5_transition_dynamics_and_scheduling/`](code/models/3.5_transition_dynamics_and_scheduling) | §3.5 | Semi-Markov dwell scheduler over five transition archetypes, re-ranked by a Bradley–Terry preference GP. | `python train/fit_preference_gp.py` | `python inference/scheduler.py --preset overlay --trans-source corpus_dwell` |
 | [`models/3.6_differentiable_reverberation/`](code/models/3.6_differentiable_reverberation) | §3.6 | Fits three scalars (decay, damping, wet gain) per impulse response by gradient descent under a multi-scale STFT loss. | `python train/fit_from_irs.py --echothief-root $DRONE_ECHOTHIEF` | `python inference/reverb_bank.py --list`<br>`python inference/reverb_bank.py --selftest` |
 | [`models/3.7_melody_generation/`](code/models/3.7_melody_generation) | §3.7 | Causal micro-transformer over Essen folk phrases, plus an order-2 Markov baseline. Three trained sizes ship. | `python train/build_essen_dataset.py`<br>`python train/train_transformer.py --n-layers 6 --d-model 128` | `python inference/melody_transformer.py --demo out.wav --valence 0.2 --arousal -0.4` |
-| [`models/3.9_human_evaluation_and_protocols/`](code/models/3.9_human_evaluation_and_protocols) | §3.9 | The listening studies: long-track recency and component preference. Merge and hygiene scripts, plus the rating data. | *not yet migrated; the rating data ships* | — |
-| [`conductor/`](code/conductor) | §3.8 | The deployed runtime. Inference only: it starts with every dataset root missing. | — | *not yet migrated* |
+| [`models/3.9_human_evaluation_and_protocols/`](code/models/3.9_human_evaluation_and_protocols) | §3.9 | The two listening studies: long-track recency and component preference. Analysis only — nothing here runs at synthesis time. | `python train/analyse_space_ratings.py`<br>`python train/build_results.py`<br>`python train/analyse_longtrack.py`<br>`python train/analyse_recency.py` | none by design |
+| [`conductor/`](code/conductor) | §3.8 | The deployed runtime. Inference only: it starts with every dataset root missing. | — | `python app.py --no-share` |
 
 Sections 3.1 and 3.2 ship no code. §3.1 is the architecture overview and §3.2
 is the developmental explorations.
@@ -180,13 +180,17 @@ already ships in `code/conductor/weights/`.
 
 ```bash
 cd code/conductor
-pip install -r requirements.txt
-python app.py                       # opens a Gradio UI on http://localhost:7860
+python app.py --no-share            # a Gradio UI on http://localhost:7860
 ```
 
-It starts with no dataset present. That is the acceptance test for the whole
-migration: the conductor must run with every dataset root pointing at
-`/nonexistent`.
+Nothing to install beyond the environment in [`env/`](env/). Without
+`--no-share` a public relay link is created as well.
+
+It starts with no dataset present, and that is a property worth testing rather
+than assuming: the conductor runs with every dataset root pointing at
+`/nonexistent`, because it loads frozen weights and resolves no dataset at
+all. `code/conductor/smoke_test.py` checks it by importing the engine with the
+repository removed from `sys.path`.
 
 The interface is a 2D valence–arousal pad. Dragging the cursor retrieves the
 nearest human-rated preset, updates the six-voice drone, and lets the
@@ -208,10 +212,17 @@ make takes a few seconds to become audible. Section 4.5.3 measures this.
   from MERT to the Emo-Soundscapes ridge, selected with
   `--arousal-ridge emo --arousal-scale pm1`. The audEERING default in the
   argument parser was never used for any result in the report.
-- **Rating data is pseudonymised.** Raters are `R01`…`R09` under a mapping kept
-  outside this repository, so the copies here and in the report agree. See
-  [`code/README.md`](code/README.md) §0.1 and §0.1b.
-- **Two rating studies are fragmented** across web-app restarts, and merging
-  them naively double-counts. Use the shipped merge scripts. The traps are
-  documented in `code/README.md` §0.1b and in
+- **Rating data is pseudonymised.** Participants appear as `R01`…`R26` under
+  one map kept outside this repository, so the copies here and in the report
+  agree and a rater who appears in several studies is the same person across
+  them. Listeners who never identified themselves keep the anonymous handle
+  the rating app minted (`rater_22cd`). See
+  [`code/README.md`](code/README.md).
+- **Two reverb conditions were renamed.** They had been named after the albums
+  they were measured from and are now named for the measurement. Mapping a
+  report table forward is documented in
   [`3.9_.../human_ratings/README.md`](code/models/3.9_human_evaluation_and_protocols/human_ratings/README.md).
+  No numeric value changed.
+- **Two rating studies are fragmented** across web-app restarts, and merging
+  them naively double-counts. Use the shipped merge scripts; the traps are
+  documented in that same README.

@@ -66,9 +66,15 @@ pseudonymised copies, so the two agree.
 No participant name, email, handle, or absolute path to a personal directory
 appears anywhere in what ships. `python code/verify.py` checks this.
 
-## Pending
+## Background beds
 
-Bed audio for the conductor (ESC-50, CC BY-NC; Emo-Soundscapes, per-clip
-Freesound terms) is not yet migrated. When it lands under
-`code/conductor/assets/`, it must be listed here with its per-collection terms
-before the conductor ships.
+The conductor's background beds come from two public corpora and are **not**
+redistributed in full: ESC-50 (CC BY-NC 3.0) and Emo-Soundscapes (Creative
+Commons, assembled from Freesound). One bed per type ships so the bed layer
+works without a download, chosen to favour the most permissive licence
+available for that type.
+
+Each shipped file is credited individually — corpus, licence, contributor and
+original source — in
+[`code/conductor/assets/beds/ATTRIBUTION.md`](code/conductor/assets/beds/ATTRIBUTION.md),
+with credits read from the corpora's own records rather than transcribed.

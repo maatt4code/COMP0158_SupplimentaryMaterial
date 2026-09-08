@@ -1540,9 +1540,9 @@ def render_via_arranger(notes, anchor=0, chord=None, tick_s=1.0, seed=0,
     # (2026-08-01: the repeated "Decoupled Engine initialized" lines in a live
     # session were this.)
     # `banks` are the labelled retrieval indexes. They used to be resolved
-    # inside DecoupledEngine through a dataset-root helper; the migrated
-    # engine takes them explicitly, which is what keeps a dataset root out of
-    # the runtime. The conductor sets `_RVA_ENGINE` once at startup, so this
+    # inside DecoupledEngine through a dataset-root helper; it takes them
+    # explicitly instead, which is what keeps a dataset root out of the
+    # runtime. The conductor sets `_RVA_ENGINE` once at startup, so this
     # construction is the fallback path for a caller that has not.
     global _RVA_ENGINE
     if _RVA_ENGINE is None:

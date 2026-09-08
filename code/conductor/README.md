@@ -90,7 +90,7 @@ construction rather than rendering buttons that quietly do nothing.
 
 ```
 app.py          the session, the transition policy, the render loop
-engine/         COPIES of the migrated inference modules, plus the renderer
+engine/         COPIES of the sections' inference modules, plus the renderer
 UI/             the deck, drawn faders, reactive visuals, browser audio
 runtime/        optional overlays: surface noise, near/far placement
 weights/        every frozen artefact the app loads (50 MB)

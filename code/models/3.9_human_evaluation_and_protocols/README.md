@@ -100,7 +100,7 @@ evidence at pilot n. The per-rater paired contrasts lead because each rater
 contributes one paired difference and is weighted equally, which is the
 correct within-subject reduction.
 
-## Two defects this migration found
+## Two defects worth knowing about
 
 **The peri-event split never used the stimulus metadata.** The original looked
 for `transition_s` / `arc_boundary_s` / `boundary_s`; the renderer writes

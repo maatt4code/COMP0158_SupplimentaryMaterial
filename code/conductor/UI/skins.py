@@ -10,7 +10,7 @@ single handler.
 
 `validate()` is not optional politeness. Every optional layer in this app
 degrades quietly by design, which is exactly how the melody layer shipped dead
-for two weeks (README §22.7) -- so a skin that forgets a component must fail
+for two weeks -- so a skin that forgets a component must fail
 LOUDLY at construction, not produce a UI whose buttons silently do nothing.
 
 Skins available:

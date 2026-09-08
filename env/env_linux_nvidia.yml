@@ -36,4 +36,9 @@ dependencies:
       - --extra-index-url https://download.pytorch.org/whl/cu118
       - torch==2.6.0+cu118
       - torchaudio==2.6.0+cu118
+      # The conductor's UI. Declared on Windows but missing here, so an
+      # environment built from this file on Linux imported everything the
+      # pipeline needs and then could not start the one component a reader
+      # actually runs.
+      - gradio
       - music21
